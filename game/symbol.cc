@@ -1,3 +1,5 @@
+#include "include.hh"
+
 const int player_count = 3;
 const int max_player_count = 4;   // If this number is changed, the initializations below have to be adapted as well.
 
@@ -5,7 +7,7 @@ const int max_player_count = 4;   // If this number is changed, the initializati
 // Symbols. The allowed values on the board
 enum Symbol {empty, x, o, d, p};
 
-std::ostream& operator<< (std::ostream& out, Symbol symbol) {
+std::ostream& operator<< (std::ostream& out, const Symbol symbol) {
     if  (symbol == empty) {out << ".";}
     else if (symbol == x) {out << "X";}
     else if (symbol == o) {out << "O";}

@@ -5,7 +5,7 @@ class Player {
         Board *board;
 
     public:
-        Player(Board& board, Symbol stone);
+        Player(Board& board, const Symbol stone);
         Symbol stone;
 
         void make_move ();

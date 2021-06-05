@@ -1,14 +1,14 @@
-#include "../game/player.cc"
+// Include only the parts of the game that are required for this test.
+#include "../game/input.cc"
 
-Board board;
-Player player_a = Player(board, stone[0]);
-Player player_b = Player(board, stone[1]);
+// Create common instances if necessary
 
 
+// Store individual tests inside functions "void test_x ()"
 void test_1 () {
-    cout << "Testing player attributes:" << endl;
-    player_a.make_move();
-    player_b.make_move();
+    cout << "Title of example test:" << endl;
+    /* Test stuff */
+    cin.clear();
 }
 
 
@@ -16,7 +16,7 @@ void test_1 () {
 
 int main () {
     int input_number;
-    const int max_number = 1;
+    const int max_number = 1;   // Change, depending on how many test functions there are to choose from.
 
     // Menu for choosing which test to run
     while (input_number < 1 or input_number > max_number) {

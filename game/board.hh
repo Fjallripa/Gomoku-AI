@@ -1,4 +1,3 @@
-#include "include.hh"
 #include "symbol.cc"
 
 
@@ -12,8 +11,12 @@ class Board {
     public:
         Board ();
 
-        Symbol& at (int x, int y);
+        bool inside (const int x, const int y) const;
 
-        std::ostream& operator<< (std::ostream& out);
+        Symbol at (const int x, const int y) const;
+
+        bool place (const int x, const int y, const Symbol symbol);
+
+        //std::ostream& operator<< (std::ostream& out, const Board& board)
         
 };
