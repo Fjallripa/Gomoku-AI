@@ -34,3 +34,19 @@
         * update the player method make_move to include that function
     * make a descriptive template test file
     * check where making function arguments to const works
+
+4. create a Group class for Players
+    * the group is a double linked circular list of Players
+        - this allows the continued circling through players with player->next during the game
+        - the group is circular so first->prev is last and the last next is the first
+        - adding to the group is always done to the last element (first->prev) updating the respective links
+        - the group has a first player and each player refers to the next one and the previous one
+    * Players have a link to the previous player and the next one
+        - when instantiating a new player, it is added to the group via the group.append() method
+        - and its player->prev and player->next pointers are defined
+    * a very basic game is created
+        - 4 players take turns on a 10x10 board
+        - the basic gameplay code performing the player cycling and stone placement is developed
+        - a limit to when the board is full is introduced
+        
+        
