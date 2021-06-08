@@ -1,12 +1,14 @@
 #include "../game/player.cc"
 
 Board board;
-Player player_a = Player(board, stone[0]);
-Player player_b = Player(board, stone[1]);
+Group group;
 
 
 void test_1 () {
     cout << "Testing player attributes:" << endl;
+    Player player_a = Player(board, stone[0], group);
+    Player player_b = Player(board, stone[1], group);
+
     player_a.make_move();
     player_b.make_move();
 }
