@@ -1,6 +1,6 @@
 #include "include.hh"
 
-const int player_count = 3;
+
 const int max_player_count = 4;   // If this number is changed, the initializations below have to be adapted as well.
 
 

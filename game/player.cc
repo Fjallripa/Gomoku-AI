@@ -11,11 +11,11 @@ Player::Player (Board& board, const Symbol stone, Group& group) {
     this->board  = &board;
     this->symbol = stone;
     this->group  = &group;
-    this->group->append(this);
+    //this->group->append(this);
 }
 
 Player::~Player () {
-    this->group->pop();  // next_player and previous_player are already removed by this function.
+    //this->group->pop();  // next_player and previous_player are already removed by this function.
     this->group = nullptr;
     this->board = nullptr;
 }
