@@ -7,12 +7,11 @@ class Player {
         Board* board;
         Symbol symbol;
         
-        Group* group;
         Player* next_player;
         Player* previous_player;
 
     public:
-        Player (Board& board, const Symbol stone, Group& group);
+        Player (Board& board, const Symbol stone);
         ~Player ();
         friend class Group;  
 
@@ -34,6 +33,8 @@ class Group {
         int number_of_players = 0;
 
     public:
+        ~Group ();
+
         Player* first () const;
 
         int length () const;

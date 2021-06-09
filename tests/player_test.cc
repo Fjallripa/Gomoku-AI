@@ -6,8 +6,8 @@ Group group;
 
 void test_1 () {
     cout << "Testing player make_move() method:" << endl;
-    Player player_a = Player(board, stone[0], group);
-    Player player_b = Player(board, stone[1], group);
+    Player player_a = Player(board, stone[0]);
+    Player player_b = Player(board, stone[1]);
 
     player_a.make_move();
     player_b.make_move();
@@ -16,9 +16,9 @@ void test_1 () {
 
 void test_2 () {
     cout << "Testing player and group properties (manual constructors):" << endl << endl;
-    Player player_a = Player(board, stone[0], group);
-    Player player_b = Player(board, stone[1], group);
-    Player player_c = Player(board, stone[2], group);
+    Player player_a = Player(board, stone[0]);
+    Player player_b = Player(board, stone[1]);
+    Player player_c = Player(board, stone[2]);
     group.append(&player_a);
     group.append(&player_b);
     group.append(&player_c);
@@ -57,7 +57,7 @@ void test_3 () {
     cout << "Testing player and group properties (looped constructors):" << endl << endl;
     std::vector<Player> players;
     for (int i = 0; i < 3; i++) {
-        players.emplace_back(board, stone[i], group);
+        players.emplace_back(board, stone[i]);
     }
     for (int i = 0; i < 3; i++) {   // Separate for-loop needed to avoid pointer-problems
         group.append(&players[i]);
@@ -105,7 +105,7 @@ void test_4 () {
     // Creating and adding players to the group
     std::vector<Player> players;
     for (int i = 0; i < player_count; i++) {
-        players.emplace_back(board, stone[i], group);
+        players.emplace_back(board, stone[i]);
     }
     for (int i = 0; i < player_count; i++) {   // Separate for-loop needed to avoid pointer-problems
         group.append(&players[i]);

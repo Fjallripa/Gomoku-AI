@@ -7,16 +7,12 @@
 // ----------------------------------
 
 // Constructor & Destructor
-Player::Player (Board& board, const Symbol stone, Group& group) {
+Player::Player (Board& board, const Symbol stone) {
     this->board  = &board;
     this->symbol = stone;
-    this->group  = &group;
-    //this->group->append(this);
 }
 
 Player::~Player () {
-    //this->group->pop();  // next_player and previous_player are already removed by this function.
-    this->group = nullptr;
     this->board = nullptr;
 }
 
@@ -52,6 +48,15 @@ void Player::make_move () {
 
 // Implementation of the Group class
 // ---------------------------------
+
+// Constructor & Destructor
+Group::~Group () {
+      // Removing players one by one until the group is empty
+    while (this->length() > 0) {
+        this->pop();
+    }
+}
+
 
 // Display of internal objects
 Player* Group::first () const {
