@@ -37,7 +37,9 @@ Player* Player::prev () const {
 void Player::make_move () {
     int x = -1; int y = -1;
     while (not board->inside(x, y) or board->at(x, y) != empty) {
-        input_coord(x, y);
+        std::ostringstream stone_info;
+        stone_info << this->stone() << ": ";   // Shows which player is currently making the move.
+        input_coord(x, y, stone_info.str());
     }
     board->place(x, y, this->stone());
     cout << *board;

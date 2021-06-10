@@ -1,7 +1,7 @@
 #include "symbol.cc"
 
 
-const int edge_length = 100;
+const int edge_length = 10;
 const int board_size = edge_length * edge_length;
 
 class Board {

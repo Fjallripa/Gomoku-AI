@@ -15,20 +15,20 @@ std::istream &get_coord(std::istream &ins, int &x, int &y);
 */
 
 //// Input function for single integers
-void input_int (int &x) {
-    cin.clear();
-    while (not get_int(cin, x)) {
+void input_int (int &x, std::string info = "") {
+    do {
+        cout << info;
         cin.clear();
-    }
+    } while (not get_int(cin, x));
 }
 
 
 //// Input function for two integers separated by whitespace (input for 2D-integer-coordinates)
-void input_coord (int &x, int &y) {
-    cin.clear();
-    while (not get_coord(cin, x, y)) {
+void input_coord (int &x, int &y, std::string info = "") {
+    do {
+        cout << info;
         cin.clear();
-    }
+    } while (not get_coord(cin, x, y));
 }
 
 
