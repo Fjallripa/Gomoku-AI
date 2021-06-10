@@ -31,12 +31,39 @@ std::ostream& operator<< (std::ostream& out, const Board& board) {
     // with the x-axis (col) increasing from left to right 
     // and the y-axis (row) increasing from bottom to top.
     for (int row = edge_length - 1; row >= 0 ; row--) {
+        out << " ";
+        int y_digit_0 = row % 10;
+        int y_digit_1 = row / 10;
+        if (edge_length > 10) {
+            if (y_digit_1 == 0) {out << " ";}
+            else                {out << y_digit_1;}
+        }
+        out << y_digit_0;
+
         for (int col = 0; col < edge_length; col++) {
             out << " " << board.at(col, row);
         }
         out << endl;
     }
-    out << endl;
+    if (edge_length > 10) {
+        out << "   ";   // 3 Zeichen Platz
+        for (int col = 0; col < edge_length; col++) {
+            out << " ";
+            int x_digit_1 = col / 10;
+            if (x_digit_1 == 0) {out << " ";}
+            else                {out << x_digit_1;}
+            
+        }
+        out << endl;
+        out << "   ";   // 3 Zeichen Platz
+    } else {
+        out << "  ";   // 2 Zeichen Platz
+    }
+    for (int col = 0; col < edge_length; col++) {
+        int x_digit_0 = col % 10;
+        out << " " << x_digit_0;
+    }
+    out << endl << endl;
 
     return out;
 }

@@ -10,30 +10,17 @@
 * set up the beginning of the project folder structure
 
 
-## Objectives
-1. create a basic board class 
-    * consisting of an array
-    * with a set of symbols as possible values
-        * by default it consists of "empty" symbols
-    * squares are adressable via coordinates
-    * output operator printing the current board
+## Objectives      
+6. put the basic game in an own file
+    * create new `assembly` folder containing just the game, not any test infrastructure
+    * print a title for the game
+    * display info about who's turn it is
+    * use the latest player test as basis for the game code
 
-2. create a basic player class
-    * that assign a new symbol to a new player instance
-    * that can interactively place a "stone" (player symbol) on the board
-    * that prints the board after placing a stone
-
-3. increase robustness for accessing squares and placing stones
-    * create a Board method inside() that checks if coordinates are pointing to squares within the board
-    * make the Board method at() read-only
-    * create a Board method place() which places a stone on the board at a coordinate
-        * update the board test to use board.place()
-        * update the Player method make_move() to use board.place() instead and check if the intended square is already occupied by another stone
-    * create an input function which forces the user to enter integers and otherwise repeats the input request
-        * update the test files to use that robust input function
-        * update the player method make_move to include that function
-    * make a descriptive template test file
-    * check where making function arguments to const works
+5. build a coordinate system and standalone game
+    * change the Board output operator to also print the x- and y-axis coordinates below and left to the board
+    * the coordinate axes adapt to the size of the board
+    * make it capable of displaying two-digit coordinates but use one-digit coordinates when possible
 
 4. create a Group class for Players
     * the group is a double linked circular list of Players
@@ -48,5 +35,27 @@
         - 4 players take turns on a 10x10 board
         - the basic gameplay code performing the player cycling and stone placement is developed
         - a limit to when the board is full is introduced
-        
-        
+
+3. increase robustness for accessing squares and placing stones
+    * create a Board method inside() that checks if coordinates are pointing to squares within the board
+    * make the Board method at() read-only
+    * create a Board method place() which places a stone on the board at a coordinate
+        * update the board test to use board.place()
+        * update the Player method make_move() to use board.place() instead and check if the intended square is already occupied by another stone
+    * create an input function which forces the user to enter integers and otherwise repeats the input request
+        * update the test files to use that robust input function
+        * update the player method make_move to include that function
+    * make a descriptive template test file
+    * check where making function arguments to const works
+
+2. create a basic player class
+    * that assign a new symbol to a new player instance
+    * that can interactively place a "stone" (player symbol) on the board
+    * that prints the board after placing a stone
+    
+1. create a basic board class 
+    * consisting of an array
+    * with a set of symbols as possible values
+        * by default it consists of "empty" symbols
+    * squares are adressable via coordinates
+    * output operator printing the current board
