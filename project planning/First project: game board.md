@@ -10,7 +10,21 @@
 * set up the beginning of the project folder structure
 
 
-## Objectives      
+## Objectives
+7. declare a victor when a sequence of stones of length k is reached
+    * create a Player `bool is_winner()` method that checks if the latest stone is part of a k-stone sequence
+        - counts the length of an uninterrupted sequence of the player's stones in each of the 8 directions
+        - returns true if there's one sequence that exceeds length k
+    * to facilitate the sequence search, a new class `Square` is introduced together with an enum type `Direction`
+        - the constructor takes in a coordinate and stores it
+        - a `Symbol symbol()` method accesses the Board at() method
+        - a `bool go(direction, steps=1)` method uses a Direction and optionally a number of steps to change the internal coordinates or return false if the edge of the board is reached.
+        - the Direction type contains eight values, one for each direction
+        - optionally introduce a new Symbol value `invalid` to be used by functions that return Symbol and sometimes need to communicate that they don't point inside the board anymore.
+    * update the game loop to check if the last move made that player a winner
+    * implement a Board method that congratulates the winner or declares a draw after the game loop is terminated
+    * make the Player is_winner() method update a Board object `Symbol winner` that is later used to declare a winner or draw
+
 6. put the basic game in an own file
     * create new `assembly` folder containing just the game, not any test infrastructure
     * print a title for the game
@@ -40,11 +54,11 @@
     * create a Board method inside() that checks if coordinates are pointing to squares within the board
     * make the Board method at() read-only
     * create a Board method place() which places a stone on the board at a coordinate
-        * update the board test to use board.place()
-        * update the Player method make_move() to use board.place() instead and check if the intended square is already occupied by another stone
+        - update the board test to use board.place()
+        - update the Player method make_move() to use board.place() instead and check if the intended square is already occupied by another stone
     * create an input function which forces the user to enter integers and otherwise repeats the input request
-        * update the test files to use that robust input function
-        * update the player method make_move to include that function
+        - update the test files to use that robust input function
+        - update the player method make_move to include that function
     * make a descriptive template test file
     * check where making function arguments to const works
 
@@ -56,6 +70,6 @@
 1. create a basic board class 
     * consisting of an array
     * with a set of symbols as possible values
-        * by default it consists of "empty" symbols
+        - by default it consists of "empty" symbols
     * squares are adressable via coordinates
     * output operator printing the current board
