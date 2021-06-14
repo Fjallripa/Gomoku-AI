@@ -1,5 +1,9 @@
-#include "../game/input.cc"
+// Tests of the input functions
+// ----------------------------
 
+
+
+#include "../game/include.hh"
 
 void test_1 () {
     // Code adapted from http://www.cplusplus.com/forum/beginner/170685/

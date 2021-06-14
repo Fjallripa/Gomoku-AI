@@ -1,7 +1,12 @@
-// Include only the parts of the game that are required for this test.
-#include "../game/input.cc"
+// Tests of some structure
+// -----------------------
 
-// Create common instances if necessary
+
+
+#include "../game/include.hh"   // Standard file that handles all inclusions for you.
+
+
+// Create common instances if necessary.
 
 
 // Store individual tests inside functions "void test_x ()"

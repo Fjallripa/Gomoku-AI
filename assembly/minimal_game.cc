@@ -1,4 +1,9 @@
-#include "../game/player.cc"
+// Implementation of a bare-bones Gomoku game
+// ------------------------------------------
+
+
+
+#include "../game/include.hh"
 
 Board board;
 Group group;

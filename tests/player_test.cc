@@ -1,4 +1,9 @@
-#include "../game/player.cc"
+// Tests of the Player methods
+// ---------------------------
+
+
+
+#include "../game/include.hh"
 
 Board board;
 Group group;

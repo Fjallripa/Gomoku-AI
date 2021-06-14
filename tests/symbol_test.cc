@@ -1,5 +1,9 @@
-#include "../game/symbol.cc"
+// Tests of the Symbol type and structures
+// ---------------------------------------
 
+
+
+#include "../game/include.hh"
 
 
 int main () {

@@ -1,11 +1,12 @@
-#include "include.hh"
+// Definition of the Symbol type
+// -----------------------------
 
 
-const int max_player_count = 4;   // If this number is changed, the initializations below have to be adapted as well.
-
-
-// Symbols. The allowed values on the board
+// Symbols are the allowed values on the board.
 enum Symbol {empty, x, o, d, p};
+
+
+const int max_player_count = 4;   // If this number is changed, the Symbol type may have to be adapted as well.
 
 std::ostream& operator<< (std::ostream& out, const Symbol symbol) {
     if  (symbol == empty) {out << ".";}
@@ -18,21 +19,5 @@ std::ostream& operator<< (std::ostream& out, const Symbol symbol) {
     return out;
 }
 
-// Stones. The symbols available to the players
+// Stones are the symbols available to the Players.
 const std::array<Symbol, max_player_count> stone = {x, o, d, p};   // Enables iteration when assigning stones to players (e.g. player.stone = stone[i];).
-
-
-
-
-// Directions. serve as arguments for where to move on the board
-enum Direction {up, upright, right, downright, down, downleft, left, upleft};
-
-// To iterate through them, a container is needed as well.
-const int direction_count = 8;
-const std::array<Direction, direction_count> all_directions = 
-    {up, upright, right, downright, down, downleft, left, upleft};
-
-const std::array<std::string, direction_count> direction_string = 
-    {"up       ", "upright  ", "right    ", "downright",
-     "down     ", "downleft ", "left     ", "upleft   "};
-        
