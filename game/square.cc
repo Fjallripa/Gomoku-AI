@@ -4,24 +4,32 @@
 
 
 // Constructor & Destructor
-Square::Square (Board& board, int x, int y) {
-    this->board       = &board;
+Square::Square (Board* board, int x, int y) {
+    this->board       = board;
     this->coordinates = {x, y};
+}
+
+Square::Square (Board& board, int x, int y) {
+    *this = Square(&board, x, y);
+}
+
+Square::Square () {
+    *this = Square(nullptr, -1, -1);
 }
 
 
 
 // Display of internal objects
-int Square::x () {
+int Square::x () const {
     return this->coordinates[0];
 }
 
-int Square::y () {
+int Square::y () const {
     return this->coordinates[1];
 }
 
 
-Symbol Square::symbol () {
+Symbol Square::symbol () const {
     return this->board->at(this->x(), this->y());   // Returns symbol at this square.
 }
 

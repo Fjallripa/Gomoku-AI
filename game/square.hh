@@ -10,13 +10,15 @@ class Square {
 
 
     public:
+        Square (Board* board, int x, int y);
         Square (Board& board, int x, int y);
+        Square ();
+        
 
+        int x () const;
+        int y () const;
 
-        int x ();
-        int y ();
-
-        Symbol symbol ();
+        Symbol symbol () const;
 
 
         bool go (Direction direction, int steps);

@@ -21,6 +21,11 @@ Symbol Player::stone () const {
 }
 
 
+Square Player::last_move () const {
+    return this->latest_move;
+}
+
+
 Player* Player::next () const {
     return this->next_player;
 }
@@ -41,5 +46,6 @@ void Player::make_move () {
         input_coord(x, y, stone_info.str());
     }
     board->place(x, y, this->stone());
+    this->latest_move = Square(this->board, x, y);
     cout << *board;
 }

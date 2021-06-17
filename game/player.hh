@@ -9,6 +9,8 @@ class Player {
     private:
         Board* board;
         Symbol symbol;
+
+        Square latest_move;
         
         Player* next_player;
         Player* previous_player;
@@ -21,6 +23,8 @@ class Player {
 
 
         Symbol stone () const;
+
+        Square last_move () const;
         
         Player* next () const;
 

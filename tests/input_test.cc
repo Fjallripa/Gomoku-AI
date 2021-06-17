@@ -33,7 +33,11 @@ void test_2 () {
         input_int(number);
     }
     cout << "You chose option " << number << endl;
-    
+    cout << endl;
+
+
+    input_int(number, "Now, just input some number: ");
+    cout << "Yes, it's " << number << "." << endl;
 }
 
 
@@ -43,7 +47,7 @@ void test_3 () {
     int number_1;
     int number_2;
 
-    input_coord(number_1, number_2);
+    input_coord(number_1, number_2, "Input two numbers separated by a space: ");
 
     cout << "You chose (" << number_1 << ", " << number_2 << ")" << endl;
     
