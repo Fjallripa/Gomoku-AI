@@ -25,13 +25,15 @@ int Group::length () const {
 
 // Actions on instances
 void Group::append (Player* new_player) {
-    if (this->number_of_players < 1) {   // if there are no players in the group (< 1 for robustness)
+    // If there are no players in the group
+    if (this->number_of_players < 1) {   //  (< 1 for robustness)
         this->first_player             = new_player;
         
         // The single player is linked to itself.
         this->first()->next_player     = this->first(); 
         this->first()->previous_player = this->first();
     
+    // If there's more than one player left in the group
     } else {
         // The old last player becomes the second-to-last.
         Player* old_last_player      = this->first()->prev();
@@ -42,15 +44,19 @@ void Group::append (Player* new_player) {
         new_player->next_player         = this->first();
         this->first()->previous_player = new_player;
     }
-    this->number_of_players++;  // The groups player count is incremented.
+
+    // The groups player count is incremented.
+    this->number_of_players++;
 }
 
 
 Player* Group::pop () {
-    if (this->number_of_players < 1) {   // if there are no players in the group (< 1 for robustness)
+    // If there are no players in the group
+    if (this->number_of_players < 1) {   // (< 1 for robustness)
         return nullptr;
     
-    } else if (this->number_of_players == 1) {   // if there's only one player left in the group
+    // If there's only one player left in the group
+    } else if (this->number_of_players == 1) {
         // The groups only player gets stripped of its links.
         this->first()->previous_player = nullptr;
         this->first()->next_player     = nullptr;
@@ -61,6 +67,7 @@ Player* Group::pop () {
         this->number_of_players = 0;
         return leaving_player;
     
+    // If there's more than one player left in the group
     } else {
         // Removal of the group's last player
         Player* leaving_player  = this->first()->prev();

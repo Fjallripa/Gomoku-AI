@@ -37,6 +37,7 @@ Symbol Square::symbol () const {
 
 // Actions on instances
 bool Square::go (Direction direction, int steps = 1) {
+    // Selection of the new coordinates
     int x_new = this->x();
     int y_new = this->y();
     switch (direction) {
@@ -51,6 +52,7 @@ bool Square::go (Direction direction, int steps = 1) {
         default:        return false;                   break;
     }
 
+    // Performing the move if it's inside the board
     bool still_inside = this->board->inside(x_new, y_new);
     if (still_inside) {   // Only moves to the new square if it is inside the board.
         this->coordinates = {x_new, y_new};
