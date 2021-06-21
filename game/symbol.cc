@@ -8,14 +8,18 @@ enum Symbol {empty, x, o, d, p};
 
 const int max_player_count = 4;   // If this number is changed, the Symbol type may have to be adapted as well.
 
+// Displaying the symbols
 std::ostream& operator<< (std::ostream& out, const Symbol symbol) {
-    if  (symbol == empty) {out << ".";}
-    else if (symbol == x) {out << "X";}
-    else if (symbol == o) {out << "O";}
-    else if (symbol == d) {out << "Δ";}
-    else if (symbol == p) {out << "Π";}
-    else {out << "! This symbol is not defined !\n";}
-
+    switch (symbol) {
+        case empty: out << "."; break;
+        case x    : out << "X"; break;
+        case o    : out << "O"; break;
+        case d    : out << "Δ"; break;
+        case p    : out << "Π"; break;
+    
+        default: out << "! This symbol is not defined !\n"; break;
+    }
+    
     return out;
 }
 

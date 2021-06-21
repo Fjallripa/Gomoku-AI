@@ -8,7 +8,7 @@
 Board board;
 
 
-void test_1 () {
+void test_1 () {   // Testing player make_move() method
     cout << "Testing player make_move() method:" << endl;
     Player player_a = Player(board, stone[0]);
     Player player_b = Player(board, stone[1]);
@@ -25,7 +25,7 @@ void test_1 () {
 }
 
 
-void test_2 () {
+void test_2 () {   // Testing player and group properties (manual constructors)
     cout << "Testing player and group properties (manual constructors):" << endl << endl;
     Player player_a = Player(board, stone[0]);
     Player player_b = Player(board, stone[1]);
@@ -94,7 +94,7 @@ void test_2 () {
 }
 
 
-void test_3 () {
+void test_3 () {   // Testing player and group properties (looped constructors)
     cout << "Testing player and group properties (looped constructors):" << endl << endl;
     std::vector<Player> players;
     for (int i = 0; i < 3; i++) {
@@ -139,7 +139,7 @@ void test_3 () {
 }
 
 
-void test_4 () {
+void test_4 () {   // Testing basic gameplay
     cout << "Testing basic gameplay:" << endl << endl;
     
     cout << "Choose the number of players: ";
@@ -162,10 +162,12 @@ void test_4 () {
     // Playing the game
     cout << board;
     Player* current_player = group.first();
-    for (int i = 0; i < board_size; i++) {
-        current_player->make_move();
+    current_player->make_move();
+    for (int i = 1; i < board_size and not current_player->is_winner(); i++) {
         current_player = current_player->next();
+        current_player->make_move();
     }
+    board.congratulate();
 }
 
 

@@ -8,7 +8,7 @@
 Board board;
 Group group;
 std::vector<Player> players;
-const int player_count = 2;  // Not more than max_player_count!
+const int player_count = 3;  // Not more than max_player_count!
 
 
 
@@ -27,8 +27,10 @@ int main () {
 
     cout << board;
     Player* current_player = group.first();
-    for (int i = 0; i < board_size; i++) {
-        current_player->make_move();
+    current_player->make_move();
+    for (int i = 1; i < board_size and not current_player->is_winner(); i++) {
         current_player = current_player->next();
+        current_player->make_move();
     }
+    board.congratulate();
 }

@@ -2,14 +2,15 @@
 // ------------------------------
 
 
-const int edge_length = 3;
+const int edge_length = 30;
 const int board_size = edge_length * edge_length;
 
 // Board creates the game board and stores its current state.
 class Board {
     private:
-        std::array<Symbol, board_size> board;    
+        std::array<Symbol, board_size> board;
 
+        Symbol winner = empty;
 
     public:
         Board ();
@@ -21,6 +22,11 @@ class Board {
 
         //std::ostream& operator<< (std::ostream& out, const Board& board)
 
+        void congratulate () const;
 
-        bool place (const int x, const int y, const Symbol symbol);    
+
+        bool place (const int x, const int y, const Symbol symbol);
+
+        void set_winner (Symbol player);
+
 };
