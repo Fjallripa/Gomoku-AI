@@ -34,3 +34,4 @@ Looking at vagabunden_schach_v1_2.cc:
     * algorithms/
     * game/
     * assembly/
+

@@ -1,7 +1,12 @@
-// Include only the parts of the game that are required for this test.
-#include "../game/input.cc"
+// Tests of some structure
+// -----------------------
 
-// Create common instances if necessary
+
+
+#include "../game/include.hh"   // Standard file that handles all inclusions for you.
+
+
+// Create common instances if necessary.
 
 
 // Store individual tests inside functions "void test_x ()"
@@ -27,5 +32,4 @@ int main () {
     //else if (input_number == 2) test_2();
     //else if (input_number == 3) test_3();
     else cout << "Didn't find any matching test for" << input_number << endl;
-
 }

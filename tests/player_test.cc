@@ -1,24 +1,37 @@
-#include "../game/player.cc"
+// Tests of the Player methods
+// ---------------------------
+
+
+
+#include "../game/include.hh"
 
 Board board;
-Group group;
 
 
-void test_1 () {
+void test_1 () {   // Testing player make_move() method
     cout << "Testing player make_move() method:" << endl;
     Player player_a = Player(board, stone[0]);
     Player player_b = Player(board, stone[1]);
 
     player_a.make_move();
+    cout << "Latest move of " << player_a.last_move().symbol() 
+    << " at (" << player_a.last_move().x() << ", " << player_a.last_move().y() << ")"
+    << endl << endl;
+    
     player_b.make_move();
+    cout << "Latest move of " << player_b.last_move().symbol() 
+    << " at (" << player_b.last_move().x() << ", " << player_b.last_move().y() << ")"
+    << endl << endl;
 }
 
 
-void test_2 () {
+void test_2 () {   // Testing player and group properties (manual constructors)
     cout << "Testing player and group properties (manual constructors):" << endl << endl;
     Player player_a = Player(board, stone[0]);
     Player player_b = Player(board, stone[1]);
     Player player_c = Player(board, stone[2]);
+    
+    Group group;
     group.append(&player_a);
     group.append(&player_b);
     group.append(&player_c);
@@ -30,35 +43,65 @@ void test_2 () {
     cout << "player_c: " << player_c.stone() << "  next(): " << player_c.next() << "  prev(): " << player_c.prev() << endl;
     cout << endl;
 
+
     cout << "Iterating through the group:" << endl;
     Player* current_player = group.first();
     cout << "next():";
-    for (int i = 0; i < group.length(); i++) {
+    for (int i = 0; i < 2 * group.length(); i++) {
         cout << " " << current_player;
         current_player = current_player->next();
     }
     cout << endl << "prev():";
-    for (int i = 0; i < group.length(); i++) {
+    for (int i = 0; i < 2 * group.length(); i++) {
         cout << " " << current_player;
         current_player = current_player->prev();
     }
     cout << endl << endl;
 
+
     cout << "Making moves:" << endl;
     cout << board;
-    for (int i = 0; i < group.length(); i++) {
+    for (int i = 0; i < 2 * group.length(); i++) {
         current_player->make_move();
         current_player = current_player->next();
+    }
+
+
+    cout << "Testing group deconstruction:" << endl;
+    // The Players are popped one by one.
+    int step = 0;
+    while (group.length() > 0) {
+        cout << "Step " << step << ":" << endl;
+        cout << "first(): " << group.first() << "  length(): " << group.length() << endl;
+        
+        cout << "members:";
+        Player* member = group.first();
+        for (int member_count = 0; member_count < group.length(); member_count++) {
+            cout << " " << member->stone() << ":" << member;
+            member = member->next();
+        }
+        cout << endl;
+        
+        Player* lone_player = group.pop();
+        cout << lone_player->stone() << ":" << lone_player 
+             << " - next(): " << lone_player->next()
+             << " - prev(): " << lone_player->prev()
+             << endl;
+        
+        cout << endl;
+        step++;
     }
 }
 
 
-void test_3 () {
+void test_3 () {   // Testing player and group properties (looped constructors)
     cout << "Testing player and group properties (looped constructors):" << endl << endl;
     std::vector<Player> players;
     for (int i = 0; i < 3; i++) {
         players.emplace_back(board, stone[i]);
     }
+
+    Group group;
     for (int i = 0; i < 3; i++) {   // Separate for-loop needed to avoid pointer-problems
         group.append(&players[i]);
     }
@@ -70,6 +113,7 @@ void test_3 () {
     }
     cout << endl;
 
+
     cout << "Iterating through the group:" << endl;
     Player* current_player = group.first();
     cout << "next():";
@@ -84,16 +128,18 @@ void test_3 () {
     }
     cout << endl << endl;
 
+
     cout << "Making moves:" << endl;
     cout << board;
-    for (int i = 0; i < board_size; i++) {
+    for (int i = 0; i < 2 * group.length(); i++) {
         current_player->make_move();
         current_player = current_player->next();
     }
+    cout << "Moves over." << endl;
 }
 
 
-void test_4 () {
+void test_4 () {   // Testing basic gameplay
     cout << "Testing basic gameplay:" << endl << endl;
     
     cout << "Choose the number of players: ";
@@ -107,6 +153,8 @@ void test_4 () {
     for (int i = 0; i < player_count; i++) {
         players.emplace_back(board, stone[i]);
     }
+
+    Group group;
     for (int i = 0; i < player_count; i++) {   // Separate for-loop needed to avoid pointer-problems
         group.append(&players[i]);
     }
@@ -114,10 +162,12 @@ void test_4 () {
     // Playing the game
     cout << board;
     Player* current_player = group.first();
-    for (int i = 0; i < board_size; i++) {
-        current_player->make_move();
+    current_player->make_move();
+    for (int i = 1; i < board_size and not current_player->is_winner(); i++) {
         current_player = current_player->next();
+        current_player->make_move();
     }
+    board.congratulate();
 }
 
 

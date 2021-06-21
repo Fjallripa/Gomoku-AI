@@ -1,22 +1,27 @@
-#include "include.hh"
+// Definition of the Symbol type
+// -----------------------------
 
 
-const int max_player_count = 4;   // If this number is changed, the initializations below have to be adapted as well.
-
-
-// Symbols. The allowed values on the board
+// Symbols are the allowed values on the board.
 enum Symbol {empty, x, o, d, p};
 
-std::ostream& operator<< (std::ostream& out, const Symbol symbol) {
-    if  (symbol == empty) {out << ".";}
-    else if (symbol == x) {out << "X";}
-    else if (symbol == o) {out << "O";}
-    else if (symbol == d) {out << "Δ";}
-    else if (symbol == p) {out << "Π";}
-    else {out << "! This symbol is not defined !\n";}
 
+const int max_player_count = 4;   // If this number is changed, the Symbol type may have to be adapted as well.
+
+// Displaying the symbols
+std::ostream& operator<< (std::ostream& out, const Symbol symbol) {
+    switch (symbol) {
+        case empty: out << "."; break;
+        case x    : out << "X"; break;
+        case o    : out << "O"; break;
+        case d    : out << "Δ"; break;
+        case p    : out << "Π"; break;
+    
+        default: out << "! This symbol is not defined !\n"; break;
+    }
+    
     return out;
 }
 
-// Stones. The symbols available to the players
+// Stones are the symbols available to the Players.
 const std::array<Symbol, max_player_count> stone = {x, o, d, p};   // Enables iteration when assigning stones to players (e.g. player.stone = stone[i];).

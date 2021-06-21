@@ -1,10 +1,7 @@
-#include "player.hh"
-#include "input.cc"
-
-
-
 // Implementation of the Player class
 // ----------------------------------
+
+
 
 // Constructor & Destructor
 Player::Player (Board& board, const Symbol stone) {
@@ -17,9 +14,15 @@ Player::~Player () {
 }
 
 
+
 // Display of internal objects
 Symbol Player::stone () const {
     return this->symbol;
+}
+
+
+Square Player::last_move () const {
+    return this->latest_move;
 }
 
 
@@ -33,96 +36,61 @@ Player* Player::prev () const {
 }
 
 
+
 // Actions on instances
 void Player::make_move () {
     int x = -1; int y = -1;
+
+    // Requesting player coordinate input
     while (not board->inside(x, y) or board->at(x, y) != empty) {
         std::ostringstream stone_info;
         stone_info << this->stone() << ": ";   // Shows which player is currently making the move.
         input_coord(x, y, stone_info.str());
     }
+
+    // Executing the move
     board->place(x, y, this->stone());
+    this->latest_move = Square(this->board, x, y);
     cout << *board;
 }
 
 
+bool Player::is_winner () const {
+    // Checking in each direction if the player has built a sequence of stones long enough to win.
+    for (Direction direction : fore_directions) {
+        Square square = this->last_move();
+        int sequence_length = 1;   // last_move starts the sequence.
+        bool inside_board = true;
 
+        // Count how long the sequence extends in the fore direction.
+        while (sequence_length < winning_length) {
+            inside_board = square.go(direction);
+            if (not inside_board or square.symbol() != this->stone()) {
+                square.go(direction, -sequence_length);   // i.e. go back to square one.
+                break;
+            }
+            sequence_length++;
+        }
 
-// Implementation of the Group class
-// ---------------------------------
-
-// Constructor & Destructor
-Group::~Group () {
-      // Removing players one by one until the group is empty
-    while (this->length() > 0) {
-        this->pop();
-    }
-}
-
-
-// Display of internal objects
-Player* Group::first () const {
-    return this->first_player;
-}
-
-
-int Group::length () const {
-    return this->number_of_players;
-}
-
-
-// Actions on instances
-void Group::append (Player* new_player) {
-    if (this->number_of_players < 1) {   // if there are no players in the group (< 1 for robustness)
-        this->first_player             = new_player;
+        // Count how long the sequence extends in the back direction.
+        while (sequence_length < winning_length) {
+            inside_board = square.go(direction, -1);
+            if (not inside_board or square.symbol() != this->stone()) {
+                break;
+            }
+            sequence_length++;
+        }
         
-        // The single player is linked to itself.
-        this->first()->next_player     = this->first(); 
-        this->first()->previous_player = this->first();
-    
-    } else {
-        // The old last player becomes the second-to-last.
-        Player* old_last_player      = this->first()->prev();
-        old_last_player->next_player = new_player;
-        
-        // The new player becomes the new last player.
-        new_player->previous_player     = old_last_player;
-        new_player->next_player         = this->first();
-        this->first()->previous_player = new_player;
-    }
-    this->number_of_players++;  // The groups player count is incremented.
-}
+        // For test purposes only.
+        //cout << this->stone() << ": " << direction << ", " << sequence_length << endl;
 
-
-Player* Group::pop () {
-    if (this->number_of_players < 1) {   // if there are no players in the group (< 1 for robustness)
-        return nullptr;
-    
-    } else if (this->number_of_players == 1) {   // if there's only one player left in the group
-        // The groups only player gets stripped of its links.
-        this->first()->previous_player = nullptr;
-        this->first()->next_player     = nullptr;
-
-        // Then this player is deleted from the group and returned by the function.
-        Player* leaving_player     = this->first();
-        this->first_player      = nullptr;
-        this->number_of_players = 0;
-        return leaving_player;
-    
-    } else {
-        // Removal of the group's last player
-        Player* leaving_player  = this->first()->prev();
-        Player* new_last_player = leaving_player->prev();
-        
-        // The second-to-last player is linked to the first player, closing the ring.
-        this->first()->previous_player = new_last_player;
-        new_last_player->next_player   = this->first();
-        this->number_of_players--;   // The groups player count is decremented.
-        
-        // The leaving player is stripped of its links and returned by the function.
-        leaving_player->previous_player = nullptr;
-        leaving_player->next_player     = nullptr;
-        return leaving_player;
+        // If the sequence is long enough, the winner is set.
+        if (sequence_length >= winning_length) {
+            board->set_winner(this->stone());
+            return true;
+        }
     }
 
+    // Else, no winner is set.
+        return false;
 }

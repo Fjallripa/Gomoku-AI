@@ -1,6 +1,9 @@
-#include "../game/board.cc"
-#include "../game/input.cc"
+// Tests of the Board methods
+// --------------------------
 
+
+
+#include "../game/include.hh"
 
 Board board;
 
@@ -9,7 +12,7 @@ void test_1 () {
     cout << "(1, 1): " << board.at(1, 1) << endl;
     cout << "(0, 0): " << board.at(0, 0) << endl;
     cout << "(2, 2): " << board.at(2, 2) << endl;
-    cout << "(2, 3): " << board.at(2, 3) << endl;  // outside 3x3 board. in that case, will generate error and stop the program
+    cout << "(2, 3): " << board.at(2, 3) << endl;  // outside 3x3 board. In that case, will generate error and stop the program.
     cout << "(3, 2): " << board.at(3, 2) << endl;
 }
 
@@ -35,6 +38,7 @@ void test_3 () {
 
 
 
+
 int main () {
     int input_number;
     const int max_number = 3;
@@ -47,6 +51,6 @@ int main () {
     if      (input_number == 1) test_1();  
     else if (input_number == 2) test_2();
     else if (input_number == 3) test_3();
+    //else if (input_number == 4) test_4();
     else cout << "Didn't find any matching test for" << input_number << endl;
-
 }

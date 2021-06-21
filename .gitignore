@@ -1,0 +1,6 @@
+compiled\ programs/*   
+# These programs can be compiled from the existing code.
+# As different versions can't be compared, there is no point in having them in a git repository.
+
+*.DS_Store
+# Irrelavent file system files

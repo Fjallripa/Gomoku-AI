@@ -1,5 +1,9 @@
-#include "../game/input.cc"
+// Tests of the input functions
+// ----------------------------
 
+
+
+#include "../game/include.hh"
 
 void test_1 () {
     // Code adapted from http://www.cplusplus.com/forum/beginner/170685/
@@ -29,7 +33,11 @@ void test_2 () {
         input_int(number);
     }
     cout << "You chose option " << number << endl;
-    
+    cout << endl;
+
+
+    input_int(number, "Now, just input some number: ");
+    cout << "Yes, it's " << number << "." << endl;
 }
 
 
@@ -39,7 +47,7 @@ void test_3 () {
     int number_1;
     int number_2;
 
-    input_coord(number_1, number_2);
+    input_coord(number_1, number_2, "Input two numbers separated by a space: ");
 
     cout << "You chose (" << number_1 << ", " << number_2 << ")" << endl;
     
@@ -61,5 +69,4 @@ int main () {
     else if (input_number == 2) test_2();
     else if (input_number == 3) test_3();
     else cout << "Didn't find any matching test for" << input_number << endl;
-
 }
