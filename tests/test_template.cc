@@ -32,5 +32,4 @@ int main () {
     //else if (input_number == 2) test_2();
     //else if (input_number == 3) test_3();
     else cout << "Didn't find any matching test for" << input_number << endl;
-
 }

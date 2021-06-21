@@ -76,5 +76,4 @@ Player* Group::pop () {
         leaving_player->next_player     = nullptr;
         return leaving_player;
     }
-
 }
