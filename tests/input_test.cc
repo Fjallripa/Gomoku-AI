@@ -5,6 +5,8 @@
 
 #include "../structures/include.hh"   // Standard file that handles all inclusions.
 
+
+// Testing the example given in the code source
 void test_1 () {
     // Code adapted from http://www.cplusplus.com/forum/beginner/170685/
     int myFace;
@@ -23,6 +25,7 @@ void test_1 () {
 }
 
 
+// Testing secure integer input (here from 1 to 3)
 void test_2 () {
     cout << "Testing secure integer input (here from 1 to 3):" << endl;
     
@@ -41,6 +44,7 @@ void test_2 () {
 }
 
 
+// Testing secure two-integer input
 void test_3 () {
     cout << "Testing secure two-integer input:" << endl;
     
@@ -65,8 +69,11 @@ int main () {
         input_int(input_number);
     }
     
-    if      (input_number == 1) test_1();  
-    else if (input_number == 2) test_2();
-    else if (input_number == 3) test_3();
-    else cout << "Didn't find any matching test for" << input_number << endl;
+    switch (input_number) {
+        case 1: test_1(); break;
+        case 2: test_2(); break;
+        case 3: test_3(); break;
+        default: 
+            cout << "Didn't find any matching test for" << input_number << endl; break;
+    }
 }

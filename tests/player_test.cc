@@ -8,7 +8,8 @@
 Board board;
 
 
-void test_1 () {   // Testing player make_move() method
+// Testing player make_move() method
+void test_1 () {
     cout << "Testing player make_move() method:" << endl;
     Player player_a = Player(board, stone[0]);
     Player player_b = Player(board, stone[1]);
@@ -25,7 +26,8 @@ void test_1 () {   // Testing player make_move() method
 }
 
 
-void test_2 () {   // Testing player and group properties (manual constructors)
+// Testing player and group properties (manual constructors)
+void test_2 () {
     cout << "Testing player and group properties (manual constructors):" << endl << endl;
     Player player_a = Player(board, stone[0]);
     Player player_b = Player(board, stone[1]);
@@ -94,7 +96,8 @@ void test_2 () {   // Testing player and group properties (manual constructors)
 }
 
 
-void test_3 () {   // Testing player and group properties (looped constructors)
+// Testing player and group properties (looped constructors)
+void test_3 () {
     cout << "Testing player and group properties (looped constructors):" << endl << endl;
     std::vector<Player> players;
     for (int i = 0; i < 3; i++) {
@@ -139,7 +142,8 @@ void test_3 () {   // Testing player and group properties (looped constructors)
 }
 
 
-void test_4 () {   // Testing basic gameplay
+// Testing basic gameplay
+void test_4 () {
     cout << "Testing basic gameplay:" << endl << endl;
     
     cout << "Choose the number of players: ";
@@ -182,9 +186,12 @@ int main () {
         input_int(input_number);
     }
     
-    if      (input_number == 1) test_1();  
-    else if (input_number == 2) test_2();
-    else if (input_number == 3) test_3();
-    else if (input_number == 4) test_4();
-    else cout << "Didn't find any matching test for" << input_number << endl;
+    switch (input_number) {
+        case 1: test_1(); break;
+        case 2: test_2(); break;
+        case 3: test_3(); break;
+        case 4: test_4(); break;
+        default: 
+            cout << "Didn't find any matching test for" << input_number << endl; break;
+    }
 }

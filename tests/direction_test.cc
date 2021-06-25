@@ -7,6 +7,8 @@
 
 
 int main () {
+    // Testing if the three "direction arrays" work correctly
+    
     cout << "all_directions:  ";
     for (Direction direction : all_directions) {
         cout << direction << ", ";

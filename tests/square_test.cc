@@ -8,7 +8,7 @@
 Board board;
 
 
-
+// Testing moving on the board with the Square class
 void test_1 () {
     cout << "Testing moving on the board with the Square class:" << endl;
     if (edge_length >= 5) {   // Test only works on an at least 5x5 board.
@@ -78,8 +78,9 @@ int main () {
         input_int(input_number);
     }
     
-    if      (input_number == 1) test_1();  
-    //else if (input_number == 2) test_2();
-    //else if (input_number == 3) test_3();
-    else cout << "Didn't find any matching test for" << input_number << endl;
+    switch (input_number) {
+        case 1: test_1(); break;
+        default: 
+            cout << "Didn't find any matching test for" << input_number << endl; break;
+    }
 }

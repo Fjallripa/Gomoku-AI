@@ -7,6 +7,8 @@
 
 Board board;
 
+
+// Testing board.at()
 void test_1 () {
     cout << "Testing coordinates:" << endl;
     cout << "(1, 1): " << board.at(1, 1) << endl;
@@ -16,11 +18,15 @@ void test_1 () {
     cout << "(3, 2): " << board.at(3, 2) << endl;
 }
 
+
+// Testing board output operator
 void test_2 () {
     cout << "Testing board output:" << endl;
     cout << board << endl;
 }
 
+
+// Testing board.place()
 void test_3 () {
     cout << "Testing placing stones on board:" << endl;
     board.place(edge_length, 0, x);
@@ -48,9 +54,11 @@ int main () {
         input_int(input_number);
     }
     
-    if      (input_number == 1) test_1();  
-    else if (input_number == 2) test_2();
-    else if (input_number == 3) test_3();
-    //else if (input_number == 4) test_4();
-    else cout << "Didn't find any matching test for" << input_number << endl;
+    switch (input_number) {
+        case 1: test_1(); break;
+        case 2: test_2(); break;
+        case 3: test_3(); break;
+        default: 
+            cout << "Didn't find any matching test for" << input_number << endl; break;
+    }
 }

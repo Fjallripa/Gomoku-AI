@@ -7,6 +7,7 @@
 
 
 int main () {
+    // Testing if all the symbols (and stones) display correctly.
     cout << empty << stone[0] << stone[1] << stone[2] << stone[3] << endl;
     cout << empty << x << o << d << p << endl;
 }
