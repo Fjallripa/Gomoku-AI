@@ -58,7 +58,13 @@ std::istream &get_int(std::istream &ins, int &n)
         if (!ss.eof())
             ins.setstate(std::ios::failbit);
     } 
-    
+    else {
+        cout << endl << "Assuming Ctrl-D was used, the program will now shut down." << endl;
+        exit(0);
+        /* No other solution was found than quitting the program as getline or cin doesn't 
+        seem to accept any input after Ctrl-D and seemingly can't be restored. */
+    }
+
     return ins;
 }
 
@@ -97,6 +103,12 @@ std::istream &get_coord(std::istream &ins, int &x, int &y)
         {
             ins.setstate(std::ios::failbit);
         }
+    } 
+    else {
+        cout << endl << "Assuming Ctrl-D was used, the program will now shut down." << endl;
+        exit(0);
+        /* No other solution was found than quitting the program as getline or cin doesn't 
+        seem to accept any input after Ctrl-D and seemingly can't be restored. */
     } 
     
     return ins;
