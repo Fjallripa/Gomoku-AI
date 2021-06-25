@@ -3,7 +3,7 @@
 
 
 
-#include "../game/include.hh"
+#include "../structures/include.hh"   // Standard file that handles all inclusions.
 
 
 int main () {

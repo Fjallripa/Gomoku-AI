@@ -57,7 +57,8 @@ std::istream &get_int(std::istream &ins, int &n)
         // Check to see that there is nothing left over.
         if (!ss.eof())
             ins.setstate(std::ios::failbit);
-    }
+    } 
+    
     return ins;
 }
 
@@ -96,7 +97,7 @@ std::istream &get_coord(std::istream &ins, int &x, int &y)
         {
             ins.setstate(std::ios::failbit);
         }
-    }
+    } 
     
     return ins;
 }

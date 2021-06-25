@@ -10,7 +10,7 @@
 				"-stdlib=libc++",
 				"${file}",
 				"-o",
-				"${workspaceFolder}/compiled programs/${fileBasenameNoExtension}"
+				"${workspaceFolder}/compiled/${fileBasenameNoExtension}"
 			],
 			"options": {
 				"cwd": "${fileDirname}"	

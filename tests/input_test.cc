@@ -3,7 +3,7 @@
 
 
 
-#include "../game/include.hh"
+#include "../structures/include.hh"   // Standard file that handles all inclusions.
 
 void test_1 () {
     // Code adapted from http://www.cplusplus.com/forum/beginner/170685/
