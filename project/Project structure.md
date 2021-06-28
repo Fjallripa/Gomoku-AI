@@ -24,14 +24,14 @@ Looking at vagabunden_schach_v1_2.cc:
 
     
 ### Idea for a folder structure
-
+```
 * game/
-    * compiled programs/
+    * compiled programs/   (now compiled/)
     * parameters/
-    * board/
-    * players/
+    * board/               (-)
+    * players/             (-)
     * scoring/
     * algorithms/
-    * game/
-    * assembly/
-
+    * game/                (now structures/)
+    * assembly/            (now games/)
+```
