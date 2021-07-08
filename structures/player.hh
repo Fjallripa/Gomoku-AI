@@ -8,7 +8,7 @@ const int winning_length = 5;
 
 // Players act on the board and provide the interactive interface of the game.
 class Player {
-    private:
+    protected:
         Board* board;
         Symbol symbol;
 
@@ -20,7 +20,7 @@ class Player {
 
     public:
         Player (Board& board, const Symbol stone);
-        ~Player ();
+        virtual ~Player () = 0;
         friend class Group;  
 
 
@@ -33,7 +33,20 @@ class Player {
         Player* prev () const;
 
 
-        void make_move ();   
+        void place_stone (int x, int y);
+        
+        virtual void make_move () = 0; 
 
         bool is_winner () const; 
+};
+
+
+
+// Human players.
+class Human : public Player {
+    public:
+        Human (Board& board, const Symbol stone);
+        
+
+        void make_move ();
 };

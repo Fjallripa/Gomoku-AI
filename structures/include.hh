@@ -28,4 +28,5 @@ using std::endl;
 #include "board.cc"
 #include "square.cc"
 #include "player.cc"
+#include "human.cc"
 #include "group.cc"

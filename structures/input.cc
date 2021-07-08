@@ -13,10 +13,11 @@ std::istream &get_coord(std::istream &ins, int &x, int &y);
 
 
 // User facing input functions
-/* They are designed to provide a safe and complete input method for certain data types. 
-*/
+// ---------------------------
+    // They are designed to provide a safe and complete input method for certain data types. 
+    
 
-//// Input function for single integers
+// Input function for single integers
 void input_int (int &x, std::string info = "") {
     do {
         cout << info;
@@ -25,7 +26,7 @@ void input_int (int &x, std::string info = "") {
 }
 
 
-//// Input function for two integers separated by whitespace (input for 2D-integer-coordinates)
+// Input function for two integers separated by whitespace (input for 2D-integer-coordinates)
 void input_coord (int &x, int &y, std::string info = "") {
     do {
         cout << info;
@@ -34,35 +35,54 @@ void input_coord (int &x, int &y, std::string info = "") {
 }
 
 
+// Input function where only a specified range of integers is allowed, e.g. menu selection.
+int input_range (int min, int max, std::string input_prompt = "") {
+    int input_number = min - 1;
+
+    input_int(input_number, input_prompt);
+    while (input_number < min or input_number > max) {   // while-loop to complain in case of bad input and ask again.
+        cout << "You have to enter one of the " << max - min + 1 << " options. " << endl;
+        input_int(input_number, input_prompt);
+    }
+
+    return input_number;
+}
+
+int input_range (int max,  std::string input_prompt = "") {
+    return input_range(1, max, input_prompt);
+}
+
+
 
 
 // Definition of internal functions doing the input handling
+// ---------------------------------------------------------
 
 // Handling the input of single integers
-std::istream &get_int(std::istream &ins, int &n)
-{
-    n = 0;   // number to return, set to 0 for safety
+std::istream &get_int(std::istream &ins, int &number) {
+    number = 0;   // Number to return, set to 0 for safety.
+    std::string input_string;
 
-    // Read a line (terminated by ENTER|NEWLINE) from the user.
-    std::string s;
-    if (std::getline(ins, s))
-    {
+    // Read a line from the user.
+    if (std::getline(ins, input_string)) {       
         // Get rid of any trailing whitespace.
-        s.erase(s.find_last_not_of(" \f\n\r\t\v") + 1);
+        input_string.erase(input_string.find_last_not_of(" \f\n\r\t\v") + 1);
+        
+        // Hand over input. If the trailing characters are not digits, nothing will happen.
+        std::istringstream stream(input_string);
+        stream >> number;
 
-        // Convert it to integer.
-        std::istringstream ss(s);
-        ss >> n;
-
-        // Check to see that there is nothing left over.
-        if (!ss.eof())
+        // Check to see if something is left over or there was no input at all.
+        if (!stream.eof() or input_string == "") {
+            // If not, the fail flag will cause this input function to be called again.
             ins.setstate(std::ios::failbit);
-    } 
+        }
+    }
     else {
         cout << endl << "Assuming Ctrl-D was used, the program will now shut down." << endl;
         exit(0);
-        /* No other solution was found than quitting the program as getline or cin doesn't 
-        seem to accept any input after Ctrl-D and seemingly can't be restored. */
+        // No other solution was found than quitting the program as getline or cin doesn't 
+        // seem to accept any input after Ctrl-D and seemingly can't be restored.
     }
 
     return ins;
@@ -70,8 +90,7 @@ std::istream &get_int(std::istream &ins, int &n)
 
 
 // Handling the input of two integer coordinates
-std::istream &get_coord(std::istream &ins, int &x, int &y)
-{
+std::istream &get_coord(std::istream &ins, int &x, int &y) {
     const std::string whitespace = " \f\n\r\t\v";
     x = 0; y = 0;   // coordinates to return, set to 0 for safety
 
@@ -91,6 +110,7 @@ std::istream &get_coord(std::istream &ins, int &x, int &y)
         
         coor_1.erase(coor_1.find_last_not_of(whitespace) + 1);   // Get rid of trailing whitespace for the first substring.
         
+
         // Convert strings to integers
         std::istringstream stream_1(coor_1);
         std::istringstream stream_2(coor_2);
@@ -107,8 +127,8 @@ std::istream &get_coord(std::istream &ins, int &x, int &y)
     else {
         cout << endl << "Assuming Ctrl-D was used, the program will now shut down." << endl;
         exit(0);
-        /* No other solution was found than quitting the program as getline or cin doesn't 
-        seem to accept any input after Ctrl-D and seemingly can't be restored. */
+        // No other solution was found than quitting the program as getline or cin doesn't 
+        // seem to accept any input after Ctrl-D and seemingly can't be restored. 
     } 
     
     return ins;

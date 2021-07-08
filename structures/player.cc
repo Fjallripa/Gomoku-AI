@@ -4,14 +4,11 @@
 
 
 // Constructor & Destructor
-Player::Player (Board& board, const Symbol stone) {
-    this->board  = &board;
-    this->symbol = stone;
-}
+Player::Player (Board& board, const Symbol stone) : 
+    board(&board), symbol(stone) {}
 
-Player::~Player () {
-    this->board = nullptr;
-}
+
+Player::~Player () {}
 
 
 
@@ -38,16 +35,7 @@ Player* Player::prev () const {
 
 
 // Actions on instances
-void Player::make_move () {
-    int x = -1; int y = -1;
-
-    // Requesting player coordinate input
-    while (not board->inside(x, y) or board->at(x, y) != empty) {
-        std::ostringstream stone_info;
-        stone_info << this->stone() << ": ";   // Shows which player is currently making the move.
-        input_coord(x, y, stone_info.str());
-    }
-
+void Player::place_stone (int x, int y) {
     // Executing the move
     board->place(x, y, this->stone());
     this->latest_move = Square(this->board, x, y);
@@ -65,8 +53,12 @@ bool Player::is_winner () const {
         // Count how long the sequence extends in the fore direction.
         while (sequence_length < winning_length) {
             inside_board = square.go(direction);
-            if (not inside_board or square.symbol() != this->stone()) {
-                square.go(direction, -sequence_length);   // i.e. go back to square one.
+            if (not inside_board) {
+                square.go(direction, -(sequence_length - 1));    // go back to square one.
+                break;
+            }
+            if (square.symbol() != this->stone()) {
+                square.go(direction, -sequence_length);   // go back to square one.
                 break;
             }
             sequence_length++;
