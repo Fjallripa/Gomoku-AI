@@ -41,7 +41,7 @@ int input_range (int min, int max, std::string input_prompt = "") {
 
     input_int(input_number, input_prompt);
     while (input_number < min or input_number > max) {   // while-loop to complain in case of bad input and ask again.
-        cout << "You have to enter one of the " << max - min + 1 << " options. " << endl;
+        cout << "You have to enter an integer between " << min << " and " << max << "." << endl;
         input_int(input_number, input_prompt);
     }
 
@@ -49,7 +49,7 @@ int input_range (int min, int max, std::string input_prompt = "") {
 }
 
 int input_range (int max,  std::string input_prompt = "") {
-    return input_range(1, max, input_prompt);
+    return input_range(0, max, input_prompt);
 }
 
 

@@ -37,7 +37,7 @@ Player* Player::prev () const {
 // Actions on instances
 void Player::place_stone (int x, int y) {
     // Executing the move
-    board->place(x, y, this->stone());
+    this->board->place(x, y, this->stone());
     this->latest_move = Square(this->board, x, y);
     cout << *board;
 }
@@ -78,7 +78,7 @@ bool Player::is_winner () const {
 
         // If the sequence is long enough, the winner is set.
         if (sequence_length >= winning_length) {
-            board->set_winner(this->stone());
+            this->board->set_winner(this->stone());
             return true;
         }
     }

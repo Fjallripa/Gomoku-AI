@@ -14,14 +14,18 @@ void test_1 () {
     cout << "1. Testing basic Player methods:" << endl;
     cout << "--------------------------------" << endl;
     cout << endl;
+    
     Human human_a = Human(board, stone[0]);
     Human human_b = Human(board, stone[1]);
+    Computer computer = Computer(board, stone[2]);
+
 
     // Testing Player::stone()
         cout << "Testing Player::stone():" << endl;
         cout << "Human 'a': " << human_a.stone() << endl;
         cout << "Human 'b': " << human_b.stone() << endl;
-    cout << endl << endl;
+        cout << "Computer :  " << computer.stone() << endl;
+    cout << endl << endl; 
     
     
     // Testing Player::place_stone()
@@ -35,6 +39,9 @@ void test_1 () {
         
         cout << "Placing " << human_b.stone() << " at (0, 1):" << endl;
         human_b.place_stone(0, 1);
+
+        cout << "Placing " << computer.stone() << " at (2, 2):" << endl;
+        computer.place_stone(2, 2);
     cout << endl;
     
 
@@ -42,6 +49,12 @@ void test_1 () {
         cout << "Testing Human::make_move():" << endl;
         human_a.make_move();
         human_b.make_move();
+    cout << endl;
+
+
+    // Testing Computer::make_move()
+        cout << "Testing Computer::make_move():" << endl;
+        computer.make_move();
     cout << endl;
 
     
@@ -52,6 +65,9 @@ void test_1 () {
              << endl;
         cout << "Latest move of " << human_b.last_move().symbol() 
              << " at (" << human_b.last_move().x() << ", " << human_b.last_move().y() << ")"
+             << endl;
+        cout << "Latest move of " << computer.last_move().symbol() 
+             << " at (" << computer.last_move().x() << ", " << computer.last_move().y() << ")"
              << endl;
     cout << endl;
 }
@@ -67,6 +83,7 @@ void test_2 () {
     Human human_a = Human(board, stone[0]);
     Human human_b = Human(board, stone[1]);
     Human human_c = Human(board, stone[2]);
+    Computer computer = Computer(board, stone[3]);
     
 
     // Building the group
@@ -74,15 +91,17 @@ void test_2 () {
         group.append(&human_a);
         group.append(&human_b);
         group.append(&human_c);
+        group.append(&computer);
 
 
     // Testing the group's properties
         cout << "Testing Group properties with " << group.length() << " Players:" << endl;
-        cout << "Player pointers: " << &human_a << " " << &human_b << " " << &human_c << endl;
+        cout << "Player pointers: " << &human_a << " " << &human_b << " " << &human_c << " " << &computer << endl;
         cout << "Group: first(): " << group.first() << "  length(): " << group.length() << endl;
-        cout << "human_a: " << human_a.stone() << "  next(): " << human_a.next() << "  prev(): " << human_a.prev() << endl;
-        cout << "human_b: " << human_b.stone() << "  next(): " << human_b.next() << "  prev(): " << human_b.prev() << endl;
-        cout << "human_c: " << human_c.stone() << "  next(): " << human_c.next() << "  prev(): " << human_c.prev() << endl;
+        cout << "human_a : " << human_a.stone() << "  next(): " << human_a.next() << "  prev(): " << human_a.prev() << endl;
+        cout << "human_b : " << human_b.stone() << "  next(): " << human_b.next() << "  prev(): " << human_b.prev() << endl;
+        cout << "human_c : " << human_c.stone() << "  next(): " << human_c.next() << "  prev(): " << human_c.prev() << endl;
+        cout << "computer: " << computer.stone() << "  next(): " << computer.next() << "  prev(): " << computer.prev() << endl;
     cout << endl << endl;
 
 
@@ -150,30 +169,52 @@ void test_3 () {
     cout << endl;
 
     // Constructing the Players
-    std::vector<Human> human_players;
-    for (int i = 0; i < 3; i++) {
-        human_players.emplace_back(board, stone[i]);
-    }
+        // Select the number of Human and Computer players. Sum must not be larger than max_player_count.
+        const int human_count = 2;
+        const int computer_count = 2;
+        const int player_count = human_count + computer_count;
+
+        std::vector<Human> human_players;
+        for (int i = 0; i < human_count; i++) {
+            human_players.emplace_back(board, stone[i]);
+        }
+        std::vector<Computer> computer_players;
+        for (int i = human_count; i < player_count; i++) {
+            computer_players.emplace_back(board, stone[i]);
+        }
+
 
     // Building the group
-    Group group;
-    for (int i = 0; i < 3; i++) {   // Separate for-loop needed to avoid pointer-problems
-        group.append(&human_players[i]);
-    }
+        Group group;
+        for (int i = 0; i < human_count; i++) {   // Separate for-loop needed to avoid pointer-problems
+            group.append(&human_players[i]);
+        }
+        for (int i = 0; i < computer_count; i++) {
+            group.append(&computer_players[i]);
+        }
     
 
     // Testing the group's properties
-        cout << "Player pointers: " << &human_players[0] << " " << &human_players[1] << " " << &human_players[2] << endl;
+        cout << "Player pointers: ";
+        Player* current_player = group.first();
+        for (int i = 0; i < group.length(); i++) {
+            cout << " " << current_player;
+            current_player = current_player->next();
+        }
+        cout << endl;
+
         cout << "Group: first(): " << group.first() << "  length(): " << group.length() << endl;
-        for (int i = 0; i < 3; i++) {
-            cout << "player: " << human_players[i].stone() << "  next(): " << human_players[i].next() << "  prev(): " << human_players[i].prev() << endl;
+        current_player = group.first();
+        for (int i = 0; i < group.length(); i++) {
+            cout << "player: " << current_player->stone() << "  next(): " << current_player->next() << "  prev(): " << current_player->prev() << endl;
+            current_player = current_player->next();
         }
     cout << endl << endl;
 
 
     // Iterating through the group
         cout << "Iterating through the group:" << endl;
-        Player* current_player = group.first();
+        current_player = group.first();
         cout << "next():";
         for (int i = 0; i < 2*group.length(); i++) {
             cout << " " << current_player;
@@ -191,6 +232,7 @@ void test_3 () {
     // Making moves while circling through the group twice
         cout << "Making moves while circling through the group twice:" << endl;
         cout << board;
+        current_player = group.first();
         for (int i = 0; i < 2 * group.length(); i++) {
             current_player->make_move();
             current_player = current_player->next();
@@ -205,32 +247,52 @@ void test_4 () {
     cout << "Testing basic gameplay:" << endl;
     cout << "-----------------------" << endl;
     cout << endl;
-    
+
+
     // Creating and adding players to the group
-        cout << "Choose the number of human players: (max. " << max_player_count << ")" << endl;
-        int player_count = input_range(max_player_count, "> ");
+        cout << "Choose the number of human and computer players:" << endl;
+        cout << "(max. " << max_player_count << " total)" << endl;
+        
+        int human_count = input_range(max_player_count, "humans: ");
+        
+        int computer_count = 0;
+        if (human_count < max_player_count) {
+            computer_count = input_range(max_player_count - human_count, "computers: ");
+        } else {
+            cout << "no computers" << endl;
+        }
+        
+        int player_count = human_count + computer_count;
         
         std::vector<Human> human_players;
-        for (int i = 0; i < player_count; i++) {
+        for (int i = 0; i < human_count; i++) {
             human_players.emplace_back(board, stone[i]);
+        }
+        std::vector<Computer> computer_players;
+        for (int i = human_count; i < player_count; i++) {
+            computer_players.emplace_back(board, stone[i]);
         }
 
         Group group;
-        for (int i = 0; i < player_count; i++) {   // Separate for-loop needed to avoid pointer-problems
+        for (int i = 0; i < human_count; i++) {   // Separate for-loop needed to avoid pointer-problems
             group.append(&human_players[i]);
+        }
+        for (int i = 0; i < computer_count; i++) {
+            group.append(&computer_players[i]);
         }
     
 
     // Playing the game
+    cout << board;
+    if (player_count > 0) {
         Player* current_player = group.first();
-        cout << board;
-        
         current_player->make_move();
         for (int i = 1; not current_player->is_winner() and i < board_size; i++) {
             current_player = current_player->next();
             current_player->make_move();
         }
-        board.congratulate();   
+        board.congratulate();
+    }   
     cout << endl;
 }
 
@@ -251,7 +313,7 @@ int main () {
     cout << "4. Basic gameplay" << endl;
     cout << endl;
     
-    int choice = input_range(0, 4, "Choose an option: ");
+    int choice = input_range(4, "Choose an option: ");
     cout << endl;
     cout << endl;
 

@@ -67,7 +67,7 @@ void test_4 () {
     cout << "--------------------------------------" << endl;
     cout << endl;
 
-    cout << "Enter a number between 1 and 3:" << endl;
+    cout << "Enter a number between 0 and 3:" << endl;
     int choice = input_range(3, "> ");
     cout << "Yes, it's " << choice << "." << endl;
     cout << endl;
@@ -95,7 +95,7 @@ int main () {
     cout << "4. Secure integer range input - input_range()" << endl;
     cout << endl;
     
-    int choice = input_range(0, 4, "Choose an option: ");
+    int choice = input_range(4, "Choose an option: ");
     cout << endl;
     cout << endl;
     

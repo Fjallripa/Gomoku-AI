@@ -50,3 +50,14 @@ class Human : public Player {
 
         void make_move ();
 };
+
+
+
+// Computer players.
+class Computer : public Player {
+    public:
+        Computer (Board& board, const Symbol stone);
+        
+
+        void make_move ();
+};
