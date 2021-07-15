@@ -3,33 +3,60 @@
 
 
 
-#include "../game/include.hh"   // Standard file that handles all inclusions for you.
+#include "../structures/include.hh"   // Standard file that handles all inclusions for you.
 
 
 // Create common instances if necessary.
+/* Initializations */
 
 
-// Store individual tests inside functions "void test_x ()"
-void test_1 () {
+
+// Title of example test
+void test_1 () {    // Store individual tests inside functions "void test_x ()"
     cout << "Title of example test:" << endl;
-    /* Test stuff */
-    cin.clear();
+    cout << "----------------------" << endl;
+    cout << endl;
+    
+    // Testing this
+        /* Code */
+    cout << endl;
+    
+
+    // Testing that
+        /* Code */
+    cout << endl;
 }
 
 
 
 
 int main () {
-    int input_number;
-    const int max_number = 1;   // Change, depending on how many test functions there are to choose from.
-
     // Menu for choosing which test to run
-    while (input_number < 1 or input_number > max_number) {
-        input_int(input_number);
-    }
+    cout << endl;
+    cout << "Tests of some structure" << endl;
+    cout << "=======================" << endl;
+    cout << endl;
+
+    cout << "0. Quit" << endl;
+    cout << "1. Title of example test" << endl;
+    //cout << "2. Title of another test" << endl;
+    //cout << "3. Title of third test" << endl;
+    //cout << "4. Title of fourth test" << endl;
+    cout << endl;
     
-    if      (input_number == 1) test_1();  
-    //else if (input_number == 2) test_2();
-    //else if (input_number == 3) test_3();
-    else cout << "Didn't find any matching test for" << input_number << endl;
+    int choice = input_range(1, "Choose an option: ");   // Adapt number to number of tests.
+    cout << endl;
+    cout << endl;
+
+    switch (choice) {
+        case 0: break;
+        case 1: test_1(); break;
+        //case 2: test_2(); break;
+        //case 3: test_3(); break;
+        //case 4: test_4(); break;
+        default: 
+            cout << "Didn't find any matching test for " << choice << "." << endl; break;
+    }
+
+    cout << endl;
 }
