@@ -2,10 +2,6 @@
 // -------------------------------
 
 
-class Group;
-
-const int winning_length = 5;
-
 // Players act on the board and provide the interactive interface of the game.
 class Player {
     protected:
@@ -29,12 +25,10 @@ class Player {
         Square last_move () const;
         
         Player* next () const;
-
         Player* prev () const;
 
 
         void place_stone (int x, int y);
-        
         virtual void make_move () = 0; 
 
         bool is_winner () const; 

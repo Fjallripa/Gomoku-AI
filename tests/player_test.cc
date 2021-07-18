@@ -5,7 +5,7 @@
 
 #include "../structures/include.hh"   // Standard file that handles all inclusions.
 
-Board board;
+Board board(5);
 
 
 
@@ -287,7 +287,7 @@ void test_4 () {
     if (player_count > 0) {
         Player* current_player = group.first();
         current_player->make_move();
-        for (int i = 1; not current_player->is_winner() and i < board_size; i++) {
+        for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
             current_player = current_player->next();
             current_player->make_move();
         }

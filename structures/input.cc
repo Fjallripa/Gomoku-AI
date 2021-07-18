@@ -25,6 +25,12 @@ void input_int (int &x, std::string info = "") {
     } while (not get_int(cin, x));
 }
 
+int input_int (std::string info = "") {
+    int number;
+    input_int(number, info);
+    return number;
+}
+
 
 // Input function for two integers separated by whitespace (input for 2D-integer-coordinates)
 void input_coord (int &x, int &y, std::string info = "") {

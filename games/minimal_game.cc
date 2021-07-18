@@ -5,10 +5,10 @@
 
 #include "../structures/include.hh"   // Standard file that handles all inclusions.
 
-Board board;
+Board board = Board(30);
 Group group;
 std::vector<Human> human_players;
-const int player_count = 2;  // Not more than max_player_count!
+const int player_count = 2;   // Not more than max_player_count!
 
 
 
@@ -29,7 +29,7 @@ int main () {
     cout << board;
     
     current_player->make_move();
-    for (int i = 1; not current_player->is_winner() and i < board_size; i++) {
+    for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
         current_player = current_player->next();
         current_player->make_move();
     }

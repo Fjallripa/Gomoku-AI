@@ -6,14 +6,14 @@ void Computer::make_move () {
     // Silly placeholder coordinate selection (taking the first empty square available)
     int x = 0; int y = 0;
     while (this->board->at(x, y) != empty) {
-        // For development purposes only
+        // For testing purposes only
         // cout << "empty check: " << (this->board->at(x, y) != empty) << " at " << "(" << x << "," << y << ")" << endl;
         
-        if (x < edge_length - 1) {
+        if (x < this->board->length() - 1) {
             x++;
         } else {
             x = 0;
-            if (y < edge_length - 1) {
+            if (y < this->board->length() - 1) {
                 y++;
             } else {   // no empty place left on the board
                 return;

@@ -35,9 +35,9 @@
      + Find a way to make the algorithm choosable by adding a paramater to the `Computer` constructor.
        - Ideally, include the ability to provide the algorithm with custom arguments.
        - These could then be used for example to set weights or toggle certain aspects of the algorithm.
-     + Build a new minmax algorithm `minmax()` that only uses win and loss as a scoring function.
-       - Create a separate scoring function that only rewards a win.
-       - Find a place to put that function. 
+   * Build a new minmax algorithm `minmax()` that only uses win and loss as a scoring function.
+     + Create a separate scoring function that only rewards a win.
+     + Find a place to put that function. 
 
 1. Make `Computer` a derived class of `Player`.
    * For clarity, also define `Human` as a derived class of `Player`.

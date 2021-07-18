@@ -6,6 +6,7 @@
 #include "../structures/include.hh"   // Standard file that handles all inclusions.
 
 
+
 // Testing if all the symbols and stones display correctly.
 void test_1 () {
     cout << "Testing if all the symbols and stones display correctly:" << endl;

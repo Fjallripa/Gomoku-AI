@@ -27,7 +27,6 @@ Player* Player::next () const {
     return this->next_player;
 }
 
-
 Player* Player::prev () const {
     return this->previous_player;
 }
@@ -51,7 +50,7 @@ bool Player::is_winner () const {
         bool inside_board = true;
 
         // Count how long the sequence extends in the fore direction.
-        while (sequence_length < winning_length) {
+        while (sequence_length < this->board->winning_length()) {
             inside_board = square.go(direction);
             if (not inside_board) {
                 square.go(direction, -(sequence_length - 1));    // go back to square one.
@@ -65,7 +64,7 @@ bool Player::is_winner () const {
         }
 
         // Count how long the sequence extends in the back direction.
-        while (sequence_length < winning_length) {
+        while (sequence_length < this->board->winning_length()) {
             inside_board = square.go(direction, -1);
             if (not inside_board or square.symbol() != this->stone()) {
                 break;
@@ -77,7 +76,7 @@ bool Player::is_winner () const {
         //cout << this->stone() << ": " << direction << ", " << sequence_length << endl;
 
         // If the sequence is long enough, the winner is set.
-        if (sequence_length >= winning_length) {
+        if (sequence_length >= this->board->winning_length()) {
             this->board->set_winner(this->stone());
             return true;
         }
