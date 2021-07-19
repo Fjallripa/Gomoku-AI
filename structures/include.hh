@@ -16,18 +16,19 @@ using std::cin;
 using std::endl;
 
 
-#include "symbol.cc"
-#include "direction.cc"
-#include "input.cc"
+#include "types/symbol.cc"
+#include "types/direction.cc"
 
-#include "board.hh"
-#include "square.hh"
-#include "player.hh"
-#include "group.hh"
+#include "functions/input.cc"
 
-#include "board.cc"
-#include "square.cc"
-#include "player.cc"
-#include "human.cc"
-#include "computer.cc"
-#include "group.cc"
+#include "class headers/board.hh"
+#include "class headers/square.hh"
+#include "class headers/player.hh"
+#include "class headers/group.hh"
+
+#include "class members/board.cc"
+#include "class members/square.cc"
+#include "class members/player.cc"
+#include "class members/human.cc"
+#include "class members/computer.cc"
+#include "class members/group.cc"
