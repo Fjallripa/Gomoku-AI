@@ -49,9 +49,19 @@ class Human : public Player {
 
 // Computer players.
 class Computer : public Player {
+    private:
+        Square (Computer::*algorithm_used) ();
+
+    
     public:
+        Computer (Board& board, const Symbol stone, const Algorithm algorithm);
         Computer (Board& board, const Symbol stone);
         
 
         void make_move ();
+
+
+        // Algorithms. Implementations in 'algorithms/' folder
+        Square placeholder ();
+        Square minmax ();
 };

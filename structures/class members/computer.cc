@@ -1,24 +1,32 @@
+// Implementation of the Player-derived Computer class
+// ---------------------------------------------------
 
-Computer::Computer (Board& board, const Symbol stone) : Player (board, stone) {}
 
 
-void Computer::make_move () {
-    // Silly placeholder coordinate selection (taking the first empty square available)
-    int x = 0; int y = 0;
-    while (this->board->at(x, y) != empty) {
-        // For testing purposes only
-        // cout << "empty check: " << (this->board->at(x, y) != empty) << " at " << "(" << x << "," << y << ")" << endl;
+// Constructor & Destructor
+Computer::Computer (Board& board, const Symbol stone, const Algorithm algorithm) : Player (board, stone) {
+    switch (algorithm) {
+        case Algorithm::placeholder: this->algorithm_used = &Computer::placeholder; break;
+        case Algorithm::minmax     : this->algorithm_used = &Computer::minmax;      break;
         
-        if (x < this->board->length() - 1) {
-            x++;
-        } else {
-            x = 0;
-            if (y < this->board->length() - 1) {
-                y++;
-            } else {   // no empty place left on the board
-                return;
-            }
-        }
+        default: cout << "Error when constructing a Computer object. "
+                      << "This 'algorithm' argument hasn't been assigned yet." << endl; break;
+    }
+}
+
+Computer::Computer (Board& board, const Symbol stone) : Player (board, stone) {
+    *this = Computer(board, stone, Algorithm::placeholder);
+}
+
+
+
+// Actions on instances
+void Computer::make_move () {
+    // Making the coordinate selection
+    Square chosen = (this->*algorithm_used) ();
+    int x = chosen.x(); int y = chosen.y();
+    if (x == -1 and y == -1) {   // In case the board is full and no further move can be made.
+        return;
     }
 
     // Executing the move. Done by Player.
