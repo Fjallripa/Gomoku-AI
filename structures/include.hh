@@ -3,6 +3,9 @@
 //      Only include this file when assembling a test or game.
 
 
+
+#include <limits>
+
 #include <array>
 #include <vector>
 

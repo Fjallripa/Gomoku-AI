@@ -31,7 +31,8 @@ class Player {
         void place_stone (int x, int y);
         virtual void make_move () = 0; 
 
-        bool is_winner () const; 
+        bool is_winner () const;
+        bool is_winner (Square last_move) const;
 };
 
 
@@ -61,7 +62,16 @@ class Computer : public Player {
         void make_move ();
 
 
+
         // Algorithms. Implementations in 'algorithms/' folder
         Square placeholder ();
         Square minmax ();
+
+
+        // Algorithm support methods. Found insde the respective algorithm files.
+        int minmax_score (int x, int y, Player* player);
+
+
+        // Algorithm support constants that need to be shared across methods.
+        const int minmax_winning_score = std::numeric_limits<int>::max();
 };

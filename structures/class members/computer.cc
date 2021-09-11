@@ -28,6 +28,15 @@ void Computer::make_move () {
     if (x == -1 and y == -1) {   // In case the board is full and no further move can be made.
         return;
     }
+    if (this->board->at(x, y) != empty) {
+        cout << "Error: The algorithm of this Computer player recommended a to place a stone at (" 
+             << x << "," << y << "), but this is not an available square. If you're the developer, please check this out." 
+             << endl;
+        cout << "Press a key if you want to continue the game.";
+        std::string input;
+        cin >> input;
+        return;
+    }
 
     // Executing the move. Done by Player.
     cout << this->stone() << " at (" << x << "," << y << ")" << endl; 
