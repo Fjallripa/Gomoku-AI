@@ -3,6 +3,11 @@
 
 
 
+// Algorithm support constants that need to be shared across minmax methods.
+const int minmax_winning_score = std::numeric_limits<int>::max();
+
+
+
 // Min-Max algorithm
 Square Computer::minmax () {
     
@@ -38,13 +43,14 @@ int Computer::minmax_score (int x, int y, Player* player) {
     
     this->board->place(x, y, player->stone());   // Make temporary test move. Has to be undone before returning a score.
     Square test_move = Square(this->board, x, y);
-    int best_score = -minmax_winning_score;   // In its search, the algorithm starts off with the lowest possible assumption.
+    int score;
 
     if (this->is_winner(test_move)) {
-        best_score = minmax_winning_score;
+        score = minmax_winning_score;
     } 
     else {   // If it hasn't won with this move, the algorithm evaluates the best score the opponent can achieve.
-        int best_opponent_score = 0;   // I.e. no one has won yet.
+        int best_opponent_score = -minmax_winning_score;   // Again, starting with the lowest assumption.
+        bool board_is_full = true;   // If below, now square is found to be empty, this value will remain true.
         int x_try; int y_try;
 
         for (int square_number = 0; square_number < this->board->size(); square_number++) {
@@ -54,11 +60,16 @@ int Computer::minmax_score (int x, int y, Player* player) {
             if (this->board->at(x_try, y_try) == empty) {
                 int opponent_score = this->minmax_score(x_try, y_try, player->next());
                 best_opponent_score = std::max(best_opponent_score, opponent_score);
+                board_is_full = false;
             }
         }
-        best_score = -best_opponent_score;
+        if (board_is_full) {   // In case no empty square was found, the board is full and we have a draw.
+            best_opponent_score = 0;
+        }
+
+        score = -best_opponent_score;
     }
 
     this->board->place(x, y, empty);   // Undo the temporary move.
-    return best_score;
+    return score;
 }

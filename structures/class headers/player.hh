@@ -70,8 +70,4 @@ class Computer : public Player {
 
         // Algorithm support methods. Found insde the respective algorithm files.
         int minmax_score (int x, int y, Player* player);
-
-
-        // Algorithm support constants that need to be shared across methods.
-        const int minmax_winning_score = std::numeric_limits<int>::max();
 };

@@ -40,8 +40,7 @@ void test_1 () {
     // Comparing test results
         cout << endl;
         cout << "Compare the latest board with how it should look like:" << endl;
-        cout << "\          " << endl
-             << "...        " << endl
+        cout << "\"         " << endl
              << "X at (0,4) " << endl
              << "           " << endl
              << "4 X . . . ." << endl

@@ -4,6 +4,7 @@
 
 
 
+// STL libraries
 #include <limits>
 
 #include <array>
@@ -14,11 +15,13 @@
 #include <string>
 
 
+// Abbreviations
 using std::cout;
 using std::cin;
 using std::endl;
 
 
+// Project files
 #include "types/symbol.cc"
 #include "types/direction.cc"
 #include "types/algorithm.cc"
