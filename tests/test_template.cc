@@ -3,7 +3,7 @@
 
 
 
-#include "../structures/include.hh"   // Standard file that handles all inclusions for you.
+#include "../../structures/include.hh"   // Standard file that handles all inclusions for you.
 
 
 // Create common instances if necessary.
