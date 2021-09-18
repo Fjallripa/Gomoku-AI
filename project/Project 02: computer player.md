@@ -20,10 +20,20 @@
        - Passing the test would require that the function can place a stone at the next empty square in every situation and always return safely.
      + For `minmax()`, use a 3x3 board as well.
        - Passing the test would require that the function always can place stones and that it (in this Tic Tac Toe scenario) always plays the optimal move and never loses.
-   * Find ways to improve the testing of the algorithms 
-     - Eg. add a toggle somewhere to enable verbose developer logs.
-       + These could tell about how the algorithm scores different options or which moves it considered.
-     - Eg. find a way to make timing tests of the algorithms.
+   * Improve the testing of the minmax() algorithm in the following ways:
+     + When a game ends, instead of ending the program, make it revert to the menu.
+     + When starting the `minmax_test` from the command line implement an extra argument "`-dev`" that enables developer tools for inspecting the algorithms inner workings and performance.
+     + Build an input function, that
+       - safely takes an input and returns a string, stripped of whitespace.
+       - requests to input one in a list of keywords (e.g. allowed commands). If one of the words were given (ignoring whitespace), it returns that word as a string. Otherwise it reiterates the request, offering assistance.
+     + Implement the following developer tools to navigate the the algorithm's search tree, following the algorithm's path:
+       - "s"/"score" means 'Compute scores for the current board and move on from there'.
+       - "d"/"down" means 'Move one level down the tree, i.e. show the board with the first available move tried out and then ask again'.
+         - Highlight that this is only a potential move considered by the algorithm.
+         - Also show the tree level, counting upward from the current root (level 0), i.e. the last real move.
+       - "q"/"quit" means 'Stop this game and return to the menu'.
+   * check if the minmax-algorithm works correctly for non-TicTacToe-boards
+   * check if some of the changes made need to be standardized/applied more broadly
 
 2. Build the basic infrastructure around algorithms.
    * Update all the other tests to the new test design language, including the `test_template.cc`.

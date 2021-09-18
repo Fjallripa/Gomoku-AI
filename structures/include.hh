@@ -26,7 +26,7 @@ using std::endl;
 #include "types/direction.cc"
 #include "types/algorithm.cc"
 
-#include "functions/input.cc"
+#include "functions/input_numbers.cc"
 
 #include "class headers/board.hh"
 #include "class headers/square.hh"
