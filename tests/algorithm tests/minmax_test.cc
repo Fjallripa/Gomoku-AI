@@ -6,7 +6,15 @@
 #include "../../structures/include.hh"   // Standard file that handles all inclusions for you.
 
 
-Board board(3);
+// Test related functions
+void dev_intro_text() {
+    cout << "Developer Mode on:" << endl
+         << "At each move, the \"> \"-prompt enables the following choices:" << endl
+         << "* Pressing Enter: Show scores for all possible moves / Execute the best move." << endl
+         << "* Entering a coordinate `x y`: Explore a specific move by printing a hypothetical board." << endl 
+         << "    Scores and further moves will refer to that board." << endl;
+}
+
 
 
 // TicTacToe (2 Computers)
@@ -15,6 +23,8 @@ void test_1 () {
     cout << "TicTacToe (2 Computers):" << endl
          << "------------------------" << endl
          << endl;
+    
+    Board board(3, 3);   // Creating a 3x3 board with a winning length of 3 stones.
     
     // Creating and adding computer players to the group
         const int computer_count = 2;
@@ -29,6 +39,7 @@ void test_1 () {
         }
 
     // Playing the game
+        if (dev_mode_on)   dev_intro_text();
         cout << board;
         Player* current_player = group.first();
         current_player->make_move();
@@ -63,6 +74,8 @@ void test_2 () {
          << "--------------------------------" << endl
          << endl;
     
+    Board board(3, 3);   // Creating a 3x3 board with a winning length of 3 stones.
+
     // Creating and adding computer players to the group
         Computer computer = Computer(board, x, minmax);
         Human human       = Human(board, o);
@@ -91,6 +104,7 @@ void test_2 () {
         }
         
     // Playing the game
+        if (dev_mode_on)   dev_intro_text();
         cout << board;
         Player* current_player = group.first();
         current_player->make_move();
@@ -106,34 +120,48 @@ void test_2 () {
 
 
 
-// Menu for choosing which test to run
-int main () { 
-    
-    // Title
-    cout << endl;
-    cout << "Tests of the minmax() algorithm" << endl
-        << "===============================" << endl;
-    cout << endl;
 
-    // Options
-    cout << "0. Quit" << endl;
-    cout << "1. TicTacToe (2 Computers)" << endl;
-    cout << "2. TicTacToe (1 Human, 1 Computer)" << endl;
-    cout << endl;
-    
-    // User prompt
-    int choice = input_range(2, "Choose an option: ");   // Adapt number to number of tests.
-    cout << endl;
-    cout << endl;
-
-    // Test execution
-    switch (choice) {
-        case 0: break;
-        case 1: test_1(); break;
-        case 2: test_2(); break;
-        default: 
-            cout << "Didn't find any matching test for " << choice << "." << endl; break;
+int main (int argument_count, char* argument_values[]) {
+    // Option for enabling developer options when starting the program
+    if (argument_count > 1) {
+        if (argument_values[1] == std::string_view{"-dev"}) {
+            dev_mode_on = true;
+        }
     }
+    
 
-    cout << endl;
+    // Menu for choosing which test to run
+    bool continue_program = true;
+    while (continue_program) {   // With this while-loop, the program returns to the menu after finishing a test.
+        // Title
+        cout << endl;
+        cout << "Tests of the minmax() algorithm" << endl
+            << "===============================" << endl;
+        if (dev_mode_on) {
+            cout << "> Developer Mode" << endl;
+        }
+        cout << endl;
+
+        // Options
+        cout << "0. Quit" << endl;
+        cout << "1. TicTacToe (2 Computers)" << endl;
+        cout << "2. TicTacToe (1 Human, 1 Computer)" << endl;
+        cout << endl;
+        
+        // User prompt
+        int choice = input_range(2, "Choose an option: ");   // Adapt number to number of tests.
+        cout << endl;
+        cout << endl;
+
+        // Test execution
+        switch (choice) {
+            case 0: continue_program = false; break;
+            case 1: test_1(); break;
+            case 2: test_2(); break;
+            default: 
+                cout << "Didn't find any matching test for " << choice << "." << endl; break;
+        }
+
+        cout << endl;
+    }
 }

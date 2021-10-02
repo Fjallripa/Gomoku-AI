@@ -19,9 +19,35 @@ Computer::Computer (Board& board, const Symbol stone) : Player (board, stone) {
 }
 
 
+// Internal developer menu
+void Computer::dev_choice (Player* player) {
+    while (true) {
+        std::string choice = input_text("> ");
+        
+        if (choice == "")   break;
+        
+        int x; int y; std::istringstream stream(choice);
+        if (get_coord(stream, x, y)) {
+            if (this->board->at(x, y) == empty) {
+                int score = this->minmax_score(x, y, player, true);
+                cout << player->stone() << "'s score if it was placed at (" << x << ", " << y << "): " << score << endl;
+                cout << *(this->board);
+                break;
+            } else {
+                cout << "Choose an empty square." << endl;
+            }
+        } else {
+            cout << "Press Enter or choose an empty square (\"x y\")." << endl;
+        }
+    }
+}
+
+
 
 // Actions on instances
 void Computer::make_move () {
+    if (dev_mode_on)   dev_choice(this);   // Choose wether to display the scores for all possible moves or to check out one specific move.
+
     // Making the coordinate selection
     Square chosen = (this->*algorithm_used) ();
     int x = chosen.x(); int y = chosen.y();
@@ -32,13 +58,13 @@ void Computer::make_move () {
         cout << "Error: The algorithm of this Computer player recommended a to place a stone at (" 
              << x << "," << y << "), but this is not an available square. If you're the developer, please check this out." 
              << endl;
-        cout << "Press a key if you want to continue the game.";
-        std::string input;
-        cin >> input;
+        input_text("Press a key if you want to continue the game. ");
         return;
     }
 
+    if (dev_mode_on)   dev_choice(this);   // Choose wether to proceed or to check out one of the possible moves.
+
     // Executing the move. Done by Player.
-    cout << this->stone() << " at (" << x << "," << y << ")" << endl; 
+    cout << "Placing " << this->stone() << " at (" << x << "," << y << ")" << endl;
     this->place_stone(x, y);
 }

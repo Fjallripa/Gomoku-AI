@@ -53,6 +53,8 @@ class Computer : public Player {
     private:
         Square (Computer::*algorithm_used) ();
 
+        void dev_choice(Player* player);
+
     
     public:
         Computer (Board& board, const Symbol stone, const Algorithm algorithm);
@@ -62,12 +64,10 @@ class Computer : public Player {
         void make_move ();
 
 
-
         // Algorithms. Implementations in 'algorithms/' folder
         Square placeholder ();
         Square minmax ();
 
-
         // Algorithm support methods. Found insde the respective algorithm files.
-        int minmax_score (int x, int y, Player* player);
+        int minmax_score (int x, int y, Player* player, bool dev_details = false);
 };
