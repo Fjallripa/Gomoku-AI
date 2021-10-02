@@ -1,5 +1,5 @@
-// Definition of custom input functions
-// ------------------------------------
+// Definition of custom number input functions
+// -------------------------------------------
 
 
 
@@ -12,22 +12,20 @@ std::istream &get_coord(std::istream &ins, int &x, int &y);
 
 
 
-// User facing input functions
-// ---------------------------
-    // They are designed to provide a safe and complete input method for certain data types. 
+// User facing number input functions
+// ----------------------------------
+//      They are designed to provide a safe and complete input method for certain data types. 
     
 
 // Input function for single integers
-void input_int (int &x, std::string info = "") {
+int input_int (std::string info = "") {
+    int number;
+    
     do {
         cout << info;
         cin.clear();
-    } while (not get_int(cin, x));
-}
-
-int input_int (std::string info = "") {
-    int number;
-    input_int(number, info);
+    } while (not get_int(cin, number));
+    
     return number;
 }
 
@@ -45,10 +43,10 @@ void input_coord (int &x, int &y, std::string info = "") {
 int input_range (int min, int max, std::string input_prompt = "") {
     int input_number = min - 1;
 
-    input_int(input_number, input_prompt);
+    input_number = input_int(input_prompt);
     while (input_number < min or input_number > max) {   // while-loop to complain in case of bad input and ask again.
         cout << "You have to enter an integer between " << min << " and " << max << "." << endl;
-        input_int(input_number, input_prompt);
+        input_number = input_int(input_prompt);
     }
 
     return input_number;
@@ -72,7 +70,7 @@ std::istream &get_int(std::istream &ins, int &number) {
     // Read a line from the user.
     if (std::getline(ins, input_string)) {       
         // Get rid of any trailing whitespace.
-        input_string.erase(input_string.find_last_not_of(" \f\n\r\t\v") + 1);
+        input_string.erase(input_string.find_last_not_of(whitespace) + 1);
         
         // Hand over input. If the trailing characters are not digits, nothing will happen.
         std::istringstream stream(input_string);
@@ -97,7 +95,6 @@ std::istream &get_int(std::istream &ins, int &number) {
 
 // Handling the input of two integer coordinates
 std::istream &get_coord(std::istream &ins, int &x, int &y) {
-    const std::string whitespace = " \f\n\r\t\v";
     x = 0; y = 0;   // coordinates to return, set to 0 for safety
 
     std::string input_string;

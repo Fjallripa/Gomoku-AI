@@ -8,9 +8,8 @@
 * Adapt tests and a new game to handle the Computer player.
   + If possible, test individual parts of the algorithm and scoring function to quickly detect bugs.
   + Make at least one test demonstrating how the Computer player cannot fail at TicTacToe.
-* Find a way to analyze the algorithms performance and to debug it.
-  + Build basic tools for analyzing how fast the algorithm is, both in terms of time and steps.
-  + Also build a basic tool for looking into how the algorithm scores different options and chooses between them.
+* Find a way to more easily debug the algorithm.
+  + Build a basic tool for looking into how the algorithm scores different options and chooses between them.
 
 
 ## Objectives
@@ -25,15 +24,20 @@
      + When starting the `minmax_test` from the command line implement an extra argument "`-dev`" that enables developer tools for inspecting the algorithms inner workings and performance.
      + Build an input function, that
        - safely takes an input and returns a string, stripped of whitespace.
-       - requests to input one in a list of keywords (e.g. allowed commands). If one of the words were given (ignoring whitespace), it returns that word as a string. Otherwise it reiterates the request, offering assistance.
-     + Implement the following developer tools to navigate the the algorithm's search tree, following the algorithm's path:
-       - "s"/"score" means 'Compute scores for the current board and move on from there'.
-       - "d"/"down" means 'Move one level down the tree, i.e. show the board with the first available move tried out and then ask again'.
+       - If the input worked correctly, it returns a string.
+       - Otherwise it reiterates the request, offering assistance.
+     + Implement a developer tool to navigate through the algorithm's search tree, via proposing moves and displaying scores for possible moves.
+       - Pressing Enter means 'Continue'.
+         - At first, a list of scores of possible moves is displayed.
+         - After pressing enter the second time, the algorithm's choice is executed.
+       - Entering a coordinate means 'Explore what happens if one chooses this move'.
          - Highlight that this is only a potential move considered by the algorithm.
-         - Also show the tree level, counting upward from the current root (level 0), i.e. the last real move.
-       - "q"/"quit" means 'Stop this game and return to the menu'.
-   * check if the minmax-algorithm works correctly for non-TicTacToe-boards
-   * check if some of the changes made need to be standardized/applied more broadly
+         - Display the board with the hypothetical move.
+         - Do also provide the same dev options here.
+           - "Continue" displays the list of scores. After a second times it says which move the algorithm would have chosen together with its score and the board on which the hypothetical move was made.
+           - Entering a coordinate means exploring one move deeper into the search tree.
+   * Check if the minmax-algorithm works correctly for non-TicTacToe-boards.
+   * Check if some of the changes made need to be standardized/applied more broadly.
 
 2. Build the basic infrastructure around algorithms.
    * Update all the other tests to the new test design language, including the `test_template.cc`.

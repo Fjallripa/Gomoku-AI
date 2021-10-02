@@ -22,11 +22,14 @@ using std::endl;
 
 
 // Project files
+#include "global_objects.cc"
+
 #include "types/symbol.cc"
 #include "types/direction.cc"
 #include "types/algorithm.cc"
 
 #include "functions/input_numbers.cc"
+#include "functions/input_text.cc"
 
 #include "class headers/board.hh"
 #include "class headers/square.hh"

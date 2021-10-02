@@ -32,7 +32,7 @@ void test_1 () {
         // Opportunity to test constructing other board sizes
             cout << "Create an own board:" << endl;
             cout << "A board length between 1 and " << max_board_length << " will work, else the constructor terminates the program and complains." << endl;
-            int size; input_int(size, "Enter the board length: ");
+            int size = input_int("Enter the board length: ");
             Board board_input = Board(size);
             cout << size << "x" << size << " board: board.length() = " << board_input.length() << ", board.size() = " << board_input.size() << endl;
         cout << endl;
@@ -106,7 +106,7 @@ void test_2 () {
     cout << "---------------------" << endl;
     cout << endl;
 
-    int size; input_int(size, "Enter the board length: ");
+    int size = input_int("Enter the board length: ");
     Board board = Board(size);
     
     cout << board;

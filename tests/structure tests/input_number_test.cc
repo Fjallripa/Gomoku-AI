@@ -1,5 +1,5 @@
-// Tests of the input functions
-// ----------------------------
+// Tests of the number input functions
+// -----------------------------------
 
 
 
@@ -37,8 +37,7 @@ void test_2 () {
     cout << "--------------------------------" << endl;
     cout << endl;
     
-    int number;
-    input_int(number, "Just input some number: ");
+    int number = input_int("Just input some number: ");
     
     cout << "Yes, it's " << number << "." << endl;
     cout << endl;
@@ -84,8 +83,8 @@ void test_4 () {
 int main () {
     // Menu for choosing which test to run
     cout << endl;
-    cout << "Tests of the input functions" << endl;
-    cout << "============================" << endl;
+    cout << "Tests of the number input functions" << endl;
+    cout << "===================================" << endl;
     cout << endl;
 
     cout << "0. Quit" << endl;
@@ -111,4 +110,3 @@ int main () {
 
     cout << endl;
 }
-
