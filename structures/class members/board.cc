@@ -5,8 +5,8 @@
 
 // Constructor & Destructor
 Board::Board (const int edge_length,  int winning_length) {
-    bool good_edge_length    = edge_length > 0  and  edge_length <= max_board_length;
-    bool good_winning_length = winning_length > 0  and  winning_length <= edge_length;
+    bool good_edge_length    = edge_length >= min_board_length  and  edge_length <= max_board_length;
+    bool good_winning_length = winning_length >= min_winning_length  and  winning_length <= edge_length;
 
     if (good_edge_length and good_winning_length) {
         this->board_length = edge_length;

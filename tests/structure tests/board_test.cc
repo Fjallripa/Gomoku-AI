@@ -18,20 +18,20 @@ void test_1 () {
         Board board_3      = Board(3);
         Board board_8      = Board(8);
         
-        Board board_1      = Board(1);
-        Board board_100    = Board(100);
+        Board board_min    = Board(min_board_length);
+        Board board_max    = Board(max_board_length);
         
         // Testing if the constructor, board.length() and board.size() work
             cout << "Boards created:" << endl;
             cout << "3x3     board: board.length() =   " << board_3.length() << ", board.size() =     " << board_3.size() << endl;
             cout << "8x8     board: board.length() =   " << board_8.length() << ", board.size() =    " << board_8.size() << endl;
-            cout << "1x1     board: board.length() =   " << board_1.length() << ", board.size() =     " << board_1.size() << endl;
-            cout << "100x100 board: board.length() = " << board_100.length() << ", board.size() = " << board_100.size() << endl;
+            cout << min_board_length << "x" << min_board_length << "     board: board.length() =   " << board_min.length() << ", board.size() =     " << board_min.size() << endl;
+            cout << max_board_length << "x" << max_board_length << " board: board.length() = " << board_max.length() << ", board.size() = " << board_max.size() << endl;
         cout << endl;
 
         // Opportunity to test constructing other board sizes
             cout << "Create an own board:" << endl;
-            cout << "A board length between 1 and " << max_board_length << " will work, else the constructor terminates the program and complains." << endl;
+            cout << "A board length between " << min_board_length << " and " << max_board_length << " will work, else the constructor terminates the program and complains." << endl;
             int size = input_int("Enter the board length: ");
             Board board_input = Board(size);
             cout << size << "x" << size << " board: board.length() = " << board_input.length() << ", board.size() = " << board_input.size() << endl;
@@ -41,7 +41,7 @@ void test_1 () {
 
     // Testing board.inside()
         cout << "Testing inside():" << endl;
-        std::vector board_list = {board_1, board_3, board_8, board_100};
+        std::vector board_list = {board_min, board_3, board_8, board_max};
         for (Board board : board_list) {   // Looping through all the previously created boards
             cout << std::boolalpha
                 << "(x, y) inside " << board.length() << "x" << board.length() << " board:";
@@ -177,34 +177,38 @@ void test_5 () {
 
 
 int main () {
-    // Menu for choosing which test to run
-    cout << endl;
-    cout << "Tests of the Board methods" << endl;
-    cout << "==========================" << endl;
-    cout << endl;
-
-    cout << "0. Quit" << endl;
-    cout << "1. Testing board.at()" << endl;
-    cout << "2. Testing board output operator" << endl;
-    cout << "3. Testing board.place()" << endl;
-    cout << "4. Testing winner congratulation" << endl;
-    cout << "5. Testing constructors with winning length" << endl;
-    cout << endl;
     
-    int choice = input_range(5, "Choose an option: ");
-    cout << endl;
-    cout << endl;
+    // Menu for choosing which test to run
+    bool continue_program = true;
+    while (continue_program) {   // With this while-loop, the program returns to the menu after finishing a test.
+        cout << endl;
+        cout << "Tests of the Board methods" << endl;
+        cout << "==========================" << endl;
+        cout << endl;
 
-    switch (choice) {
-        case 0: break;
-        case 1: test_1(); break;
-        case 2: test_2(); break;
-        case 3: test_3(); break;
-        case 4: test_4(); break;
-        case 5: test_5(); break;
-        default: 
-            cout << "Didn't find any matching test for " << choice << "." << endl; break;
+        cout << "0. Quit" << endl;
+        cout << "1. Testing board.at()" << endl;
+        cout << "2. Testing board output operator" << endl;
+        cout << "3. Testing board.place()" << endl;
+        cout << "4. Testing winner congratulation" << endl;
+        cout << "5. Testing constructors with winning length" << endl;
+        cout << endl;
+        
+        int choice = input_range(5, "Choose an option: ");
+        cout << endl;
+        cout << endl;
+
+        switch (choice) {
+            case 0: continue_program = false; break;
+            case 1: test_1(); break;
+            case 2: test_2(); break;
+            case 3: test_3(); break;
+            case 4: test_4(); break;
+            case 5: test_5(); break;
+            default: 
+                cout << "Didn't find any matching test for " << choice << "." << endl; break;
+        }
+
+        cout << endl;
     }
-
-    cout << endl;
 }

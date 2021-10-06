@@ -116,28 +116,32 @@ void test_2 () {
 
 
 int main () {
-    // Menu for choosing which test to run
-    cout << endl;
-    cout << "Tests of the placeholder() algorithm" << endl;
-    cout << "====================================" << endl;
-    cout << endl;
-
-    cout << "0. Quit" << endl;
-    cout << "1. Automatic test (4 Computers, 5x5 board)" << endl;
-    cout << "2. Manual test (choose number of Humans and Computers)" << endl;
-    cout << endl;
     
-    int choice = input_range(2, "Choose an option: ");   // Adapt number to number of tests.
-    cout << endl;
-    cout << endl;
+    // Menu for choosing which test to run
+    bool continue_program = true;
+    while (continue_program) {   // With this while-loop, the program returns to the menu after finishing a test.
+        cout << endl;
+        cout << "Tests of the placeholder() algorithm" << endl;
+        cout << "====================================" << endl;
+        cout << endl;
 
-    switch (choice) {
-        case 0: break;
-        case 1: test_1(); break;
-        case 2: test_2(); break;
-        default: 
-            cout << "Didn't find any matching test for " << choice << "." << endl; break;
+        cout << "0. Quit" << endl;
+        cout << "1. Automatic test (4 Computers, 5x5 board)" << endl;
+        cout << "2. Manual test (choose number of Humans and Computers)" << endl;
+        cout << endl;
+        
+        int choice = input_range(2, "Choose an option: ");   // Adapt number to number of tests.
+        cout << endl;
+        cout << endl;
+
+        switch (choice) {
+            case 0: continue_program = false; break;
+            case 1: test_1(); break;
+            case 2: test_2(); break;
+            default: 
+                cout << "Didn't find any matching test for " << choice << "." << endl; break;
+        }
+
+        cout << endl;
     }
-
-    cout << endl;
 }

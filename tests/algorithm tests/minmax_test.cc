@@ -115,7 +115,49 @@ void test_2 () {
         board.congratulate();
     
     cout << endl;
+}
 
+
+
+// minmax() on different sized boards
+void test_3 () {
+    // Title
+    cout << "minmax() on a custom board:" << endl
+         << "---------------------------" << endl
+         << endl;
+    
+    // Creating the board
+        cout << "Create a board you want to test the algorithm on:" << endl;
+        int board_length   = input_range(min_board_length, max_board_length, "length of board edge: ");
+        int winning_length = input_range(min_winning_length, board_length, "length of winning sequence: ");
+
+        Board board = Board(board_length, winning_length);
+
+    // Creating and adding computer players to the group
+        const int computer_count = 2;
+        std::vector<Computer> computer_players;
+        for (int i = 0; i < computer_count; i++) {
+            computer_players.emplace_back(board, stone[i], minmax);
+        }
+
+        Group group;
+        for (int i = 0; i < computer_count; i++) {
+            group.append(&computer_players[i]);
+        }
+    cout << endl;
+
+    // Playing the game
+        if (dev_mode_on)   dev_intro_text();
+        cout << board;
+        Player* current_player = group.first();
+        current_player->make_move();
+        for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
+            current_player = current_player->next();
+            current_player->make_move();
+        }
+        board.congratulate();
+    
+    cout << endl;
 }
 
 
@@ -146,10 +188,11 @@ int main (int argument_count, char* argument_values[]) {
         cout << "0. Quit" << endl;
         cout << "1. TicTacToe (2 Computers)" << endl;
         cout << "2. TicTacToe (1 Human, 1 Computer)" << endl;
+        cout << "3. minmax() on a custom board" << endl;
         cout << endl;
         
         // User prompt
-        int choice = input_range(2, "Choose an option: ");   // Adapt number to number of tests.
+        int choice = input_range(3, "Choose an option: ");   // Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
@@ -158,6 +201,7 @@ int main (int argument_count, char* argument_values[]) {
             case 0: continue_program = false; break;
             case 1: test_1(); break;
             case 2: test_2(); break;
+            case 3: test_3(); break;
             default: 
                 cout << "Didn't find any matching test for " << choice << "." << endl; break;
         }

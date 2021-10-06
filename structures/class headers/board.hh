@@ -2,8 +2,13 @@
 // ------------------------------
 
 
+// global Board constants
+const int min_board_length = 1;
 const int max_board_length = 100;
 const int max_board_size = max_board_length * max_board_length;
+
+const int min_winning_length = 1;
+
 
 // Board creates the game board and stores its current state.
 class Board {
