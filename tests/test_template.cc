@@ -33,7 +33,7 @@ void test_1 () {    // Store individual tests inside functions "void test_x ()"
 // Alternative start of main() - when Developer Mode is relevant
 /*
 int main (int argument_count, char* argument_values[]) {
-    // Option for enabling developer options when starting the program
+    // Option for enabling Developer Mode when starting the program
     if (argument_count > 1) {
         if (argument_values[1] == std::string_view{"-dev"}) {
             dev_mode_on = true;

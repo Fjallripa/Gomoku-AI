@@ -6,15 +6,6 @@
 #include "../../structures/include.hh"   // Standard file that handles all inclusions for you.
 
 
-// Test related functions
-void dev_intro_text() {
-    cout << "Developer Mode on:" << endl
-         << "At each move, the \"> \"-prompt enables the following choices:" << endl
-         << "* Pressing Enter: Show scores for all possible moves / Execute the best move." << endl
-         << "* Entering a coordinate `x y`: Explore a specific move by printing a hypothetical board." << endl 
-         << "    Scores and further moves will refer to that board." << endl;
-}
-
 
 
 // TicTacToe (2 Computers)
@@ -39,7 +30,7 @@ void test_1 () {
         }
 
     // Playing the game
-        if (dev_mode_on)   dev_intro_text();
+        if (dev_mode_on)   print_dev_intro();
         cout << board;
         Player* current_player = group.first();
         current_player->make_move();
@@ -104,7 +95,7 @@ void test_2 () {
         }
         
     // Playing the game
-        if (dev_mode_on)   dev_intro_text();
+        if (dev_mode_on)   print_dev_intro();
         cout << board;
         Player* current_player = group.first();
         current_player->make_move();
@@ -147,7 +138,7 @@ void test_3 () {
     cout << endl;
 
     // Playing the game
-        if (dev_mode_on)   dev_intro_text();
+        if (dev_mode_on)   print_dev_intro();
         cout << board;
         Player* current_player = group.first();
         current_player->make_move();
@@ -164,7 +155,7 @@ void test_3 () {
 
 
 int main (int argument_count, char* argument_values[]) {
-    // Option for enabling developer options when starting the program
+    // Option for enabling Developer Mode when starting the program
     if (argument_count > 1) {
         if (argument_values[1] == std::string_view{"-dev"}) {
             dev_mode_on = true;
@@ -173,17 +164,10 @@ int main (int argument_count, char* argument_values[]) {
     
 
     // Menu for choosing which test to run
-    bool continue_program = true;
-    while (continue_program) {   // With this while-loop, the program returns to the menu after finishing a test.
+    while (true) {   // With this while-loop, the program returns to the menu after finishing a test.
         // Title
-        cout << endl;
-        cout << "Tests of the minmax() algorithm" << endl
-            << "===============================" << endl;
-        if (dev_mode_on) {
-            cout << "> Developer Mode" << endl;
-        }
-        cout << endl;
-
+        print_title("Tests of the minmax() algorithm");
+        
         // Options
         cout << "0. Quit" << endl;
         cout << "1. TicTacToe (2 Computers)" << endl;
@@ -198,12 +182,11 @@ int main (int argument_count, char* argument_values[]) {
 
         // Test execution
         switch (choice) {
-            case 0: continue_program = false; break;
+            case 0: return 0;   // Ending the program
             case 1: test_1(); break;
             case 2: test_2(); break;
             case 3: test_3(); break;
-            default: 
-                cout << "Didn't find any matching test for " << choice << "." << endl; break;
+            default: print_switch_default(choice); break;
         }
 
         cout << endl;

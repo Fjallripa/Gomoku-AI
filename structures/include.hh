@@ -30,6 +30,7 @@ using std::endl;
 
 #include "functions/input_numbers.cc"
 #include "functions/input_text.cc"
+#include "functions/messages.cc"
 
 #include "class headers/board.hh"
 #include "class headers/square.hh"

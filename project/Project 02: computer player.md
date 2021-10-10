@@ -10,9 +10,15 @@
   + Make at least one test demonstrating how the Computer player cannot fail at TicTacToe.
 * Find a way to more easily debug the algorithm.
   + Build a basic tool for looking into how the algorithm scores different options and chooses between them.
+* Build a stand-alone TicTacToe game.
+
 
 
 ## Objectives
+4. Build a stand-alone TicTacToe game.
+   * Have a start menu to return to after a game that lets one choose between a Player/Player, a Computer/Player and a Computer/Computer game.
+   * Include Developer Mode as an option.
+
 3. Build the basic infrastructure around algorithm tests.
    * Build a new set of tests to stress-test the algorithms.
      + For `placeholder()`, use a 4x4 board and 4 players of which 2 are computers.
