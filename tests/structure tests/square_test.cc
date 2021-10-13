@@ -1,17 +1,21 @@
 // Tests of the Square methods
-// ---------------------------
-
+// ===========================
 
 
 #include "../../structures/include.hh"   // Standard file that handles all inclusions.
 
 
 
-// Testing to move on the board with Square objects
+
+
+// Functions for individual tests
+// ------------------------------
+
+/* Testing to move on the board with Square objects */
 void test_1 () {
-    cout << "Testing to move on the board with Square objects:" << endl;
-    cout << "-------------------------------------------------" << endl;
     
+    print_subtitle("Testing to move on the board with Square objects");
+
     Board board = Board(5);
 
     // Preparing the  board with symbols to detect
@@ -72,31 +76,31 @@ void test_1 () {
 
 
 
-int main () {
-    
-    // Menu for choosing which test to run
-    bool continue_program = true;
-    while (continue_program) {   // With this while-loop, the program returns to the menu after finishing a test.
-        cout << endl;
-        cout << "Tests of the Square methods" << endl;
-        cout << "===========================" << endl;
-        cout << endl;
 
+// Menu for choosing a test
+// ------------------------
+
+int main () {
+    while (true) {   // The program returns to the menu after finishing a test.
+        
+        print_title("Tests of the Square methods");
+
+        // Options
         cout << "0. Quit" << endl;
         cout << "1. Moving on the board with Square objects" << endl;
         cout << endl;
         
-        int choice = input_range(1, "Choose an option: ");
+        // User prompt
+        int choice = input_range(1, "Choose an option: ");   //! Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
+        // Test execution
         switch (choice) {
-            case 0: continue_program = false; break;
+            case 0: return 0;   // Ending the program
             case 1: test_1(); break;
-            default: 
-                cout << "Didn't find any matching test for " << choice << "." << endl; break;
+            default: print_switch_default(choice); break;
         }
-
         cout << endl;
     }
 }

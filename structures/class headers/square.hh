@@ -1,25 +1,32 @@
 // Declaration of the Square class
-// -------------------------------
+// ===============================
 
 
-// Squares serve as a way to access and move around between the squares of the game board.
+
+// Square is an interface to read and move around between the squares of the game board.
 class Square {
     private:
-        Board* board;
-        std::array<int, 2> coordinates;
+        // Set by constructor
+            Board* board;
+        
+        // Changed by public methods
+            std::array<int, 2> coordinates;
 
 
     public:
-        Square (Board* board, int x, int y);
-        Square (Board& board, int x, int y);
-        Square ();
+        // Constructors
+            Square (Board* board, int x, int y);
+            Square (Board& board, int x, int y);
+            Square ();
         
 
-        int x () const;
-        int y () const;
+        // Display of internal objects
+            int x () const;
+            int y () const;
 
-        Symbol symbol () const;
+            Symbol symbol () const;
 
 
-        bool go (Direction direction, int steps);
+        // Actions on internal objects
+            bool go (Direction direction, int steps);
 };

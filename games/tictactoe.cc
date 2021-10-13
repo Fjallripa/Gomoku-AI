@@ -1,12 +1,12 @@
 // Implementation of a TicTacToe game with optional computer players
-// -----------------------------------------------------------------
+// =================================================================
 
 
 #include "../structures/include.hh"   // Standard file that handles all inclusions.
 
 
-
 enum PlayerSetup {human_v_human, computer_v_human, human_v_computer, computer_v_computer};
+
 
 
 
@@ -47,6 +47,7 @@ void game (PlayerSetup setup) {
 
 
 
+
 int main (int argument_count, char* argument_values[]) {
     // Option for enabling Developer Mode when starting the program
     if (argument_count > 1) {
@@ -57,7 +58,7 @@ int main (int argument_count, char* argument_values[]) {
 
 
     // Menu for choosing with which players to play
-    while (true) {   // With this while-loop, the program returns to the menu after finishing a game.
+    while (true) {   // The program returns to the menu after finishing a game.
         // Title
         print_title("Tic Tac Toe");
 
@@ -69,15 +70,14 @@ int main (int argument_count, char* argument_values[]) {
         cout << endl;
 
         // User prompt
-        int choice = input_range(3, "Choose an option: ");
+        int choice = input_range(3, "Choose an option: ");   //! Adapt number to number of options.
         cout << endl;
         cout << endl;
 
         // Player selection
         PlayerSetup players;
+        int beginner;   // for case 2
         switch (choice) {
-            int beginner;
-            
             case 0: return 0;   // Ending the program
             case 1: players = human_v_human; break;
             case 2:

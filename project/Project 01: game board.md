@@ -10,6 +10,7 @@
 * set up the beginning of the project folder structure
 
 
+
 ## Objectives
 7. declare a victor when a sequence of stones of length k is reached
     * create a Player `bool is_winner()` method that checks if the latest stone is part of a k-stone sequence

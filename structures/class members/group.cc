@@ -1,9 +1,12 @@
 // Implementation of the Group class
-// ---------------------------------
+// =================================
 
 
 
-// Constructor & Destructor
+// Destructors
+// -----------
+
+/* Destructor */
 Group::~Group () {
     // Removing players one by one until the group is empty.
     while (this->length() > 0) {
@@ -13,19 +16,30 @@ Group::~Group () {
 
 
 
+
+
 // Display of internal objects
+// ---------------------------
+
+/* Returns the pointer to the group's `first_player`. */
 Player* Group::first () const {
     return this->first_player;
 }
 
 
+/* Returns the `number_of_players` the group contains. */
 int Group::length () const {
     return this->number_of_players;
 }
 
 
 
-// Actions on instances
+
+
+// Actions on internal objects
+// ---------------------------
+
+/* Adds a player behind the last player and before the first one. */
 void Group::append (Player* new_player) {
     // If there are no players in the group
     if (this->number_of_players < 1) {   //  (< 1 for robustness)
@@ -55,6 +69,10 @@ void Group::append (Player* new_player) {
 }
 
 
+
+/* Removes and returns the pointer of last player 
+and closes the ring of the group again by connecting 
+the penultimate to the first player. */
 Player* Group::pop () {
     // If there are no players in the group
     if (this->number_of_players < 1) {   // (< 1 for robustness)

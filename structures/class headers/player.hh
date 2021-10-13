@@ -1,73 +1,89 @@
 // Declaration of the Player class
-// -------------------------------
+// ===============================
 
 
-// Players act on the board and provide the interactive interface of the game.
+
+// Player is the base class that acts on the board.
 class Player {
     protected:
-        Board* board;
-        Symbol symbol;
+        // Set by constructor
+            Board* board;
+            Symbol symbol;
 
-        Square latest_move;
+        // Changed by public methods
+            Square latest_move;
         
-        Player* next_player;
-        Player* previous_player;
+        // Changed by Group methods
+            Player* next_player;
+            Player* previous_player;
 
 
     public:
-        Player (Board& board, const Symbol stone);
-        virtual ~Player () = 0;
-        friend class Group;  
-
-
-        Symbol stone () const;
-
-        Square last_move () const;
+        friend class Group;
         
-        Player* next () const;
-        Player* prev () const;
+        // Constructors & Destructors  
+            Player (Board& board, const Symbol stone);
+            virtual ~Player () = 0;
 
+           
+        // Display of internal objects
+            Symbol stone () const;
 
-        void place_stone (int x, int y);
-        virtual void make_move () = 0; 
+            Square last_move () const;
+            
+            Player* next () const;
+            Player* prev () const;
 
-        bool is_winner () const;
-        bool is_winner (Square last_move) const;
+            bool is_winner () const;   // Changes Board.
+            bool is_winner (Square last_move) const;
+        
+
+        // Actions on internal objects
+            void place_stone (int x, int y);   // Changes Board.
+            virtual void make_move () = 0;     // Changes Board. 
 };
 
 
 
-// Human players.
+
+// Human players make moves via text-based user input.
 class Human : public Player {
     public:
-        Human (Board& board, const Symbol stone);
-        
+        // Constructors    
+            Human (Board& board, const Symbol stone);
 
-        void make_move ();
+        // Actions on internal objects
+            void make_move ();   // Changes Board.
 };
 
 
 
-// Computer players.
+
+// Computer players make moves chosen by their algorithms.
 class Computer : public Player {
     private:
-        Square (Computer::*algorithm_used) ();
+        // Set by constructor
+            Square (Computer::*algorithm_used) ();
 
-        void dev_choice(Player* player);
+        // Internal method
+            void dev_choice(Player* player);   // Changes Board.
 
     
     public:
-        Computer (Board& board, const Symbol stone, const Algorithm algorithm);
-        Computer (Board& board, const Symbol stone);
-        
+        // Constructors    
+            Computer (Board& board, const Symbol stone, const Algorithm algorithm);
+            Computer (Board& board, const Symbol stone);
 
-        void make_move ();
+
+        // Actions on internal objects
+            void make_move ();   // Changes Board.
 
 
         // Algorithms. Implementations in 'algorithms/' folder
-        Square placeholder ();
-        Square minmax ();
+            Square placeholder ();
+            Square minmax ();
+
 
         // Algorithm support methods. Found insde the respective algorithm files.
-        int minmax_score (int x, int y, Player* player, bool dev_details = false);
+            int minmax_score (int x, int y, Player* player, bool dev_details = false);
 };

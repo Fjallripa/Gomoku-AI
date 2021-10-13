@@ -1,18 +1,21 @@
 // Tests of the Board methods
-// --------------------------
-
+// ==========================
 
 
 #include "../../structures/include.hh"   // Standard file that handles all inclusions.
 
 
 
-// Testing basic Board display methods
-void test_1 () {
-    cout << "Testing basic Board display methods:" << endl;
-    cout << "------------------------------------" << endl;
-    cout << endl;
 
+
+// Functions for individual tests
+// ------------------------------
+
+/* Testing basic Board display methods */
+void test_1 () {
+    
+    print_subtitle("Testing basic Board display methods");
+    
     // Testing the Board constructor
         cout << "Testing the Board constructor:" << endl;
         Board board_3      = Board(3);
@@ -100,12 +103,12 @@ void test_1 () {
 }
 
 
-// Testing board output operator
-void test_2 () {
-    cout << "Testing board output:" << endl;
-    cout << "---------------------" << endl;
-    cout << endl;
 
+/* Testing board output operator */
+void test_2 () {
+    
+    print_subtitle("Testing board output");
+    
     int size = input_int("Enter the board length: ");
     Board board = Board(size);
     
@@ -113,12 +116,12 @@ void test_2 () {
 }
 
 
-// Testing board.place()
-void test_3 () {
-    cout << "Testing to place stones on board:" << endl;
-    cout << "---------------------------------" << endl;
-    cout << endl;
 
+/* Testing board.place() */
+void test_3 () {
+    
+    print_subtitle("Testing to place stones on board");
+    
     Board board = Board(3);
 
     std::vector symbols = {x, p,              d, o,                  x,                  empty, o,              p,  x, o,  x, empty,          d};
@@ -129,16 +132,15 @@ void test_3 () {
         board.place(x_s[i], y_s[i], symbols[i]);
         cout << board;
     }
-    cout << endl;
 }
 
 
-// Testing winner congratulation
-void test_4 () {
-    cout << "Testing winner congratulation:" << endl;
-    cout << "------------------------------" << endl;
-    cout << endl;
 
+/* Testing winner congratulation */
+void test_4 () {
+    
+    print_subtitle("Testing winner congratulation");
+    
     Board board = Board(1);
 
     cout << "Not setting a winner     : ";                            board.congratulate();
@@ -149,12 +151,12 @@ void test_4 () {
 }
 
 
-// Testing constructors with winning length
-void test_5 () {
-    cout << "Testing winning_length():" << endl;
-    cout << "-------------------------" << endl;
-    cout << endl;
 
+/* Testing constructors with winning length */
+void test_5 () {
+    
+    print_subtitle("Testing winning_length()");
+    
     // Custom edge length and automatic winning length
         cout << "Construct a board with custom edge length and automatic winning length:" << endl;
         int edge_length    = input_int("edge length   : ");
@@ -176,16 +178,16 @@ void test_5 () {
 
 
 
-int main () {
-    
-    // Menu for choosing which test to run
-    bool continue_program = true;
-    while (continue_program) {   // With this while-loop, the program returns to the menu after finishing a test.
-        cout << endl;
-        cout << "Tests of the Board methods" << endl;
-        cout << "==========================" << endl;
-        cout << endl;
 
+// Menu for choosing a test
+// ------------------------
+
+int main () {
+    while (true) {   // With this, the program returns to the menu after finishing a test.
+        
+        print_title("Tests of the Board methods");
+        
+        // Options
         cout << "0. Quit" << endl;
         cout << "1. Testing board.at()" << endl;
         cout << "2. Testing board output operator" << endl;
@@ -194,21 +196,20 @@ int main () {
         cout << "5. Testing constructors with winning length" << endl;
         cout << endl;
         
-        int choice = input_range(5, "Choose an option: ");
+        // User prompt
+        int choice = input_range(5, "Choose an option: ");   //! Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
         switch (choice) {
-            case 0: continue_program = false; break;
+            case 0: return 0;   // Ending the program
             case 1: test_1(); break;
             case 2: test_2(); break;
             case 3: test_3(); break;
             case 4: test_4(); break;
             case 5: test_5(); break;
-            default: 
-                cout << "Didn't find any matching test for " << choice << "." << endl; break;
+            default: print_switch_default(choice); break;
         }
-
         cout << endl;
     }
 }

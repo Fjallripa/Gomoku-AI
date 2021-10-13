@@ -10,7 +10,7 @@
   + Make at least one test demonstrating how the Computer player cannot fail at TicTacToe.
 * Find a way to more easily debug the algorithm.
   + Build a basic tool for looking into how the algorithm scores different options and chooses between them.
-* Build a stand-alone TicTacToe game.
+* Build a stand-alone TicTacToe game with optional computer players.
 
 
 

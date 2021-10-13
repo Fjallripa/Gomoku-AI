@@ -1,8 +1,10 @@
 // Implementation of the placeholder() algorithm
-// ---------------------------------------------
+// =============================================
 
 
-// Silly placeholder coordinate selection (taking the first empty square available)
+
+/* Silly placeholder coordinate selection for the Computer class.
+Always chooses the first empty square available. */
 Square Computer::placeholder () {
     int x = 0; int y = 0;
     

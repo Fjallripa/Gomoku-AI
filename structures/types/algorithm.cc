@@ -1,5 +1,6 @@
-// Definition of the Direction type
-// --------------------------------
+// Definition of the Algorithm type
+// ================================
+
 
 
 // Algorithms serve as Computer constructor arguments for which algorithm method to use.

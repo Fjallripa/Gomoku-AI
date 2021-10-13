@@ -1,9 +1,7 @@
 // Definition of custom number input functions
-// -------------------------------------------
+// ===========================================
 
 
-
-// Code adapted from http://www.cplusplus.com/forum/beginner/170685/
 
 // Declaration of internal functions doing the input handling
 std::istream &get_int(std::istream &ins, int &n);
@@ -12,13 +10,14 @@ std::istream &get_coord(std::istream &ins, int &x, int &y);
 
 
 
+
 // User facing number input functions
 // ----------------------------------
 //      They are designed to provide a safe and complete input method for certain data types. 
     
-
-// Input function for single integers
+/* Input function for single integers */
 int input_int (std::string info = "") {
+    // Code adapted from http://www.cplusplus.com/forum/beginner/170685/
     int number;
     
     do {
@@ -30,7 +29,8 @@ int input_int (std::string info = "") {
 }
 
 
-// Input function for two integers separated by whitespace (input for 2D-integer-coordinates)
+
+/* Input function for two integers separated by whitespace (input for 2D-integer-coordinates) */
 void input_coord (int &x, int &y, std::string info = "") {
     do {
         cout << info;
@@ -39,7 +39,8 @@ void input_coord (int &x, int &y, std::string info = "") {
 }
 
 
-// Input function where only a specified range of integers is allowed, e.g. menu selection.
+
+/* Input function that only allows integers within a range between `min` and including `max`. */
 int input_range (int min, int max, std::string input_prompt = "") {
     int input_number = min - 1;
 
@@ -52,6 +53,9 @@ int input_range (int min, int max, std::string input_prompt = "") {
     return input_number;
 }
 
+
+
+/* Input function that only allows integers within a range between 0 and including `max`. */
 int input_range (int max,  std::string input_prompt = "") {
     return input_range(0, max, input_prompt);
 }
@@ -59,11 +63,13 @@ int input_range (int max,  std::string input_prompt = "") {
 
 
 
+
 // Definition of internal functions doing the input handling
 // ---------------------------------------------------------
 
-// Handling the input of single integers
+/* Handles the input of single integers. */
 std::istream &get_int(std::istream &ins, int &number) {
+    // Code adapted from http://www.cplusplus.com/forum/beginner/170685/
     number = 0;   // Number to return, set to 0 for safety.
     std::string input_string;
 
@@ -93,7 +99,8 @@ std::istream &get_int(std::istream &ins, int &number) {
 }
 
 
-// Handling the input of two integer coordinates
+
+/* Handles the input of two integer coordinates */
 std::istream &get_coord(std::istream &ins, int &x, int &y) {
     x = 0; y = 0;   // coordinates to return, set to 0 for safety
 
@@ -101,31 +108,30 @@ std::istream &get_coord(std::istream &ins, int &x, int &y) {
     std::string coor_1;   // first substring
     std::string coor_2;   // second one
     
-    // Process input if there is any valid input
+    // Process input if there is any valid input.
     if (std::getline(ins, input_string))   // Read a line (terminated by ENTER|NEWLINE) from the user.
     {
         // Cut out the to numbers from the input.
-        input_string.erase(input_string.find_last_not_of(whitespace) + 1);   // Get rid of any trailing whitespace.
-        
-        size_t split_point = input_string.find_last_of(whitespace) + 1;   // Find the split point.
-        coor_1 = input_string.substr(0, split_point);
-        coor_2 = input_string.substr(split_point);
-        
-        coor_1.erase(coor_1.find_last_not_of(whitespace) + 1);   // Get rid of trailing whitespace for the first substring.
-        
-
-        // Convert strings to integers
-        std::istringstream stream_1(coor_1);
-        std::istringstream stream_2(coor_2);
-        stream_1 >> x;
-        stream_2 >> y;
+            input_string.erase(input_string.find_last_not_of(whitespace) + 1);   // Get rid of any trailing whitespace.
+            
+            size_t split_point = input_string.find_last_of(whitespace) + 1;   // Find the split point.
+            coor_1 = input_string.substr(0, split_point);
+            coor_2 = input_string.substr(split_point);
+            
+            coor_1.erase(coor_1.find_last_not_of(whitespace) + 1);   // Get rid of trailing whitespace for the first substring.
+            
+        // Convert strings to integers.
+            std::istringstream stream_1(coor_1);
+            std::istringstream stream_2(coor_2);
+            stream_1 >> x;
+            stream_2 >> y;
         
         // Check to see that there is nothing left over.
-        if (not (stream_1.eof() and stream_2.eof())   // if there are bits left that are not integers
-            or coor_1 == "" or coor_2 == "")    // if there was no input at all
-        {
-            ins.setstate(std::ios::failbit);
-        }
+            if (not (stream_1.eof() and stream_2.eof())   // If there are bits left that are not integers.
+                or coor_1 == "" or coor_2 == "")    // If there was no input at all.
+            {
+                ins.setstate(std::ios::failbit);
+            }
     } 
     else {
         cout << endl << "Assuming Ctrl-D was used, the program will now shut down." << endl;

@@ -1,20 +1,23 @@
 // Tests of of the placeholder() algorithm
-// ---------------------------------------
-
+// =======================================
 
 
 #include "../../structures/include.hh"   // Standard file that handles all inclusions for you.
 
-Board board(5);
 
 
 
-// Automatic test (4 Computers, 5x5 board)
+
+// Functions for individual tests
+// ------------------------------
+
+/* Automatic test (4 Computers, 5x5 board) */
 void test_1 () {
-    cout << "Automatic test (4 Computers, 5x5 board)" << endl;
-    cout << "---------------------------------------" << endl;
-    cout << endl;
+
+    print_subtitle("Automatic test (4 Computers, 5x5 board)");
     
+    Board board(5);
+
     // Creating and adding computer players to the group
         const int computer_count = 4;
         std::vector<Computer> computer_players;
@@ -28,14 +31,17 @@ void test_1 () {
         }
 
     // Playing the game
-        cout << board;
         Player* current_player = group.first();
+        
+        cout << board;
         current_player->make_move();
         for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
             current_player = current_player->next();
             current_player->make_move();
         }
+        
         board.congratulate();
+        cout << endl;
 
     // Comparing test results
         cout << endl;
@@ -57,15 +63,17 @@ void test_1 () {
 }
 
 
-// Manual test (choose number of Humans and Computers)
+
+/* Manual test (choose number of Humans and Computers) */
 void test_2 () {
-    cout << "Manual test (choose number of Humans and Computers):" << endl;
-    cout << "----------------------------------------------------" << endl;
-    cout << endl;
+    
+    print_subtitle("Manual test (choose number of Humans and Computers)");
+    
+    Board board(5);
 
     // Creating and adding players to the group
-        cout << "Choose the number of human and computer players:" << endl;
-        cout << "(max. " << max_player_count << " total)" << endl;
+        cout << "Choose the number of human and computer players:" << endl
+             << "(max. " << max_player_count << " total)" << endl;
         
         int human_count = input_range(max_player_count, "humans: ");
         
@@ -98,50 +106,52 @@ void test_2 () {
 
     // Playing the game
         cout << "Test now if the placeholder() algorithm behaves correctly." << endl
-            << "Does it in every situation place a stone at the first square that is empty?" << endl;
+             << "Does it in every situation place a stone at the first square that is empty?" << endl;
+        
+        Player* current_player = group.first();
         cout << board;
+        
         if (player_count > 0) {
-            Player* current_player = group.first();
             current_player->make_move();
             for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
                 current_player = current_player->next();
                 current_player->make_move();
             }
+            
             board.congratulate();
-        }   
-    cout << endl;
+        }
 }
 
 
 
 
-int main () {
-    
-    // Menu for choosing which test to run
-    bool continue_program = true;
-    while (continue_program) {   // With this while-loop, the program returns to the menu after finishing a test.
-        cout << endl;
-        cout << "Tests of the placeholder() algorithm" << endl;
-        cout << "====================================" << endl;
-        cout << endl;
 
+// Menu for choosing a test
+// ------------------------
+
+int main () {
+    while (true) {   // The program returns to the menu after finishing a test.
+        
+        print_title("Tests of the placeholder() algorithm");
+
+        // Options
         cout << "0. Quit" << endl;
         cout << "1. Automatic test (4 Computers, 5x5 board)" << endl;
         cout << "2. Manual test (choose number of Humans and Computers)" << endl;
         cout << endl;
         
-        int choice = input_range(2, "Choose an option: ");   // Adapt number to number of tests.
+        // User prompt
+        int choice = input_range(2, "Choose an option: ");   //! Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
+        // Test execution
         switch (choice) {
-            case 0: continue_program = false; break;
+            case 0: return 0;   // Ending the program
             case 1: test_1(); break;
             case 2: test_2(); break;
-            default: 
-                cout << "Didn't find any matching test for " << choice << "." << endl; break;
+            default: print_switch_default(choice); break;
         }
-
         cout << endl;
     }
 }

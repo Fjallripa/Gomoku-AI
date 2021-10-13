@@ -1,16 +1,33 @@
 // Implementation of the Board class
-// ---------------------------------
+// =================================
 
 
 
-// Constructor & Destructor
+// Constructors
+// ------------
+
+/* Default constructor */
+Board::Board (const int edge_length) {
+    int winning_length;
+    if (edge_length >= 5) {
+        winning_length = 5;
+    } else {
+        winning_length = edge_length;
+    }
+
+    *this = Board(edge_length, winning_length);
+}
+
+
+
+/* Constructor with custom length of winning sequence */
 Board::Board (const int edge_length,  int winning_length) {
     bool good_edge_length    = edge_length >= min_board_length  and  edge_length <= max_board_length;
     bool good_winning_length = winning_length >= min_winning_length  and  winning_length <= edge_length;
 
     if (good_edge_length and good_winning_length) {
         this->board_length = edge_length;
-        this->board_size  = edge_length * edge_length;
+        this->board_size   = edge_length * edge_length;
         this->length_of_winning_sequence = winning_length;
         board_array.fill(empty);
 
@@ -26,40 +43,40 @@ Board::Board (const int edge_length,  int winning_length) {
     }
 }
 
-Board::Board (const int edge_length) {
-    int winning_length;
-    if (edge_length >= 5) {
-        winning_length = 5;
-    } else {
-        winning_length = edge_length;
-    }
 
-    *this = Board(edge_length, winning_length);
-}
 
 
 
 // Display of internal objects
+// ---------------------------
+
+/* Returns internal `board_length`. */
 int Board::length () const {
     return this->board_length;
 }
 
+
+/* Returns internal `board_size`. */
 int Board::size () const {
     return this->board_size;
 }
 
 
+/* Returns internal `length_of_winning_sequence`. */
 int Board::winning_length () const {
     return this->length_of_winning_sequence;
 }
 
 
+/* Checks wether a coordinate is inside the board. */
 bool Board::inside (const int x, const int y) const {
     return (x >= 0 and x < this->length()
         and y >= 0 and y < this->length());
 }
 
 
+
+/* Returns symbol of a specific square. */
 Symbol Board::at (const int x,const int y) const {
     if (this->inside(x, y)) {
         return this->board_array.at(this->length() * y + x);
@@ -70,6 +87,8 @@ Symbol Board::at (const int x,const int y) const {
 }
 
 
+
+/* Returns a picture of the board. */
 std::ostream& operator<< (std::ostream& out, const Board& board) {
     out << endl;
     // The output has a coordinate system 
@@ -118,6 +137,8 @@ std::ostream& operator<< (std::ostream& out, const Board& board) {
 }
 
 
+
+/* Prints a congratulation to the winner or declares a draw. */
 void Board::congratulate () const {
     if (this->winner == empty) {
         cout << "Draw." << endl;
@@ -129,7 +150,12 @@ void Board::congratulate () const {
 
 
 
-// Actions on instances
+
+
+// Actions on internal objects
+// ---------------------------
+
+/* Sets the symbol on a specific square on the board. */
 bool Board::place (const int x, const int y, const Symbol symbol) {
     bool is_on_board = this->inside(x, y);
     if (is_on_board) {
@@ -139,6 +165,8 @@ bool Board::place (const int x, const int y, const Symbol symbol) {
 }
 
 
+
+/* Sets the board's winner. */
 void Board::set_winner (Symbol player) {
     this->winner = player;
 }

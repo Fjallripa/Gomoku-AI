@@ -1,5 +1,5 @@
 // Definition of custom text input functions
-// -----------------------------------------
+// =========================================
 
 
 
@@ -9,12 +9,13 @@ bool is_printable(std::string string);
 
 
 
+
+
 // User facing text input functions
 // --------------------------------
 //      They are designed to provide a safe and complete input method for certain data types. 
     
-
-// Input function for strings
+/* Input function for strings */
 std::string input_text (std::string info = "") {
     std::string text;
     do {
@@ -26,11 +27,12 @@ std::string input_text (std::string info = "") {
 
 
 
+
+
 // Definition of internal functions doing the input handling
 // ---------------------------------------------------------
 
-
-// Handling the input of strings
+/* Handles the input of strings */
 std::istream &get_text(std::istream &input_stream, std::string &text) {
     text = "";   // Intially set to "" for safety.
     
@@ -58,6 +60,8 @@ std::istream &get_text(std::istream &input_stream, std::string &text) {
 }
 
 
+
+/* Checks wether a string only contains printable characters (`isgraph()` or `isblank()`). */
 bool is_printable(std::string string) {
     return std::all_of(string.begin(), string.end(), 
         [](char character) { 

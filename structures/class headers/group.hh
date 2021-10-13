@@ -1,24 +1,31 @@
 // Declaration of the Group class
-// ------------------------------
+// ==============================
+
 
 
 // Group provides a circular container for Players.
 class Group {
     private:
-        Player* first_player;
-        int number_of_players = 0;
+        // Set by constructor
+            Player* first_player;
+        
+        // Changed by public methods
+            int number_of_players = 0;
 
 
     public:
-        ~Group ();
+        // Destructors
+            ~Group ();
+
+        
+        // Display of internal objects
+            Player* first () const;
+
+            int length () const;
 
 
-        Player* first () const;
+        // Actions on internal objects
+            void append (Player* player);   // Changes Player.
 
-        int length () const;
-
-
-        void append (Player* player);
-
-        Player* pop ();
+            Player* pop ();   // Changes Player.
 };

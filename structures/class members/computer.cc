@@ -1,31 +1,22 @@
 // Implementation of the Player-derived Computer class
-// ---------------------------------------------------
+// ===================================================
+//     For algorithm (support) methods, see their respective .cc files.
 
 
 
-// Constructor & Destructor
-Computer::Computer (Board& board, const Symbol stone, const Algorithm algorithm) : Player (board, stone) {
-    switch (algorithm) {
-        case Algorithm::placeholder: this->algorithm_used = &Computer::placeholder; break;
-        case Algorithm::minmax     : this->algorithm_used = &Computer::minmax;      break;
-        
-        default: cout << "Error when constructing a Computer object. "
-                      << "This 'algorithm' argument hasn't been assigned yet." << endl; break;
-    }
-}
+// Internal methods
+// ----------------
 
-Computer::Computer (Board& board, const Symbol stone) : Player (board, stone) {
-    *this = Computer(board, stone, Algorithm::placeholder);
-}
-
-
-// Internal developer menu
+/* Handles the Developer Mode input prompt. */
 void Computer::dev_choice (Player* player) {
-    while (true) {
+    while (true) {   // In case of a bad input, the prompt repeats itself.
+        // Input prompt
         std::string choice = input_text("> ");
         
+        // If Enter was pressed, the game goes on.
         if (choice == "")   break;
         
+        // If a coordinate of an empty square was entered, a hypothetical move on that square is done.
         int x; int y; std::istringstream stream(choice);
         if (get_coord(stream, x, y)) {
             if (this->board->at(x, y) == empty) {
@@ -44,7 +35,37 @@ void Computer::dev_choice (Player* player) {
 
 
 
-// Actions on instances
+
+
+// Constructors
+// ------------
+
+/* Default constructor */
+Computer::Computer (Board& board, const Symbol stone, const Algorithm algorithm) : Player (board, stone) {
+    switch (algorithm) {
+        case Algorithm::placeholder: this->algorithm_used = &Computer::placeholder; break;
+        case Algorithm::minmax     : this->algorithm_used = &Computer::minmax;      break;
+        
+        default: cout << "Error when constructing a Computer object. "
+                      << "This 'algorithm' argument hasn't been assigned yet." << endl; break;
+    }
+}
+
+
+
+/* Placeholder constructor (Implicitly assigns `placeholder()` algorithm.) */
+Computer::Computer (Board& board, const Symbol stone) : Player (board, stone) {
+    *this = Computer(board, stone, Algorithm::placeholder);
+}
+
+
+
+
+
+// Actions on internal objects
+// ---------------------------
+
+/* Places the computer player's symbol at a square chosen by its algorithm. */
 void Computer::make_move () {
     if (dev_mode_on)   dev_choice(this);   // Choose wether to display the scores for all possible moves or to check out one specific move.
 

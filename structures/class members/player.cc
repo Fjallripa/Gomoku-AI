@@ -1,48 +1,49 @@
 // Implementation of the Player class
-// ----------------------------------
+// ==================================
+//    For derived classes, see their respective .cc files.
 
 
 
-// Constructor & Destructor
+// Constructors & Destructors
+// --------------------------
 
+/* Default constructor */
 Player::Player (Board& board, const Symbol stone) : 
     board(&board), symbol(stone) {}
 
-
+/* Default destructor */
 Player::~Player () {}
 
 
 
-// Display of internal objects
 
+
+// Display of internal objects
+// ---------------------------
+
+/* Returns the internal `symbol`. */
 Symbol Player::stone () const {
     return this->symbol;
 }
 
 
+/* Returns the internal `last_move`. */
 Square Player::last_move () const {
     return this->latest_move;
 }
 
 
+/* If the player is part of a group, the pointer to the next player in that group is returned. */
 Player* Player::next () const {
     return this->next_player;
 }
 
+
+/* If the player is part of a group, the pointer to the previous player in that group is returned. */
 Player* Player::prev () const {
     return this->previous_player;
 }
 
-
-
-// Actions on instances
-
-void Player::place_stone (int x, int y) {
-    // Executing the move
-    this->board->place(x, y, this->stone());
-    this->latest_move = Square(this->board, x, y);
-    cout << *board;
-}
 
 
 /* Determines if the last move of a Player was a winning move. If so, it also updates the Board's winner value. */
@@ -54,6 +55,7 @@ bool Player::is_winner () const {
     }
     return win;
 }
+
 
 
 /* Actual evaluation of winner status. Is made to be player-independant and side effect free to be usable for analysis purposes. */
@@ -99,4 +101,19 @@ bool Player::is_winner (Square last_move) const {
 
     // Else, no winner is set.
         return false;
+}
+
+
+
+
+
+// Actions on internal objects
+// ---------------------------
+
+/* Sets the player's symbol on a specific square of the board. */
+void Player::place_stone (int x, int y) {
+    // Executing the move
+    this->board->place(x, y, this->stone());
+    this->latest_move = Square(this->board, x, y);
+    cout << *board;
 }

@@ -1,7 +1,22 @@
+// Implementation of the Player-derived Human class
+// ================================================
 
+
+
+// Constructors
+// ------------
+
+/* Default constructor */
 Human::Human (Board& board, const Symbol stone) : Player (board, stone) {}
 
 
+
+
+
+// Actions on internal objects
+// ---------------------------
+
+/* Places the human player's symbol at a square chosen by text input by the user. */
 void Human::make_move () {
     // Requesting user coordinate input
     int x = -1; int y = -1;

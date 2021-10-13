@@ -1,6 +1,5 @@
 // Tests of the minmax() algorithm
-// -------------------------------
-
+// ===============================
 
 
 #include "../../structures/include.hh"   // Standard file that handles all inclusions for you.
@@ -8,12 +7,14 @@
 
 
 
-// TicTacToe (2 Computers)
+
+// Functions for individual tests
+// ------------------------------
+
+/* TicTacToe (2 Computers) */
 void test_1 () {
-    // Title
-    cout << "TicTacToe (2 Computers):" << endl
-         << "------------------------" << endl
-         << endl;
+    
+    print_subtitle("TicTacToe (2 Computers)");
     
     Board board(3, 3);   // Creating a 3x3 board with a winning length of 3 stones.
     
@@ -30,15 +31,18 @@ void test_1 () {
         }
 
     // Playing the game
-        if (dev_mode_on)   print_dev_intro();
-        cout << board;
         Player* current_player = group.first();
+        if (dev_mode_on)   print_dev_intro();
+        
+        cout << board;
         current_player->make_move();
         for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
             current_player = current_player->next();
             current_player->make_move();
         }
+        
         board.congratulate();
+        cout << endl;
 
     // Comparing test results
         cout << endl;
@@ -58,12 +62,11 @@ void test_1 () {
 }
 
 
-// TicTacToe (1 Human, 1 Computer)
+
+/* TicTacToe (1 Human, 1 Computer) */
 void test_2 () {
-    // Title
-    cout << "TicTacToe (1 Human, 1 Computer):" << endl
-         << "--------------------------------" << endl
-         << endl;
+    
+    print_subtitle("TicTacToe (1 Human, 1 Computer)");
     
     Board board(3, 3);   // Creating a 3x3 board with a winning length of 3 stones.
 
@@ -90,32 +93,30 @@ void test_2 () {
                 group.append(&computer);
                 break;
             default:
-                cout << "Error in the code: The option " << choice << " doesn't have a matching case." << endl;
-                break;
+                print_switch_default(choice); break;
         }
         
     // Playing the game
-        if (dev_mode_on)   print_dev_intro();
-        cout << board;
         Player* current_player = group.first();
+        if (dev_mode_on)   print_dev_intro();
+        
+        cout << board;
         current_player->make_move();
         for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
             current_player = current_player->next();
             current_player->make_move();
         }
+        
         board.congratulate();
-    
-    cout << endl;
+        cout << endl;
 }
 
 
 
 // minmax() on different sized boards
 void test_3 () {
-    // Title
-    cout << "minmax() on a custom board:" << endl
-         << "---------------------------" << endl
-         << endl;
+    
+    print_subtitle("minmax() on a custom board");
     
     // Creating the board
         cout << "Create a board you want to test the algorithm on:" << endl;
@@ -138,21 +139,25 @@ void test_3 () {
     cout << endl;
 
     // Playing the game
-        if (dev_mode_on)   print_dev_intro();
-        cout << board;
         Player* current_player = group.first();
+        if (dev_mode_on)   print_dev_intro();
+        
+        cout << board;
         current_player->make_move();
         for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
             current_player = current_player->next();
             current_player->make_move();
         }
+        
         board.congratulate();
-    
-    cout << endl;
 }
 
 
 
+
+
+// Menu for choosing a test
+// ------------------------
 
 int main (int argument_count, char* argument_values[]) {
     // Option for enabling Developer Mode when starting the program
@@ -161,11 +166,10 @@ int main (int argument_count, char* argument_values[]) {
             dev_mode_on = true;
         }
     }
-    
 
-    // Menu for choosing which test to run
-    while (true) {   // With this while-loop, the program returns to the menu after finishing a test.
-        // Title
+    // Menu
+    while (true) {   // The program returns to the menu after finishing a test.
+        
         print_title("Tests of the minmax() algorithm");
         
         // Options
@@ -176,7 +180,7 @@ int main (int argument_count, char* argument_values[]) {
         cout << endl;
         
         // User prompt
-        int choice = input_range(3, "Choose an option: ");   // Adapt number to number of tests.
+        int choice = input_range(3, "Choose an option: ");   //! Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
@@ -188,7 +192,6 @@ int main (int argument_count, char* argument_values[]) {
             case 3: test_3(); break;
             default: print_switch_default(choice); break;
         }
-
         cout << endl;
     }
 }

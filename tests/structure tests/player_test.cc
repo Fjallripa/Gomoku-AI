@@ -1,25 +1,30 @@
 // Tests of the Player methods
-// ---------------------------
-
+// ===========================
 
 
 #include "../../structures/include.hh"   // Standard file that handles all inclusions.
 
-Board board(5);
 
 
 
-// Testing basic Player methods
+
+// Functions for individual tests
+// ------------------------------
+
+/* Testing basic Player methods */
 void test_1 () {
-    cout << "1. Testing basic Player methods:" << endl;
-    cout << "--------------------------------" << endl;
-    cout << endl;
     
-    Human human_a = Human(board, stone[0]);
-    Human human_b = Human(board, stone[1]);
-    Computer computer = Computer(board, stone[2]);
+    print_subtitle("Testing basic Player methods");
+    
+    Board board(5);
+    
+    
+    // Constructing the Players
+        Human human_a = Human(board, stone[0]);
+        Human human_b = Human(board, stone[1]);
+        Computer computer = Computer(board, stone[2]);
 
-
+    
     // Testing Player::stone()
         cout << "Testing Player::stone():" << endl;
         cout << "Human 'a': " << human_a.stone() << endl;
@@ -44,13 +49,12 @@ void test_1 () {
         computer.place_stone(2, 2);
     cout << endl;
     
-
+    
     // Testing Human::make_move()
         cout << "Testing Human::make_move():" << endl;
         human_a.make_move();
         human_b.make_move();
     cout << endl;
-
 
     // Testing Computer::make_move()
         cout << "Testing Computer::make_move():" << endl;
@@ -73,12 +77,14 @@ void test_1 () {
 }
 
 
-// Testing Player and Group properties (manual constructors)
+
+/* Testing Player and Group properties (manual constructors) */
 void test_2 () {
-    cout << "2. Testing Player and Group properties (manual constructors):" << endl;
-    cout << "-------------------------------------------------------------" << endl;
-    cout << endl;
     
+    print_subtitle("Testing Player and Group properties (manual constructors)");
+    
+    Board board(5);
+
     // Constructing the Players
     Human human_a = Human(board, stone[0]);
     Human human_b = Human(board, stone[1]);
@@ -162,12 +168,15 @@ void test_2 () {
 }
 
 
-// Testing Player and Group properties (looped constructors)
-void test_3 () {
-    cout << "3. Testing Player and Group properties (looped constructors):" << endl;
-    cout << "-------------------------------------------------------------" << endl;
-    cout << endl;
 
+/* Testing Player and Group properties (looped constructors) */
+void test_3 () {
+    
+    print_subtitle("Testing Player and Group properties (looped constructors)");
+
+    Board board(5);
+    
+    
     // Constructing the Players
         // Select the number of Human and Computer players. Sum must not be larger than max_player_count.
         const int human_count = 2;
@@ -242,12 +251,13 @@ void test_3 () {
 }
 
 
-// Testing basic gameplay
-void test_4 () {
-    cout << "Testing basic gameplay:" << endl;
-    cout << "-----------------------" << endl;
-    cout << endl;
 
+/* Testing basic gameplay */
+void test_4 () {
+    
+    print_subtitle("Testing basic gameplay");
+
+    Board board(5);
 
     // Creating and adding players to the group
         cout << "Choose the number of human and computer players:" << endl;
@@ -283,32 +293,32 @@ void test_4 () {
     
 
     // Playing the game
+    Player* current_player = group.first();
     cout << board;
+
     if (player_count > 0) {
-        Player* current_player = group.first();
         current_player->make_move();
         for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
             current_player = current_player->next();
             current_player->make_move();
         }
         board.congratulate();
-    }   
-    cout << endl;
+    }
 }
 
 
 
 
-int main () {
-    
-    // Menu for choosing which test to run
-    bool continue_program = true;
-    while (continue_program) {   // With this while-loop, the program returns to the menu after finishing a test.
-        cout << endl;
-        cout << "Tests of the Player methods" << endl;
-        cout << "===========================" << endl;
-        cout << endl;
 
+// Menu for choosing a test
+// ------------------------
+
+int main () {
+    while (true) {   // The program returns to the menu after finishing a test.
+        
+        print_title("Tests of the Player methods");
+
+        // Options
         cout << "0. Quit" << endl;
         cout << "1. Basic Player methods" << endl;
         cout << "2. Player and Group properties (manual constructors)" << endl;
@@ -316,20 +326,20 @@ int main () {
         cout << "4. Basic gameplay" << endl;
         cout << endl;
         
-        int choice = input_range(4, "Choose an option: ");
+        // User prompt
+        int choice = input_range(4, "Choose an option: ");   //! Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
+        // Test execution
         switch (choice) {
-            case 0: continue_program = false; break;
+            case 0: return 0;   // Ending the program
             case 1: test_1(); break;
             case 2: test_2(); break;
             case 3: test_3(); break;
             case 4: test_4(); break;
-            default: 
-                cout << "Didn't find any matching test for " << choice << "." << endl; break;
+            default: print_switch_default(choice); break;
         }
-
         cout << endl;
     }
 }
