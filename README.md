@@ -1,44 +1,44 @@
 # Gomoku-AI
 
-## Aims of this project
-* devolop and test different gomoku-playing algorithms
-* build an interactive and flexible testbed for testing, evaluating and comparing different algorithms
 
 
-## Whishlist of features
-### one program to play gomoku and test gomoku algorithms
-  * variable winning lengths
-  * variable sized gomoku board
-  * rules: freestyle, (m,n,k)-game
-  * text based with visible but compact coordinate system
-  * interactive (play via placing stones at coordinates)
-  * multiple game modes such as person/person, person/computer, computer/computer
+## What this project is about
+Gomoku-AI is a personal learning project to 
+* build a comand-line-based Gomoku-like game (multiplayer m,n,k-game) with human as well as computer players, and around it 
+* create an algorithm development platform for various game board algorithms including (hopefully) machine learning ones. It also serves to
+* gather experience on larger-scale software development, version control and project management.
 
-### interchangeable algorithms
-  * tree-search algorithms
-    * simple min-max algorithm
-    * alpha-beta-pruning
-  * evaluation functions
-    * only win or loose yield points (practical for very small boards only)
-    * own scores for different board patterns
-  * scoring algorithms
-    * all legal places are scored
-    * only places adjacent to stones are scored (+some rule restricting legal moves)
-    * only places relevant to a current move are scored/updated
+<img width="529" alt="Example of playing this game" src="https://user-images.githubusercontent.com/58792390/123403884-290f7400-d5a9-11eb-8216-c31f19d29950.png">
+Example of playing on a 30x30 board with the goal to build a straight line of 5 symbols.
 
-### debugging and analysis
-  * different parts of the program are stored in different files so that they can be used interchangeably and developed independantly
-    * eg. different files for the board, the game, the algorithm, the scoring algorithm etc.
-  * select different debug tools through terminal arguments when running program
-    * toggle for auto/manual next move
-    * toggle showing score of current board
-    * toggle showing score map of individual moves
-    * toggle showing heat map of legal moves
-    * tool for manually navigating through evaluation tree and presenting scores there
-    * toggle showing calculation time for various subroutines
-    * toggle highlighting latest moves
 
-### exciting and unlikely expansions
-  * real Gomuku rules or other variations
-  * try out machine learning algorithms on this game
-  * more than two players in a game (eg. 3- or 4-player gomoku)
+
+## [Roadmap](https://github.com/Fjallripa/Gomoku-AI/blob/main/project/Roadmap.md) (summary)
+
+
+### [Completed](https://github.com/Fjallripa/Gomoku-AI/releases)
+
+* 2021-10: [Tic Tac Toe](https://github.com/Fjallripa/Gomoku-AI/releases/tag/v1.0)
+  + 3x3 board, 2 players (optionally computer players)
+  + Computer players use the minimax algorithm. They cannot lose.
+  + Internally: Now supports many algorithms and game variations.
+
+* 2021-06: [Core Game](https://github.com/Fjallripa/Gomoku-AI/releases/tag/v0.1)
+  + Text-based Gomoku-like game. Played by inputting coordinates.
+  + 30x30 board, 3 human players
+  + Internally: functionality neatly separated into classes, tests for all features
+  
+
+### Upcoming features
+* limited-depth minimax with scoring function
+* Core game expansion with computer players and new algorithm
+
+
+### Longer-term plans
+* gradient descent search for optimal scoring function
+* alpha-beta-pruning algorithm
+* remembering already calculated moves
+
+
+### Whishlist
+* real machine learning algorithms
