@@ -26,19 +26,19 @@ Example of playing on a 30x30 board with the goal to build a straight line of 5 
 * 2021-06: [Core Game](https://github.com/Fjallripa/Gomoku-AI/releases/tag/v0.1)
   + Text-based Gomoku-like game. Played by inputting coordinates.
   + 30x30 board, 3 human players
-  + Internally: functionality neatly separated into classes, tests for all features
+  + Internally: Functionality neatly separated into classes, tests for all features
   
 
 ### Upcoming features
-* limited-depth minimax with scoring function
+* Limited-depth minimax with scoring function
 * Core game expansion with computer players and new algorithm
 
 
 ### Longer-term plans
-* gradient descent search for optimal scoring function
-* alpha-beta-pruning algorithm
-* remembering already calculated moves
+* Gradient descent search for optimal scoring function
+* Alpha-beta-pruning algorithm
+* Remembering already calculated moves
 
 
 ### Whishlist
-* real machine learning algorithms
+* Real machine learning algorithms
