@@ -11,7 +11,9 @@
 // Functions for individual tests
 // ------------------------------
 
-/* Testing basic Player methods */
+/* (semi-automated) Tests basic Playeer, Human and Computer methods.
+Tests all three constructors, `player.stone()`, `player.place_stone()`, 
+`human.make_move()`, `computer.make_move()` and `player.last_move()`. */
 void test_1 () {
     
     print_subtitle("Testing basic Player methods");
@@ -78,7 +80,12 @@ void test_1 () {
 
 
 
-/* Testing Player and Group properties (manual constructors) */
+/* (automated) Tests Player and Group properties (with manual constructors).
++ Tests group construction with `group.append()`, `group.length`, Player pointers, 
+`group.first()`, `player.next()` and  `player.prev()`. 
++ Tests repeated iterations through the group in both directions and making moves 
+with the different Players of the group but the same `&player->make_move()` method.
++ Tests group deconstruction with `group.pop()`. */
 void test_2 () {
     
     print_subtitle("Testing Player and Group properties (manual constructors)");
@@ -169,7 +176,12 @@ void test_2 () {
 
 
 
-/* Testing Player and Group properties (looped constructors) */
+/* (automated) Tests Player and Group properties (with looped constructors).
++ Same as the previous test with the only difference being that 2 Humans 
+and 2 Computers are first constructed within a loop placing them 
+into respective vectors (`vector.emplace_back()`). They then get added 
+to the group with loops appending each element of the vector.
++ Only `group.pop()` doesn't get tested again. */
 void test_3 () {
     
     print_subtitle("Testing Player and Group properties (looped constructors)");
@@ -252,7 +264,10 @@ void test_3 () {
 
 
 
-/* Testing basic gameplay */
+/* (interactive) Tests basic gameplay.
+A 5x5 board is used and a custom number of human and computer players 
+(default `placeholder()` algorithm) are put into a group 
+and used to play a basic game. */
 void test_4 () {
     
     print_subtitle("Testing basic gameplay");

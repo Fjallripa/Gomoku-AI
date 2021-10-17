@@ -20,7 +20,7 @@ void Computer::dev_choice (Player* player) {
         int x; int y; std::istringstream stream(choice);
         if (get_coord(stream, x, y)) {
             if (this->board->at(x, y) == empty) {
-                int score = this->minmax_score(x, y, player, true);
+                int score = this->minimax_score(x, y, player, true);
                 cout << player->stone() << "'s score if it was placed at (" << x << ", " << y << "): " << score << endl;
                 cout << *(this->board);
                 break;
@@ -44,7 +44,7 @@ void Computer::dev_choice (Player* player) {
 Computer::Computer (Board& board, const Symbol stone, const Algorithm algorithm) : Player (board, stone) {
     switch (algorithm) {
         case Algorithm::placeholder: this->algorithm_used = &Computer::placeholder; break;
-        case Algorithm::minmax     : this->algorithm_used = &Computer::minmax;      break;
+        case Algorithm::minimax     : this->algorithm_used = &Computer::minimax;      break;
         
         default: cout << "Error when constructing a Computer object. "
                       << "This 'algorithm' argument hasn't been assigned yet." << endl; break;

@@ -11,10 +11,12 @@
 // Functions for individual tests
 // ------------------------------
 
-/* Testing to move on the board with Square objects */
+/* (automated) Tests to move on the board with Square instances. 
+Tests constructor, `square.symbol()`, `square.go()` in all directions 
+and also its behavior at the egde of the board.*/
 void test_1 () {
     
-    print_subtitle("Testing to move on the board with Square objects");
+    print_subtitle("Testing to move on the board with Square instances");
 
     Board board = Board(5);
 

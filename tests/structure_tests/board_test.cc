@@ -11,7 +11,8 @@
 // Functions for individual tests
 // ------------------------------
 
-/* Testing basic Board display methods */
+/* (semi-automated) Tests the constructor, `board.length()`, `board.size()`, 
+custom Board construction, `board.inside()` and `board.at()`. */
 void test_1 () {
     
     print_subtitle("Testing basic Board display methods");
@@ -104,7 +105,7 @@ void test_1 () {
 
 
 
-/* Testing board output operator */
+/* (semi-automated) Tests the Board output operater (e.g. if the board is printed correctly). */
 void test_2 () {
     
     print_subtitle("Testing board output");
@@ -117,7 +118,7 @@ void test_2 () {
 
 
 
-/* Testing board.place() */
+/* (automated) Tests `board.place()`. */
 void test_3 () {
     
     print_subtitle("Testing to place stones on board");
@@ -136,7 +137,7 @@ void test_3 () {
 
 
 
-/* Testing winner congratulation */
+/* (automated) Tests congratulation via `board.set_winner()` and `board.congratulate()`. */
 void test_4 () {
     
     print_subtitle("Testing winner congratulation");
@@ -152,7 +153,8 @@ void test_4 () {
 
 
 
-/* Testing constructors with winning length */
+/* (interactive) Tests `board.winning_length()` and how the constructor variants 
+handle default and custom winning lengths respectively. */
 void test_5 () {
     
     print_subtitle("Testing winning_length()");

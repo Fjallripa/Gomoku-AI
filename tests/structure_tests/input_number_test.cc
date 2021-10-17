@@ -11,7 +11,7 @@
 // Functions for individual tests
 // ------------------------------
 
-/* Testing the example given in the code source */
+/* (interactive) Tests `input_int()` with the example given in the code source */
 void test_1 () {
     
     print_subtitle("Testing example code");
@@ -35,7 +35,7 @@ void test_1 () {
 
 
 
-/* Testing secure integer input */
+/* (interactive) Tests secure integer input with `input_int()`. */
 void test_2 () {
     
     print_subtitle("Testing secure integer input");
@@ -48,7 +48,7 @@ void test_2 () {
 
 
 
-/* Testing secure two-integer input */
+/* (interactive) Tests secure coordinate input with `input_coord()`. */
 void test_3 () {
     
     print_subtitle("Testing secure two-integer input");
@@ -63,7 +63,7 @@ void test_3 () {
 
 
 
-/* Testing secure integer range input */
+/* (interactive) Tests secure integer range input with the two variants of `input_range()`. */
 void test_4 () {
     
     print_subtitle("Testing secure integer range input");

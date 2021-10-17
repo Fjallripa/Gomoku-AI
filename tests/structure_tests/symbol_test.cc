@@ -11,7 +11,7 @@
 // Functions for individual tests
 // ------------------------------
 
-/* Testing if all the symbols and stones display correctly. */
+/* (automated) Tests if all the symbols and stones display correctly. */
 void test_1 () {
     
     print_subtitle("Testing if all the symbols and stones display correctly");

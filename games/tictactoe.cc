@@ -1,4 +1,4 @@
-// Implementation of a TicTacToe game with optional computer players
+// Implementation of a Tic Tac Toe game with optional computer players
 // =================================================================
 
 
@@ -11,14 +11,14 @@ enum PlayerSetup {human_v_human, computer_v_human, human_v_computer, computer_v_
 
 
 void game (PlayerSetup setup) {
-    // Creating the TicTacToe board
+    // Creating the Tic Tac Toe board
         Board board(3);
 
     // Creating the players
         Human human1(board, stone[0]);
         Human human2(board, stone[1]);
-        Computer computer1(board, stone[0], minmax);
-        Computer computer2(board, stone[1], minmax);
+        Computer computer1(board, stone[0], minimax);
+        Computer computer2(board, stone[1], minimax);
         
         Group players;
         if (setup == human_v_human or setup == human_v_computer) {
@@ -33,16 +33,18 @@ void game (PlayerSetup setup) {
         }
 
     // Playing the game
+        Player* current_player = players.first();
         if (dev_mode_on)   print_dev_intro();
 
         cout << board;
-        Player* current_player = players.first();
         current_player->make_move();
         for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
             current_player = current_player->next();
             current_player->make_move();
         }
+        
         board.congratulate();
+        cout << endl;
 }
 
 

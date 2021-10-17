@@ -1,5 +1,5 @@
 // Tests of the Direction type and structures
-// ---------------------------------------
+// ==========================================
 
 
 #include "../../structures/include.hh"   // Standard file that handles all inclusions.
@@ -11,7 +11,7 @@
 // Functions for individual tests
 // ------------------------------
 
-/* Testing if the three "direction arrays" work correctly */
+/* (automated) Tests if the three "direction arrays" work correctly. */
 void test_1 () {
     
     print_subtitle("Testing if the three \"direction arrays\" work correctly");

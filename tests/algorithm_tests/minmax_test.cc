@@ -1,4 +1,4 @@
-// Tests of the minmax() algorithm
+// Tests of the minimax() algorithm
 // ===============================
 
 
@@ -11,10 +11,12 @@
 // Functions for individual tests
 // ------------------------------
 
-/* TicTacToe (2 Computers) */
+/* Tic Tac Toe (2 Computers) 
+As this test has a known outcome, an "expected board" is explicitly printed 
+after the game ends in order to verify the behavior in case of future modifications. */
 void test_1 () {
     
-    print_subtitle("TicTacToe (2 Computers)");
+    print_subtitle("Tic Tac Toe (2 Computers)");
     
     Board board(3, 3);   // Creating a 3x3 board with a winning length of 3 stones.
     
@@ -22,7 +24,7 @@ void test_1 () {
         const int computer_count = 2;
         std::vector<Computer> computer_players;
         for (int i = 0; i < computer_count; i++) {
-            computer_players.emplace_back(board, stone[i], minmax);
+            computer_players.emplace_back(board, stone[i], minimax);
         }
 
         Group group;
@@ -63,15 +65,16 @@ void test_1 () {
 
 
 
-/* TicTacToe (1 Human, 1 Computer) */
+/* Tic Tac Toe (1 Human, 1 Computer) 
+The beginner is choosable. */
 void test_2 () {
     
-    print_subtitle("TicTacToe (1 Human, 1 Computer)");
+    print_subtitle("Tic Tac Toe (1 Human, 1 Computer)");
     
     Board board(3, 3);   // Creating a 3x3 board with a winning length of 3 stones.
 
     // Creating and adding computer players to the group
-        Computer computer = Computer(board, x, minmax);
+        Computer computer = Computer(board, x, minimax);
         Human human       = Human(board, o);
 
         cout << "Who should begin?" << endl;
@@ -113,10 +116,10 @@ void test_2 () {
 
 
 
-// minmax() on different sized boards
+/* Tests `minimax()` on custom sized boards with custom winning lengths. */
 void test_3 () {
     
-    print_subtitle("minmax() on a custom board");
+    print_subtitle("minimax() on a custom board");
     
     // Creating the board
         cout << "Create a board you want to test the algorithm on:" << endl;
@@ -129,7 +132,7 @@ void test_3 () {
         const int computer_count = 2;
         std::vector<Computer> computer_players;
         for (int i = 0; i < computer_count; i++) {
-            computer_players.emplace_back(board, stone[i], minmax);
+            computer_players.emplace_back(board, stone[i], minimax);
         }
 
         Group group;
@@ -150,6 +153,7 @@ void test_3 () {
         }
         
         board.congratulate();
+        cout << endl;
 }
 
 
@@ -170,13 +174,13 @@ int main (int argument_count, char* argument_values[]) {
     // Menu
     while (true) {   // The program returns to the menu after finishing a test.
         
-        print_title("Tests of the minmax() algorithm");
+        print_title("Tests of the minimax() algorithm");
         
         // Options
         cout << "0. Quit" << endl;
-        cout << "1. TicTacToe (2 Computers)" << endl;
-        cout << "2. TicTacToe (1 Human, 1 Computer)" << endl;
-        cout << "3. minmax() on a custom board" << endl;
+        cout << "1. Tic Tac Toe (2 Computers)" << endl;
+        cout << "2. Tic Tac Toe (1 Human, 1 Computer)" << endl;
+        cout << "3. minimax() on a custom board" << endl;
         cout << endl;
         
         // User prompt

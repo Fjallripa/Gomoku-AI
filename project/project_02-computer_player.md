@@ -1,21 +1,23 @@
-# Second project: Build a perfect TicTacToe computer player
-  
+# Second project: Build a perfect Tic Tac Toe computer player
+
+
+
 ## Aims of this project 
 * Make `Computer` a derived class of `Player` that has another `make_move()` method using an algorithm to determine its next move.
-* Build a minmax algorithm that only uses win and loss as a scoring function.
+* Build a minimax algorithm that only uses win and loss as a scoring function.
   + Keep in mind the need to in principle function for a variable sized board and more than two players.
 * Build the basic project structures around algorithms and scoring functions.
 * Adapt tests and a new game to handle the Computer player.
   + If possible, test individual parts of the algorithm and scoring function to quickly detect bugs.
-  + Make at least one test demonstrating how the Computer player cannot fail at TicTacToe.
+  + Make at least one test demonstrating how the Computer player cannot fail at Tic Tac Toe.
 * Find a way to more easily debug the algorithm.
   + Build a basic tool for looking into how the algorithm scores different options and chooses between them.
-* Build a stand-alone TicTacToe game with optional computer players.
+* Build a stand-alone Tic Tac Toe game with optional computer players.
 
 
 
 ## Objectives
-4. Build a stand-alone TicTacToe game.
+4. Build a stand-alone Tic Tac Toe game.
    * Have a start menu to return to after a game that lets one choose between a Player/Player, a Computer/Player and a Computer/Computer game.
    * Include Developer Mode as an option.
 
@@ -23,11 +25,11 @@
    * Build a new set of tests to stress-test the algorithms.
      + For `placeholder()`, use a 4x4 board and 4 players of which 2 are computers.
        - Passing the test would require that the function can place a stone at the next empty square in every situation and always return safely.
-     + For `minmax()`, use a 3x3 board as well.
+     + For `minimax()`, use a 3x3 board as well.
        - Passing the test would require that the function always can place stones and that it (in this Tic Tac Toe scenario) always plays the optimal move and never loses.
-   * Improve the testing of the minmax() algorithm in the following ways:
+   * Improve the testing of the minimax() algorithm in the following ways:
      + When a game ends, instead of ending the program, make it revert to the menu.
-     + When starting the `minmax_test` from the command line implement an extra argument "`-dev`" that enables developer tools for inspecting the algorithms inner workings and performance.
+     + When starting the `minimax_test` from the command line implement an extra argument "`-dev`" that enables developer tools for inspecting the algorithms inner workings and performance.
      + Build an input function, that
        - safely takes an input and returns a string, stripped of whitespace.
        - If the input worked correctly, it returns a string.
@@ -42,7 +44,7 @@
          - Do also provide the same dev options here.
            - "Continue" displays the list of scores. After a second times it says which move the algorithm would have chosen together with its score and the board on which the hypothetical move was made.
            - Entering a coordinate means exploring one move deeper into the search tree.
-   * Check if the minmax-algorithm works correctly for non-TicTacToe-boards.
+   * Check if the minimax-algorithm works correctly for non-Tic Tac Toe-boards.
    * Check if some of the changes made need to be standardized/applied more broadly.
 
 2. Build the basic infrastructure around algorithms.
@@ -55,7 +57,7 @@
      + Find a way to make the algorithm choosable by adding a paramater to the `Computer` constructor.
        - Ideally, include the ability to provide the algorithm with custom arguments.
        - These could then be used for example to set weights or toggle certain aspects of the algorithm.
-   * Build a new minmax algorithm `minmax()` that only uses win and loss as a scoring function.
+   * Build a new minimax algorithm `minimax()` that only uses win and loss as a scoring function.
      + Create a separate scoring function that only rewards a win.
      + Find a place to put that function. 
 

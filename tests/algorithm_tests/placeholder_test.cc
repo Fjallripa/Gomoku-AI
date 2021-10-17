@@ -11,7 +11,9 @@
 // Functions for individual tests
 // ------------------------------
 
-/* Automatic test (4 Computers, 5x5 board) */
+/* Automatic test (4 Computers, 5x5 board)
+As this test has a known outcome, an "expected board" is explicitly printed 
+after the game ends in order to verify the behavior in case of future modifications. */
 void test_1 () {
 
     print_subtitle("Automatic test (4 Computers, 5x5 board)");

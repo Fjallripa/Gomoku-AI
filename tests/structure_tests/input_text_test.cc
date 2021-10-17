@@ -1,5 +1,5 @@
 // Tests of the text input functions
-// ---------------------------------
+// =================================
 
 
 #include "../../structures/include.hh"   // Standard file that handles all inclusions for you.
@@ -11,7 +11,7 @@
 // Functions for individual tests
 // ------------------------------
 
-/* Testing basic text input */
+/* (interactive) Tests secure text input with `input_text()`. */
 void test_1 () {
 
     print_subtitle("Testing basic text input");
