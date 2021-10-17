@@ -1,29 +1,45 @@
 // Implementation of the Group class
-// ---------------------------------
+// =================================
 
 
 
-// Constructor & Destructor
+// Destructors
+// -----------
+
+/* Destructor */
 Group::~Group () {
-      // Removing players one by one until the group is empty.
+    // Removing players one by one until the group is empty.
     while (this->length() > 0) {
         this->pop();
     }
 }
 
 
+
+
+
 // Display of internal objects
+// ---------------------------
+
+/* Returns the pointer to the group's `first_player`. */
 Player* Group::first () const {
     return this->first_player;
 }
 
 
+/* Returns the `number_of_players` the group contains. */
 int Group::length () const {
     return this->number_of_players;
 }
 
 
-// Actions on instances
+
+
+
+// Actions on internal objects
+// ---------------------------
+
+/* Adds a player behind the last player and before the first one. */
 void Group::append (Player* new_player) {
     // If there are no players in the group
     if (this->number_of_players < 1) {   //  (< 1 for robustness)
@@ -32,9 +48,11 @@ void Group::append (Player* new_player) {
         // The single player is linked to itself.
         this->first()->next_player     = this->first(); 
         this->first()->previous_player = this->first();
-    
+    }
+
+
     // If there's more than one player left in the group
-    } else {
+    else {
         // The old last player becomes the second-to-last.
         Player* old_last_player      = this->first()->prev();
         old_last_player->next_player = new_player;
@@ -45,30 +63,39 @@ void Group::append (Player* new_player) {
         this->first()->previous_player = new_player;
     }
 
+
     // The groups player count is incremented.
     this->number_of_players++;
 }
 
 
+
+/* Removes and returns the pointer of last player 
+and closes the ring of the group again by connecting 
+the penultimate to the first player. */
 Player* Group::pop () {
     // If there are no players in the group
     if (this->number_of_players < 1) {   // (< 1 for robustness)
         return nullptr;
-    
+    } 
+
+
     // If there's only one player left in the group
-    } else if (this->number_of_players == 1) {
+    else if (this->number_of_players == 1) {
         // The groups only player gets stripped of its links.
         this->first()->previous_player = nullptr;
         this->first()->next_player     = nullptr;
 
         // Then this player is deleted from the group and returned by the function.
-        Player* leaving_player     = this->first();
+        Player* leaving_player  = this->first();
         this->first_player      = nullptr;
         this->number_of_players = 0;
         return leaving_player;
-    
+    } 
+
+
     // If there's more than one player left in the group
-    } else {
+    else {
         // Removal of the group's last player
         Player* leaving_player  = this->first()->prev();
         Player* new_last_player = leaving_player->prev();

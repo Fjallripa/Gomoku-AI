@@ -1,5 +1,7 @@
 # First project: Building the core game from the ground up
 
+
+
 ## Aims of this project
 * being able to play a whole game of gomoku on the command line by starting one program
 * only human/human play for now, 2 players taking turns
@@ -8,6 +10,7 @@
 * place stones by entering coordinates
 * declare a victor when a sequence of stones of length k is reached
 * set up the beginning of the project folder structure
+
 
 
 ## Objectives

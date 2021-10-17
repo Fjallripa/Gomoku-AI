@@ -1,41 +1,61 @@
 // Implementation of the Square class
-// ----------------------------------
+// ==================================
 
 
 
-// Constructor & Destructor
+// Constructors
+// ------------
+
+/* Default constructor (takes a pointer to the board). */
 Square::Square (Board* board, int x, int y) {
     this->board       = board;
     this->coordinates = {x, y};
 }
 
+
+/* Default constructor (takes a reference to the board). */
 Square::Square (Board& board, int x, int y) {
     *this = Square(&board, x, y);
 }
 
+
+/* Empty constructor */
 Square::Square () {
     *this = Square(nullptr, -1, -1);
 }
 
 
 
+
+
 // Display of internal objects
+// ---------------------------
+
+/* Returns the x-coordinate of the square. */
 int Square::x () const {
     return this->coordinates[0];
 }
 
+
+/* Returns the y-coordinate of the square. */
 int Square::y () const {
     return this->coordinates[1];
 }
 
 
+/* Returns the symbol of the square. */
 Symbol Square::symbol () const {
     return this->board->at(this->x(), this->y());   // Returns symbol at this square.
 }
 
 
 
-// Actions on instances
+
+
+// Actions on internal objects
+// ---------------------------
+
+/* Moves towards a new square on the board (change of internal `coordinates`). */
 bool Square::go (Direction direction, int steps = 1) {
     // Selection of the new coordinates
     int x_new = this->x();
