@@ -44,7 +44,8 @@ void Computer::dev_choice (Player* player) {
 Computer::Computer (Board& board, const Symbol stone, const Algorithm algorithm) : Player (board, stone) {
     switch (algorithm) {
         case Algorithm::placeholder: this->algorithm_used = &Computer::placeholder; break;
-        case Algorithm::minimax     : this->algorithm_used = &Computer::minimax;      break;
+        case Algorithm::minimax    : this->algorithm_used = &Computer::minimax;     break;
+        case Algorithm::miniscore  : this->algorithm_used = &Computer::miniscore;   break;
         
         default: cout << "Error when constructing a Computer object. "
                       << "This 'algorithm' argument hasn't been assigned yet." << endl; break;

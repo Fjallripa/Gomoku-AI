@@ -82,8 +82,10 @@ class Computer : public Player {
         // Algorithms. Implementations in 'algorithms/' folder
             Square placeholder ();
             Square minimax ();
+            Square miniscore ();
 
 
         // Algorithm support methods. Found insde the respective algorithm files.
             int minimax_score (int x, int y, Player* player, bool dev_details = false);
+            int miniscore_score (int x, int y, Player* player, bool dev_details = false);
 };

@@ -46,3 +46,4 @@ using std::endl;
 
 #include "algorithms/placeholder.cc"
 #include "algorithms/minimax.cc"
+#include "algorithms/miniscore.cc"
