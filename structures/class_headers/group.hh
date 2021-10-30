@@ -6,11 +6,11 @@
 // Group provides a circular container for Players.
 class Group {
     private:
-        // Set by constructor
+        // Set by initialization.
+            int number_of_players = 0;   // Changed by append() and pop().
+
+        // Set by constructor.
             Player* first_player;
-        
-        // Changed by public methods
-            int number_of_players = 0;
 
 
     public:

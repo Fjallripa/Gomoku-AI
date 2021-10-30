@@ -6,16 +6,14 @@
 // Player is the base class that acts on the board.
 class Player {
     protected:
-        // Set by constructor
+        // Set by constructor.
             Board* board;
             Symbol symbol;
 
-        // Changed by public methods
-            Square latest_move;
-        
-        // Changed by Group methods
-            Player* next_player;
-            Player* previous_player;
+        // Set by public methods.
+            Square latest_move;   // Changed by place_stone().
+            Player* next_player;   // Changed by Group::append() and Group::pop().
+            Player* previous_player;   // Changed by Group::append() and Group::pop().
 
 
     public:
@@ -79,7 +77,7 @@ class Computer : public Player {
             void make_move ();   // Changes Board.
 
 
-        // Algorithms. Implementations in 'algorithms/' folder
+        // Algorithms. Implementations in 'algorithms/' folder.
             Square placeholder ();
             Square minimax ();
             Square miniscore ();
@@ -88,4 +86,8 @@ class Computer : public Player {
         // Algorithm support methods. Found insde the respective algorithm files.
             int minimax_score (int x, int y, Player* player, bool dev_details = false);
             int miniscore_score (int x, int y, Player* player, bool dev_details = false);
+
+
+        // Algorithm scoring methods. Implementation in 'algorithms/scoring/' folder.
+            int score_win ();
 };

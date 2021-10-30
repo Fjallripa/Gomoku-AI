@@ -35,6 +35,10 @@
      + Create `miniscore_test.cc` and copy over the Tic Tac Toe test from `minmax_test.cc`.
      + Make sure every component works under the new name.
    * Introduce a depth limit and a trivial scoring function.
+     + In preparation for scoring functions, `Board` needs an `is_full()` method that efficiently checks wether theres no `empty` square left.
+       - `bool is_full ()` is implemented by checking wether a private Board object `empty_square_count` is 0.
+       - `empty_square_count` gets updated everytime `place()` is executed.
+       - Create a new test inside `board_test.cc` to verify `is_full()`'s behaviour.
      + Replace the built-in win-, lose- and full-scores with a scoring function that
        - is a Computer method `score_win()`.
        - yields maximum points in case of victory and zero points else.

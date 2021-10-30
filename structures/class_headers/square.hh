@@ -6,11 +6,9 @@
 // Square is an interface to read and move around between the squares of the game board.
 class Square {
     private:
-        // Set by constructor
+        // Set by constructor.
             Board* board;
-        
-        // Changed by public methods
-            std::array<int, 2> coordinates;
+            std::array<int, 2> coordinates;   // Changed by go().
 
 
     public:

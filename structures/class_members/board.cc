@@ -41,6 +41,8 @@ Board::Board (const int edge_length,  int winning_length) {
         cout << endl;
         exit(1);
     }
+
+    this->empty_square_count = this->board_size;   // On a new board, all squares are `empty`.
 }
 
 
@@ -138,6 +140,19 @@ std::ostream& operator<< (std::ostream& out, const Board& board) {
 
 
 
+/* Checks wether the board is already full. */
+bool Board::is_full () const {
+    if (this->empty_square_count <= 0) {
+        if (this->empty_square_count < 0) {
+            cout << "Error in the code: Somehow, Board::empty_square_count is smaller than 0." << endl;
+        }
+        return true;
+    }
+    return false;
+}
+
+
+
 /* Prints a congratulation to the winner or declares a draw. */
 void Board::congratulate () const {
     if (this->winner == empty) {
@@ -159,6 +174,15 @@ void Board::congratulate () const {
 bool Board::place (const int x, const int y, const Symbol symbol) {
     bool is_on_board = this->inside(x, y);
     if (is_on_board) {
+        // Updating the empty_square_count
+        Symbol old_symbol = this->at(x, y);
+        if (old_symbol == empty and symbol != empty) {
+            this->empty_square_count--;
+        } else if (old_symbol != empty and symbol == empty) {
+            this->empty_square_count++;
+        }
+        
+        // Updating the board_array
         this->board_array.at(this->length() * y + x) = symbol;
     }
     return is_on_board;

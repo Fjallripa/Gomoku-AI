@@ -16,16 +16,15 @@
 // Board creates the game board and stores its current state.
 class Board {
     private:
-        // Set by initialization
-            std::array<Symbol, max_board_size> board_array;   // Changed by Player.
-        
-        // Set by constructor
+        // Set by initialization.
+            std::array<Symbol, max_board_size> board_array;   // Changed by place().
+            Symbol winner = empty;   // Changed by set_winner().
+
+        // Set by constructor.
             int board_length;
             int board_size;
             int length_of_winning_sequence;
-
-        // Set by public methods
-            Symbol winner = empty;   // Changed by Player.
+            int empty_square_count;   // Changed by place().
 
 
     public:
@@ -45,6 +44,8 @@ class Board {
             Symbol at (const int x, const int y) const;
 
             // std::ostream& operator<< (std::ostream& out, const Board& board);
+
+            bool is_full () const;
 
             void congratulate () const;
 

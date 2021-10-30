@@ -48,7 +48,7 @@ void test_1 () {
         std::vector board_list = {board_min, board_3, board_8, board_max};
         for (Board board : board_list) {   // Looping through all the previously created boards
             cout << std::boolalpha
-                << "(x, y) inside " << board.length() << "x" << board.length() << " board:";
+                 << "(x, y) inside " << board.length() << "x" << board.length() << " board:";
             cout << endl;
 
             // Testing coordinates that should be inside the board
@@ -178,6 +178,74 @@ void test_5 () {
 }
 
 
+/* (automatic) Tests `board.is_full()` and wether it returns `true` 
+if and only if there's at least one empty square left on the board. */
+void test_6 () {
+
+    print_subtitle("Testing board.is_full()");
+    
+    cout << std::boolalpha;   // Boolean values now get written out.
+
+    // Testing to fill and modify a 2x2 board
+        Board small_board(2);
+
+        cout << "Small board:" << endl;
+        cout << small_board;
+        cout << "Board is full: " << small_board.is_full() << endl;
+
+        auto place_test = [&] (int x, int y, Symbol symbol) {
+            small_board.place(x, y, symbol);
+            cout << "Placed " << symbol << " at (" << x << ", " << y << "). "
+                 << "Is it full now? " << small_board.is_full() 
+                 << endl;
+        };
+        
+        place_test(1, 1, d);
+        place_test(1, 0, o);
+        place_test(0, 1, o);
+        place_test(0, 0, x);
+        cout << small_board;
+        
+        place_test(0, 1, p);
+        place_test(1, 0, empty);
+        place_test(1, 1, x);
+        cout << small_board;
+        
+        place_test(1, 1, outside);
+        place_test(1, 0, outside);
+        cout << small_board;
+
+        place_test(0, 0, empty);
+        cout << small_board;
+    cout << endl;
+
+
+    // Testing to (over)fill a 5x5 board
+        Board large_board(5);
+
+        cout << "Large board:" << endl;
+        cout << large_board;
+        
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                large_board.place(i, j, o);
+                cout << "Placed " << o << " at (" << i << ", " << j << "). "
+                     << "Full: " << large_board.is_full() 
+                     << endl;
+            }
+            cout << large_board;
+        }
+
+        large_board.place(2, 2, empty);
+        cout << "Placed " << empty << " at (" << 2 << ", " << 2 << "). "
+             << "Full: " << large_board.is_full() 
+             << endl;
+        cout << large_board;
+
+    cout << endl;
+}
+
+
 
 
 
@@ -196,10 +264,11 @@ int main () {
         cout << "3. Testing board.place()" << endl;
         cout << "4. Testing winner congratulation" << endl;
         cout << "5. Testing constructors with winning length" << endl;
+        cout << "6. Testing board.is_full()" << endl;
         cout << endl;
         
         // User prompt
-        int choice = input_range(5, "Choose an option: ");   //! Adapt number to number of tests.
+        int choice = input_range(6, "Choose an option: ");   //! Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
@@ -210,6 +279,7 @@ int main () {
             case 3: test_3(); break;
             case 4: test_4(); break;
             case 5: test_5(); break;
+            case 6: test_6(); break;
             default: print_switch_default(choice); break;
         }
         cout << endl;
