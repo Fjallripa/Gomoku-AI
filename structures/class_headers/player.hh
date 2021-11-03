@@ -89,5 +89,5 @@ class Computer : public Player {
 
 
         // Algorithm scoring methods. Implementation in 'algorithms/scoring/' folder.
-            int score_win ();
+            int score_win (Square move, int max_score);
 };

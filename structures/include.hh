@@ -15,10 +15,12 @@
 #include <string>
 
 
+
 // Abbreviations
 using std::cout;
 using std::cin;
 using std::endl;
+
 
 
 // Project files
@@ -32,6 +34,7 @@ using std::endl;
 #include "functions/input_text.cc"
 #include "functions/messages.cc"
 
+
 #include "class_headers/board.hh"
 #include "class_headers/square.hh"
 #include "class_headers/player.hh"
@@ -44,6 +47,9 @@ using std::endl;
 #include "class_members/computer.cc"
 #include "class_members/group.cc"
 
+
 #include "algorithms/placeholder.cc"
 #include "algorithms/minimax.cc"
 #include "algorithms/miniscore.cc"
+
+#include "algorithms/scoring/score_win.cc"
