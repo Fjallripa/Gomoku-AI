@@ -6,6 +6,7 @@
 
 // STL libraries
 #include <limits>
+#include <algorithm>
 
 #include <array>
 #include <vector>
