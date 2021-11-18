@@ -1,5 +1,5 @@
 // Implementation of the miniscore() algorithm
-// ========================================
+// ===========================================
 
 
 
@@ -71,8 +71,8 @@ int Computer::miniscore_score (int x, int y, Player* player, bool dev_details) {
     }
 
     // Evaluating the score of the test move.
-    if (this->is_winner(test_move)) {   // Checks wether the `test_move` is a winning one for `player`.
-        score = miniscore_winning_score;
+    if (this->is_winner(test_move) or this->board->is_full()) {   // Checks wether the `test_move` is a winning one for `player`.
+        score = score_win(test_move, minimax_winning_score);
     } 
     else {   // If it hasn't won with this move, the algorithm evaluates the best score the opponent can achieve.
         int best_opponent_score = -miniscore_winning_score;   // Again, starting with the lowest assumption.
@@ -97,10 +97,6 @@ int Computer::miniscore_score (int x, int y, Player* player, bool dev_details) {
                 best_opponent_score = std::max(best_opponent_score, opponent_score);
                 board_is_full = false;
             }
-        }
-        // In case no empty square was found, the board is full and there is a draw.
-        if (board_is_full) {
-            best_opponent_score = 0;
         }
 
         // The score of the test move is negative that of the optimal countermove.
