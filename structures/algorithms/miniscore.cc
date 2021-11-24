@@ -58,13 +58,13 @@ Square Computer::miniscore () {
 
 /* miniscore score evaluator. 
 Moves recursively down the whole game tree in order to calculate the score of the optimal move. */
-int Computer::miniscore_score (int x, int y, Player* player, int current_depth, bool dev_details) {
+std::deque<int> Computer::miniscore_score (int x, int y, Player* player, int current_depth, bool dev_details) {
     int new_depth = current_depth + 1;
     
     // Makes test move to evaluate opponent's optimal score in that scenario.
     this->board->place(x, y, player->stone());   // Make temporary test move. Has to be undone before returning a score.
     Square test_move = Square(this->board, x, y);
-    int score;
+    std::deque<int> player_scores;
 
     // Header in Developer Mode offering an input.
     if (dev_details) {
@@ -89,11 +89,11 @@ int Computer::miniscore_score (int x, int y, Player* player, int current_depth, 
         this->is_winner(test_move) or 
         this->board->is_full()) 
     {   // Checks wether the `test_move` is a winning one for `player`.
-        score = score_win(test_move, minimax_winning_score);
+        player_scores.push_front(score_win(test_move, minimax_winning_score));
     } 
     else {   // If it hasn't won with this move, the algorithm evaluates the best score the opponent can achieve.
-        int best_opponent_score = -miniscore_winning_score;   // Again, starting with the lowest assumption.
-        bool board_is_full = true;   // If below, now square is found to be empty, this value will remain true.
+        std::deque<int> best_opponent_scores = {-miniscore_winning_score};   // Again, starting with the lowest assumption.
+        int best_opponent_score = -miniscore_winning_score;
         int x_try; int y_try;
 
         // Evaluates every opponent move and selects the first best one.
@@ -103,7 +103,7 @@ int Computer::miniscore_score (int x, int y, Player* player, int current_depth, 
 
             if (this->board->at(x_try, y_try) == empty) {
                 // Recursively evaluates opponent's score.
-                int opponent_score = this->miniscore_score(x_try, y_try, player->next(), new_depth);
+                std::deque<int> opponent_scores = this->miniscore_score(x_try, y_try, player->next(), new_depth);
                 
                 // Prints opponent's score when asked for in Developer Mode.
                 if (dev_details) {
@@ -111,13 +111,17 @@ int Computer::miniscore_score (int x, int y, Player* player, int current_depth, 
                 }
                 
                 // Chooses best opponent score.
-                best_opponent_score = std::max(best_opponent_score, opponent_score);
-                board_is_full = false;
+                int opponent_scores_max = std::max_element(opponent_scores.front(), opponent_scores.back());
+                if (best_opponent_score < opponent_scores_max) {
+                    best_opponent_score = opponent_scores_max;
+                    best_opponent_scores = opponent_scores;
+                }
             }
         }
 
         // The score of the test move is negative that of the optimal countermove.
-        score = -best_opponent_score;
+        player_scores = best_opponent_scores;
+        player_scores.push_front(-best_opponent_score);
     }
 
     // Offers a second input prompt in Developer Mode.
@@ -128,5 +132,8 @@ int Computer::miniscore_score (int x, int y, Player* player, int current_depth, 
 
     // Undoes the temporary move and returns its score.
     this->board->place(x, y, empty); 
-    return score;
+    if (player_scores.size() >= this->group->length()) {
+        player_scores.pop_back();
+    }
+    return player_scores;
 }

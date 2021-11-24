@@ -1,3 +1,3 @@
 # Current to do items
 
-- All current items done.
+* Developer Mode is now spread out over 2 algorithms. It should be more centralized into functions or something like that.

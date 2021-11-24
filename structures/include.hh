@@ -10,6 +10,7 @@
 
 #include <array>
 #include <vector>
+#include <deque>
 
 #include <iostream>
 #include <sstream>

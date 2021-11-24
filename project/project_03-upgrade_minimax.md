@@ -57,4 +57,4 @@
      + Build a new test inside `miniscore_test.cc` for that multiplayer feature.
        - Use a 6x6 board, 3 players, and a winning length of 3.
        - Adapt Developer Mode inside `miniscore()` to aptly display all player's scores.
-       -  Check with Developer Mode if the new feature performs as expected.
+       - Check with Developer Mode if the new feature performs as expected.

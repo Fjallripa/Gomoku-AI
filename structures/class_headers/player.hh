@@ -86,7 +86,7 @@ class Computer : public Player {
 
         // Algorithm support methods. Found insde the respective algorithm files.
             int minimax_score (int x, int y, Player* player, bool dev_details = false);
-            int miniscore_score (int x, int y, Player* player, int depth, bool dev_details = false);
+            std::deque<int> miniscore_score (int x, int y, Player* player, int depth, bool dev_details = false);
 
 
         // Algorithm scoring methods. Implementation in 'algorithms/scoring/' folder.
