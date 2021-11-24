@@ -4,11 +4,25 @@
 
 
 
+// Algorithm support constants
+const int algorithm_min_depth = 1;
+
+
+
+
+
 // Internal methods
 // ----------------
 
 /* Handles the Developer Mode input prompt. */
 void Computer::dev_choice (Player* player) {
+    this->dev_choice(player, algorithm_min_depth);
+}
+
+
+
+/* Actual exection of Developer Mode input prompt */
+void Computer::dev_choice (Player* player, int depth) {
     while (true) {   // In case of a bad input, the prompt repeats itself.
         // Input prompt
         std::string choice = input_text("> ");
@@ -20,9 +34,17 @@ void Computer::dev_choice (Player* player) {
         int x; int y; std::istringstream stream(choice);
         if (get_coord(stream, x, y)) {
             if (this->board->at(x, y) == empty) {
-                int score = this->minimax_score(x, y, player, true);
-                cout << player->stone() << "'s score if it was placed at (" << x << ", " << y << "): " << score << endl;
+                int score;
+                if (this->algorithm_used == &Computer::placeholder)   score = 0;
+                if (this->algorithm_used == &Computer::minimax)       score = this->minimax_score(x, y, player, true);
+                if (this->algorithm_used == &Computer::miniscore) {
+                    score = this->miniscore_score(x, y, player, depth, true);
+                }
+
+                cout << "depth " << depth << ": "
+                     << player->stone() << "'s score if it was placed at (" << x << ", " << y << "): " << score << endl;
                 cout << *(this->board);
+                
                 break;
             } else {
                 cout << "Choose an empty square." << endl;

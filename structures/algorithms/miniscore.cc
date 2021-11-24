@@ -5,6 +5,7 @@
 
 // Algorithm support constants that need to be shared across miniscore methods.
 const int miniscore_winning_score = max_int;
+const int miniscore_max_depth     = 4;
 
 
 
@@ -18,7 +19,8 @@ Only recommended in cases as simple as Tic Tac Toe. */
 Square Computer::miniscore () {
     // Header in Developer Mode
     if (dev_mode_on) {   // Title for list of possible moves.
-        cout << this->stone() << "'s scores of its possible moves:" << endl;
+        cout << "depth " << algorithm_min_depth << ": "
+             << this->stone() << "'s scores of its possible moves:" << endl;
     }
 
     // Initial values
@@ -32,7 +34,7 @@ Square Computer::miniscore () {
         y_try = square_number / this->board->length();
 
         if (this->board->at(x_try, y_try) == empty) {
-            int current_score = this->miniscore_score(x_try, y_try, this);
+            int current_score = this->miniscore_score(x_try, y_try, this, algorithm_min_depth);
             if (dev_mode_on) {   // Print score for each possible move.
                 cout << "(" << x_try << ", " << y_try << "): " << current_score << endl;
             }
@@ -56,7 +58,9 @@ Square Computer::miniscore () {
 
 /* miniscore score evaluator. 
 Moves recursively down the whole game tree in order to calculate the score of the optimal move. */
-int Computer::miniscore_score (int x, int y, Player* player, bool dev_details) {
+int Computer::miniscore_score (int x, int y, Player* player, int current_depth, bool dev_details) {
+    int new_depth = current_depth + 1;
+    
     // Makes test move to evaluate opponent's optimal score in that scenario.
     this->board->place(x, y, player->stone());   // Make temporary test move. Has to be undone before returning a score.
     Square test_move = Square(this->board, x, y);
@@ -64,14 +68,27 @@ int Computer::miniscore_score (int x, int y, Player* player, bool dev_details) {
 
     // Header in Developer Mode offering an input.
     if (dev_details) {
-        cout << "Hypothetical move of " << player->stone() << " at (" << x << ", " << y << "):" << endl;
+        cout << "depth " << current_depth << ": "
+             << "Hypothetical move of " << player->stone() << " at (" << x << ", " << y << "):" << endl;
         cout << *(this->board);
-        dev_choice(player->next());
-        cout << player->next()->stone() << "'s scores of its possible moves:" << endl;
+        
+        dev_choice(player->next(), new_depth);
+        
+        cout << "depth " << new_depth << ": "
+             << player->next()->stone() << "'s scores of its possible moves:" << endl;
+        if (current_depth == miniscore_max_depth) {
+            cout << "Depth limit reached. These scores are based only on the current board." << endl;
+        }
+        else if (current_depth > miniscore_max_depth) {
+            cout << "Depth limit exceeded. No scores are calculated down here." << endl;
+        }
     }
 
     // Evaluating the score of the test move.
-    if (this->is_winner(test_move) or this->board->is_full()) {   // Checks wether the `test_move` is a winning one for `player`.
+    if (current_depth > miniscore_max_depth or
+        this->is_winner(test_move) or 
+        this->board->is_full()) 
+    {   // Checks wether the `test_move` is a winning one for `player`.
         score = score_win(test_move, minimax_winning_score);
     } 
     else {   // If it hasn't won with this move, the algorithm evaluates the best score the opponent can achieve.
@@ -86,7 +103,7 @@ int Computer::miniscore_score (int x, int y, Player* player, bool dev_details) {
 
             if (this->board->at(x_try, y_try) == empty) {
                 // Recursively evaluates opponent's score.
-                int opponent_score = this->miniscore_score(x_try, y_try, player->next());
+                int opponent_score = this->miniscore_score(x_try, y_try, player->next(), new_depth);
                 
                 // Prints opponent's score when asked for in Developer Mode.
                 if (dev_details) {
@@ -106,7 +123,7 @@ int Computer::miniscore_score (int x, int y, Player* player, bool dev_details) {
     // Offers a second input prompt in Developer Mode.
     if (dev_details) {
         cout << endl;   // Making space after the list of possible moves.
-        dev_choice(player->next());
+        dev_choice(player->next(), new_depth);
     }
 
     // Undoes the temporary move and returns its score.

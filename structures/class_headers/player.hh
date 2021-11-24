@@ -63,10 +63,11 @@ class Computer : public Player {
         // Set by constructor
             Square (Computer::*algorithm_used) ();
 
-        // Internal method
+        // Internal methods
             void dev_choice(Player* player);   // Changes Board.
+            void dev_choice(Player* player, int depth);
 
-    
+
     public:
         // Constructors    
             Computer (Board& board, const Symbol stone, const Algorithm algorithm);
@@ -85,7 +86,7 @@ class Computer : public Player {
 
         // Algorithm support methods. Found insde the respective algorithm files.
             int minimax_score (int x, int y, Player* player, bool dev_details = false);
-            int miniscore_score (int x, int y, Player* player, bool dev_details = false);
+            int miniscore_score (int x, int y, Player* player, int depth, bool dev_details = false);
 
 
         // Algorithm scoring methods. Implementation in 'algorithms/scoring/' folder.

@@ -158,6 +158,44 @@ void test_3 () {
 
 
 
+/* Tests if the depth limit functionality of `miniscore()` works as intended. */
+void test_4 () {
+    
+    print_subtitle("Depth limit");
+    
+    cout << "The depth limit of `miniscore()` is " << miniscore_max_depth << "." << endl
+         << "This means that the algorithm should not calculate more than " << miniscore_max_depth << " moves in advance." << endl;
+        
+    cout << endl
+         << "Test if `miniscore()` observes the depth limmit on a 5x5 board:" << endl
+         << endl;
+
+    // Creating the game
+        Board board(5, 4);
+        Computer computer(board, x, miniscore);
+        Human human(board, o);
+
+        Group group;
+        group.append(&computer);
+        group.append(&human);
+
+    // Playing the game
+        Player* current_player = group.first();
+        if (dev_mode_on)   print_dev_intro();
+
+        cout << board;
+        current_player->make_move();
+        for (int i = 1; not current_player->is_winner() and i < board.size(); i++) {
+            current_player = current_player->next();
+            current_player->make_move();
+        }
+        
+        board.congratulate();
+        cout << endl;
+}
+
+
+
 
 
 // Menu for choosing a test
@@ -181,10 +219,11 @@ int main (int argument_count, char* argument_values[]) {
         cout << "1. Tic Tac Toe (2 Computers)" << endl;
         cout << "2. Tic Tac Toe (1 Human, 1 Computer)" << endl;
         cout << "3. miniscore() on a custom board" << endl;
+        cout << "4. Depth limit" << endl;
         cout << endl;
         
         // User prompt
-        int choice = input_range(3, "Choose an option: ");   //! Adapt number to number of tests.
+        int choice = input_range(4, "Choose an option: ");   //! Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
@@ -194,6 +233,7 @@ int main (int argument_count, char* argument_values[]) {
             case 1: test_1(); break;
             case 2: test_2(); break;
             case 3: test_3(); break;
+            case 4: test_4(); break;
             default: print_switch_default(choice); break;
         }
         cout << endl;
