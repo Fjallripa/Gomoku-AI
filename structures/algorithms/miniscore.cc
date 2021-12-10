@@ -29,24 +29,31 @@ Square Computer::miniscore () {
     int best_score = -miniscore_winning_score - 1;   // In its search, the algorithm starts off with the lowest possible assumption. "-1" important here in order to distinguish between the case "garanteed failure" and "full board".
 
     // Evaluates every move and selects the first best one.
-    for (int square_number = 0; square_number < this->board->size(); square_number++) {
-        x_try = square_number % this->board->length();
-        y_try = square_number / this->board->length();
+    if (not this->board->is_full()) {
+        int best_score = -miniscore_winning_score;
+            
+        for (int square_number = 0; square_number < this->board->size(); square_number++) {
+            x_try = square_number % this->board->length();
+            y_try = square_number / this->board->length();
 
-        if (this->board->at(x_try, y_try) == empty) {
-            int current_score = this->miniscore_score(x_try, y_try, this, algorithm_min_depth);
-            if (dev_mode_on) {   // Print score for each possible move.
-                cout << "(" << x_try << ", " << y_try << "): " << current_score << endl;
-            }
-            if (current_score > best_score) {   // If the algorithm finds a move that is better than the previous best, it updates its "recommended move".
-                best_score = current_score;
-                x = x_try; y = y_try;
-                if (current_score == miniscore_winning_score) {   // I.e. victory is guaranteed in optimal play.
-                    break;   // The algorithm always quits after having found the first best move.
+            if (this->board->at(x_try, y_try) == empty) {
+                std::deque<int> current_scores = this->miniscore_score(x_try, y_try, this, algorithm_min_depth);
+                
+                if (dev_mode_on) {   // Print score for each possible move.
+                    cout << "(" << x_try << ", " << y_try << "): " << current_scores.front() << endl;
+                }
+                
+                int current_scores_max = std::max_element(current_scores.front(), current_scores.back());
+                if (current_scores_max > best_score) {   // If the algorithm finds a move that is better than the previous best, it updates its "recommended move".
+                    best_score = current_scores_max;
+                    x = x_try; y = y_try;
+                    if (current_scores_max == miniscore_winning_score) {   // I.e. victory is guaranteed in optimal play.
+                        break;   // The algorithm always quits after having found the first best move.
+                    }
                 }
             }
+            // In case failure is garuanteed in optimal play, the algorithm picks the first empty square, thereby "giving up".
         }
-        // In case failure is garuanteed in optimal play, the algorithm picks the first empty square, thereby "giving up".
     }
 
     // Returns move recommendation as a Square.
@@ -93,7 +100,7 @@ std::deque<int> Computer::miniscore_score (int x, int y, Player* player, int cur
     } 
     else {   // If it hasn't won with this move, the algorithm evaluates the best score the opponent can achieve.
         std::deque<int> best_opponent_scores = {-miniscore_winning_score};   // Again, starting with the lowest assumption.
-        int best_opponent_score = -miniscore_winning_score;
+        int best_opponent_scores_max         = -miniscore_winning_score;
         int x_try; int y_try;
 
         // Evaluates every opponent move and selects the first best one.
@@ -107,21 +114,21 @@ std::deque<int> Computer::miniscore_score (int x, int y, Player* player, int cur
                 
                 // Prints opponent's score when asked for in Developer Mode.
                 if (dev_details) {
-                    cout << "(" << x_try << ", " << y_try << "): " << opponent_score << endl;
+                    cout << "(" << x_try << ", " << y_try << "): " << opponent_scores.front() << endl;
                 }
                 
                 // Chooses best opponent score.
-                int opponent_scores_max = std::max_element(opponent_scores.front(), opponent_scores.back());
-                if (best_opponent_score < opponent_scores_max) {
-                    best_opponent_score = opponent_scores_max;
-                    best_opponent_scores = opponent_scores;
+                int opponent_scores_max = std::max_element(opponent_scores.begin(), opponent_scores.end());
+                if (best_opponent_scores_max < opponent_scores_max) {
+                    best_opponent_scores_max = opponent_scores_max;
+                    best_opponent_scores     = opponent_scores;
                 }
             }
         }
 
         // The score of the test move is negative that of the optimal countermove.
         player_scores = best_opponent_scores;
-        player_scores.push_front(-best_opponent_score);
+        player_scores.push_front(-best_opponent_scores_max);
     }
 
     // Offers a second input prompt in Developer Mode.

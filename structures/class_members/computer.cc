@@ -38,7 +38,7 @@ void Computer::dev_choice (Player* player, int depth) {
                 if (this->algorithm_used == &Computer::placeholder)   score = 0;
                 if (this->algorithm_used == &Computer::minimax)       score = this->minimax_score(x, y, player, true);
                 if (this->algorithm_used == &Computer::miniscore) {
-                    score = this->miniscore_score(x, y, player, depth, true);
+                    score = this->miniscore_score(x, y, player, depth, true).front();
                 }
 
                 cout << "depth " << depth << ": "
