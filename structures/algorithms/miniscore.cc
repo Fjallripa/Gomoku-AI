@@ -43,7 +43,7 @@ Square Computer::miniscore () {
                     cout << "(" << x_try << ", " << y_try << "): " << current_scores.front() << endl;
                 }
                 
-                int current_scores_max = std::max_element(current_scores.front(), current_scores.back());
+                int current_scores_max = *std::max_element(current_scores.begin(), current_scores.end());
                 if (current_scores_max > best_score) {   // If the algorithm finds a move that is better than the previous best, it updates its "recommended move".
                     best_score = current_scores_max;
                     x = x_try; y = y_try;
@@ -118,7 +118,7 @@ std::deque<int> Computer::miniscore_score (int x, int y, Player* player, int cur
                 }
                 
                 // Chooses best opponent score.
-                int opponent_scores_max = std::max_element(opponent_scores.begin(), opponent_scores.end());
+                int opponent_scores_max = *std::max_element(opponent_scores.begin(), opponent_scores.end());
                 if (best_opponent_scores_max < opponent_scores_max) {
                     best_opponent_scores_max = opponent_scores_max;
                     best_opponent_scores     = opponent_scores;

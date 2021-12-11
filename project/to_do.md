@@ -1,7 +1,6 @@
 # Current to do items
 
 * Current step in project: End of objective 1. Before test can be written, some compile time problems have to be fixed.
-  +  In `miniscore.cc`, a solution has to be found for getting the max value of a deque.
   +  In `miniscore.cc`, a solution has to be found for letting the algorithm know the size of the group.
 
 
