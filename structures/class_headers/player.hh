@@ -15,7 +15,7 @@ class Player {
 
         // Set by public methods.
             Square latest_move;   // Changed by place_stone().
-            Group* group;              // Changed by Group::append() and Group::pop().
+            Group* own_group;          // Changed by Group::append() and Group::pop().
             Player* next_player;       // Changed by Group::append() and Group::pop().
             Player* previous_player;   // Changed by Group::append() and Group::pop().
 
@@ -33,6 +33,7 @@ class Player {
 
             Square last_move () const;
             
+            Group* group () const;
             Player* next () const;
             Player* prev () const;
 

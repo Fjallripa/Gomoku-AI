@@ -33,6 +33,12 @@ Square Player::last_move () const {
 }
 
 
+/* If the player is part of a group, the pointer to that group is returned. */
+Group* Player::group() const {
+    return this->own_group;
+}
+
+
 /* If the player is part of a group, the pointer to the next player in that group is returned. */
 Player* Player::next () const {
     return this->next_player;

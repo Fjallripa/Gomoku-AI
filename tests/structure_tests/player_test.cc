@@ -97,7 +97,13 @@ void test_2 () {
     Human human_b = Human(board, stone[1]);
     Human human_c = Human(board, stone[2]);
     Computer computer = Computer(board, stone[3]);
-    
+
+
+    // Checking if the Group related methods are empty initially
+    cout << "Testing if the Group related methods are empty initially:" << endl
+         << "human_a : group(): " << human_a.group() << "  next(): " << human_a.next() << "  prev(): " << human_a.prev() << endl
+         << "computer: group(): " << computer.group() << "  next(): " << computer.next() << "  prev(): " << computer.prev() << endl
+         << endl;
 
     // Building the group
         Group group;
@@ -111,10 +117,10 @@ void test_2 () {
         cout << "Testing Group properties with " << group.length() << " Players:" << endl;
         cout << "Player pointers: " << &human_a << " " << &human_b << " " << &human_c << " " << &computer << endl;
         cout << "Group: first(): " << group.first() << "  length(): " << group.length() << endl;
-        cout << "human_a : " << human_a.stone() << "  next(): " << human_a.next() << "  prev(): " << human_a.prev() << endl;
-        cout << "human_b : " << human_b.stone() << "  next(): " << human_b.next() << "  prev(): " << human_b.prev() << endl;
-        cout << "human_c : " << human_c.stone() << "  next(): " << human_c.next() << "  prev(): " << human_c.prev() << endl;
-        cout << "computer: " << computer.stone() << "  next(): " << computer.next() << "  prev(): " << computer.prev() << endl;
+        cout << "human_a : " << human_a.stone() << "  next(): " << human_a.next() << "  prev(): " << human_a.prev() << "  group(): " << human_a.group() << endl;
+        cout << "human_b : " << human_b.stone() << "  next(): " << human_b.next() << "  prev(): " << human_b.prev() << "  group(): " << human_b.group() << endl;
+        cout << "human_c : " << human_c.stone() << "  next(): " << human_c.next() << "  prev(): " << human_c.prev() << "  group(): " << human_c.group() << endl;
+        cout << "computer: " << computer.stone() << "  next(): " << computer.next() << "  prev(): " << computer.prev() << "  group(): " << computer.group() << endl;
     cout << endl << endl;
 
 
@@ -167,6 +173,7 @@ void test_2 () {
                 cout << "Popping one Player and checking if it got removed cleanly:" << endl;
                 Player* lone_player = group.pop();
                 cout << lone_player->stone() << ":" << lone_player 
+                    << " - group(): " << lone_player->group()
                     << " - next(): " << lone_player->next()
                     << " - prev(): " << lone_player->prev()
                     << endl;

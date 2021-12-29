@@ -68,7 +68,7 @@ void Group::append (Player* new_player) {
     this->number_of_players++;
 
     // The group is pointed to in the new player.
-    new_player->group = this;
+    new_player->own_group = this;
 }
 
 
@@ -90,10 +90,10 @@ Player* Group::pop () {
         this->first()->next_player     = nullptr;
 
         // Then this player is deleted from the group and returned by the function.
-        Player* leaving_player  = this->first();
-        leaving_player->group   = nullptr;
-        this->first_player      = nullptr;
-        this->number_of_players = 0;
+        Player* leaving_player    = this->first();
+        leaving_player->own_group = nullptr;
+        this->first_player        = nullptr;
+        this->number_of_players   = 0;
         return leaving_player;
     } 
 
@@ -112,7 +112,7 @@ Player* Group::pop () {
         // The leaving player is stripped of its links and returned by the function.
         leaving_player->previous_player = nullptr;
         leaving_player->next_player     = nullptr;
-        leaving_player->group           = nullptr;
+        leaving_player->own_group       = nullptr;
         return leaving_player;
     }
 }

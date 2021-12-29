@@ -139,7 +139,7 @@ std::deque<int> Computer::miniscore_score (int x, int y, Player* player, int cur
 
     // Undoes the temporary move and returns its score.
     this->board->place(x, y, empty); 
-    if (player_scores.size() >= this->group->length()) {
+    if (player_scores.size() >= this->group()->length()) {
         player_scores.pop_back();
     }
     return player_scores;
