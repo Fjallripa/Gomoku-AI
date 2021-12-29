@@ -3,6 +3,9 @@
 
 
 
+class Group;
+
+
 // Player is the base class that acts on the board.
 class Player {
     protected:
@@ -12,7 +15,8 @@ class Player {
 
         // Set by public methods.
             Square latest_move;   // Changed by place_stone().
-            Player* next_player;   // Changed by Group::append() and Group::pop().
+            Group* group;              // Changed by Group::append() and Group::pop().
+            Player* next_player;       // Changed by Group::append() and Group::pop().
             Player* previous_player;   // Changed by Group::append() and Group::pop().
 
 
@@ -86,7 +90,7 @@ class Computer : public Player {
 
         // Algorithm support methods. Found insde the respective algorithm files.
             int minimax_score (int x, int y, Player* player, bool dev_details = false);
-            int miniscore_score (int x, int y, Player* player, int depth, bool dev_details = false);
+            std::deque<int> miniscore_score (int x, int y, Player* player, int depth, bool dev_details = false);
 
 
         // Algorithm scoring methods. Implementation in 'algorithms/scoring/' folder.
