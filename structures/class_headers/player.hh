@@ -3,6 +3,9 @@
 
 
 
+class Group;
+
+
 // Player is the base class that acts on the board.
 class Player {
     protected:
@@ -12,7 +15,8 @@ class Player {
 
         // Set by public methods.
             Square latest_move;   // Changed by place_stone().
-            Player* next_player;   // Changed by Group::append() and Group::pop().
+            Group* group;              // Changed by Group::append() and Group::pop().
+            Player* next_player;       // Changed by Group::append() and Group::pop().
             Player* previous_player;   // Changed by Group::append() and Group::pop().
 
 

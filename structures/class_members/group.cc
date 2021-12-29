@@ -51,21 +51,24 @@ void Group::append (Player* new_player) {
     }
 
 
-    // If there's more than one player left in the group
+    // If there's more than one player in the group
     else {
         // The old last player becomes the second-to-last.
         Player* old_last_player      = this->first()->prev();
         old_last_player->next_player = new_player;
         
         // The new player becomes the new last player.
-        new_player->previous_player     = old_last_player;
-        new_player->next_player         = this->first();
+        new_player->previous_player    = old_last_player;
+        new_player->next_player        = this->first();
         this->first()->previous_player = new_player;
     }
 
 
     // The groups player count is incremented.
     this->number_of_players++;
+
+    // The group is pointed to in the new player.
+    new_player->group = this;
 }
 
 
@@ -88,6 +91,7 @@ Player* Group::pop () {
 
         // Then this player is deleted from the group and returned by the function.
         Player* leaving_player  = this->first();
+        leaving_player->group   = nullptr;
         this->first_player      = nullptr;
         this->number_of_players = 0;
         return leaving_player;
@@ -108,6 +112,7 @@ Player* Group::pop () {
         // The leaving player is stripped of its links and returned by the function.
         leaving_player->previous_player = nullptr;
         leaving_player->next_player     = nullptr;
+        leaving_player->group           = nullptr;
         return leaving_player;
     }
 }
