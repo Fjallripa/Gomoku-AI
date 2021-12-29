@@ -80,7 +80,7 @@ void test_1 () {
 
 
 
-/* (automated) Tests Player and Group properties (with manual constructors).
+/* (semi-automated) Tests Player and Group properties (with manual constructors).
 + Tests group construction with `group.append()`, `group.length`, Player pointers, 
 `group.first()`, `player.next()` and  `player.prev()`. 
 + Tests repeated iterations through the group in both directions and making moves 
@@ -116,7 +116,7 @@ void test_2 () {
     // Testing the group's properties
         cout << "Testing Group properties with " << group.length() << " Players:" << endl;
         cout << "Player pointers: " << &human_a << " " << &human_b << " " << &human_c << " " << &computer << endl;
-        cout << "Group: first(): " << group.first() << "  length(): " << group.length() << endl;
+        cout << "Group: " << &group << "  first(): " << group.first() << "  length(): " << group.length() << endl;
         cout << "human_a : " << human_a.stone() << "  next(): " << human_a.next() << "  prev(): " << human_a.prev() << "  group(): " << human_a.group() << endl;
         cout << "human_b : " << human_b.stone() << "  next(): " << human_b.next() << "  prev(): " << human_b.prev() << "  group(): " << human_b.group() << endl;
         cout << "human_c : " << human_c.stone() << "  next(): " << human_c.next() << "  prev(): " << human_c.prev() << "  group(): " << human_c.group() << endl;
