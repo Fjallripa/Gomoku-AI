@@ -196,6 +196,16 @@ void test_4 () {
 
 
 
+/* Tests how `miniscore()` can handle a multi-player game. */
+void test_5 () {
+
+    print_subtitle("Multi-player");
+
+    // Creating a 2x2 board and a 2-player-game just to quickly make sure now 
+}
+
+
+
 
 
 // Menu for choosing a test
@@ -215,15 +225,16 @@ int main (int argument_count, char* argument_values[]) {
         print_title("Tests of the miniscore() algorithm");
         
         // Options
-        cout << "0. Quit" << endl;
-        cout << "1. Tic Tac Toe (2 Computers)" << endl;
-        cout << "2. Tic Tac Toe (1 Human, 1 Computer)" << endl;
-        cout << "3. miniscore() on a custom board" << endl;
-        cout << "4. Depth limit" << endl;
-        cout << endl;
+        cout << "0. Quit" << endl
+             << "1. Tic Tac Toe (2 Computers)" << endl
+             << "2. Tic Tac Toe (1 Human, 1 Computer)" << endl
+             << "3. miniscore() on a custom board" << endl
+             << "4. Depth limit" << endl
+             << "5. Multi-player" << endl
+             << endl;
         
         // User prompt
-        int choice = input_range(4, "Choose an option: ");   //! Adapt number to number of tests.
+        int choice = input_range(5, "Choose an option: ");   //! Adapt number to number of tests.
         cout << endl;
         cout << endl;
 
@@ -234,6 +245,7 @@ int main (int argument_count, char* argument_values[]) {
             case 2: test_2(); break;
             case 3: test_3(); break;
             case 4: test_4(); break;
+            case 5: test_5(); break;
             default: print_switch_default(choice); break;
         }
         cout << endl;

@@ -1,7 +1,7 @@
 # Current to do items
 
 * Current step in project: End of objective 1. 
-    [ ] Player test has to be modified for the new Player.group object
+    [x] Player test has to be modified for the new Player.group object
     [ ] miniscore test has to be added to test behaviour with more than two players
       - Ideas:
         - begin with small tests just to check if there are no obvious bugs
